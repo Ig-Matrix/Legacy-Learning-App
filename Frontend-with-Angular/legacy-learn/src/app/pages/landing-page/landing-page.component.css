@@ -1,0 +1,141 @@
+main {
+    font-size: 1.8vh;
+    color: #4d5160;
+}
+.padded {
+    padding: 3vh 8vh 3vh 8vh;
+}
+.top-view {
+    display: flex;
+    flex-direction: row;
+    padding: 5vh;
+}
+#first-half {
+    flex: 1;
+    height: 35%;
+    width: 50%;
+    border-radius: 10px;
+}
+.second-half {
+    flex: 1;
+    padding-top: 1.5vh;
+    padding-left: 10vh;
+    text-align: left;
+}
+h1 {
+    text-transform: uppercase;
+    font-size: 5vh;
+    font-weight: bolder;
+    text-align: left;
+}
+h2 {
+    text-transform: uppercase;
+    font-size: 3.5vh;
+    font-weight: bolder;
+    text-align: left;
+    padding-left: 20px;
+}
+#start {
+    padding: 13px 50px;
+    border: none;
+    border-radius: 10px;
+    background-color: #2f57e5;
+    color: #edeff7;
+    margin-top: 10px;
+    font-size: 2.2vh;
+    font-weight: bolder;
+}
+a {
+    color: #2f57e5;
+}
+.others {
+    padding: 1vh 5vh;
+}
+.others2 {
+    padding: 1vh 8vh;
+}
+.cards {
+    display: flex;
+    flex-direction: row;
+}
+.card {
+    flex: 1;
+    border: 2px solid #b7b8be;
+    border-radius: 8px;
+    text-align: center;
+    padding: 4px 10px;
+    margin: 0px 10px;
+}
+.background {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    height: 700px;
+    width: 100%;
+}
+.write {
+    display: flex;
+    flex-direction: row;
+}
+.written {
+    flex: 1;
+    padding: 0px 10px;
+}
+
+
+@media screen and (max-width: 1024px) {
+    main {
+        font-size: 1.7vh;
+    }
+    .padded {
+        padding: 2vh;
+    }
+    .top-view {
+        display: flex;
+        flex-direction: column;
+        padding: 2vh;
+    }
+    .others, .others2 {
+        padding: 2vh;
+    }
+    .second-half {
+        padding: 1vh 2vh;
+    }
+    #first-half {
+        flex: 1;
+        height: 50%;
+        width: 100%;
+        border-radius: 10px;
+    }
+    h1 {
+        font-size: 3.5vh;
+    }
+    h2 {
+        font-size: 2.8vh;
+        padding-left: 10px;
+    }
+    h3 {
+        margin-bottom: 0;
+    }
+    #no-margin {
+        margin-top: 0;
+    }
+    #start {
+        padding: 10px 40px;
+    }
+    .cards {
+        flex-direction: column;
+    }
+    .card {
+        margin: 10px 0px;
+    }
+    .background {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        height: 50%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .write {
+        flex-direction: column;
+    }
+}
