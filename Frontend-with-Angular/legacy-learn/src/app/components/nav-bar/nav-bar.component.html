@@ -1,1 +1,15 @@
-<p>nav-bar works!</p>
+<div class="full">
+    <img>
+    <section class="mynav" [ngClass]="{'active':isNavActive}">
+        <a href="#" class="icon" (click)="toggleNavBar()">
+            <fa-icon [icon]="barsIcon"></fa-icon>
+        </a>
+        <a href="#" class="active" id="up1">Home</a>
+        <a href="#" class="up">Announcements</a>
+        <a href="#" class="down">Feedback</a>
+        <a href="#" class="down">Portfolio</a>
+        <a href="#" class="down">About</a>
+        <a href="#" class="down">Contact Us</a>
+        <a href="#" class="down">Get Started</a>
+    </section>
+</div>
