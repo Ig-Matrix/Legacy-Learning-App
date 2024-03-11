@@ -1,1 +1,8 @@
-<p>side-bar works!</p>
+<div class="sidebar">
+    <ul>
+        <li *ngFor="let icon of icons">
+        <a routerLink="/{{ icon.name }}"><img [src]="icon.iconPath" alt="{{ icon.name }}" title="{{ icon.title }}">
+        </a>
+        </li>
+    </ul>
+</div>

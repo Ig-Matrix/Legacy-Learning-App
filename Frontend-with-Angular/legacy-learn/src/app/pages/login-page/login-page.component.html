@@ -1,7 +1,7 @@
 <main>
     <div class="container">      
       <section class="pageInput">
-        <p class="logo">Lea<span>rn</span> 2.0</p>
+        <p class="logo">Lea<span id="logo1">rn</span> 2.0</p>
         <p class="welcome">Welcome back to Legacy Learn!  Let's get you logged in and ready to dive back into your educational journey.</p>
         <form id="login-form" [formGroup]="loginForm" (submit)="onSubmit()">
           <input type="text" id="username" name="username" required
@@ -30,6 +30,7 @@
             <button routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">CANCEL</button>
             <br />
           </section>
+          <p class="welcome">Don't have an account. Click <a routerLink="/create" routerLinkActive="active" ariaCurrentWhenActive="page">here</a> to sign up now - it's free!</p>
           <div class="ngIfError" *ngIf="errorMessage">
             {{ errorMessage }}
           </div>

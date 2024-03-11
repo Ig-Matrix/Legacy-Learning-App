@@ -1,0 +1,154 @@
+main {
+    width: 100%;
+    height: 100%;
+    font-size: 2vh;
+    background-color: whitesmoke;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+}
+.col-6 {
+    padding: 0 10%;
+}
+#image {
+    height: 100%;
+    width:100%;
+}
+.logo {
+    font-family: 'Sacramento', sans-serif;
+    font-size: 5vh;
+    font-weight: bold;
+    color: #2f57e5;
+    padding: 5vh 30% 0 30%;
+}
+#logo1 {
+    color: orange !important;
+}
+#one, #two {
+    flex: 1;
+}
+#one {
+    padding-left: 5%;
+    padding-right: 2%;
+}
+#two {
+    padding-left: 2%;
+}
+.password-container {
+    position: relative;
+}
+.eyeicon {
+    position: absolute;
+    margin-top: 22px;
+    right: 10%;
+}
+input {
+    border: 3px solid lightgrey;
+    height: 20px;
+    width: 80%;
+    transition: transform 0.3s ease;
+}
+input:hover, input:focus {
+    outline: none;
+    border: 3px solid #2f57e5;
+    transform: scale(1.03);
+}
+#title {
+    padding: 0 5% 0 10%;
+    text-align: center;
+    font-weight: 500;
+    font-size: 2.3vh;
+}
+label {
+    font-size: 2vh;
+    font-weight: 600;
+}
+#lastname, #firstname, #username, #pwd, #confirmPwd, #email { 
+    width: 100%;
+    border-radius: 5px;
+    margin: 10px auto;
+    padding: 10px 20px;
+}
+button {
+    padding: 12px 50px;
+    margin-right: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2f57e5;
+    color: #edeff7;
+    font-size: 1.8vh;
+    font-weight: 600;
+}
+button:hover, button:focus {
+    background-color: #2d51b4;
+    transform: scale(1.03);
+    transition: transform 0.2s ease-in-out;
+}
+#create {
+    margin: 10px 25px 10px 0px;
+}
+#cancel {
+    margin: 10px 10px 10px 0px;
+}
+#write {
+    margin: 10px auto;
+    text-align: left;
+}
+.ngIf {
+    color:rgba(255, 0, 0, 0.687);
+    margin-bottom: 10px;
+    font-size: 1.8vh;
+  }
+.ngIfError {
+border: transparent !important;
+margin: 10px auto !important;
+background-color: rgb(236, 165, 165);
+text-align: center;
+justify-content: center;
+color:rgba(255, 0, 0, 0.73);
+width: 100%;
+padding: 10px 20px;
+}
+
+@media screen and (max-width: 1020px) {
+    main {
+        height: 100%;
+        width: 100%;
+        font-size: 2vh;
+    }
+    input {
+        height: 20px;
+    }
+    label {
+        font-size: 1.8vh;
+    }
+    .col-6 {
+        width: 80%;
+        padding: 0 5%;
+    }
+    #title {
+        text-align: center;
+        font-size: 1.8vh;
+        padding: 0 5vh 0 5vh;
+    } 
+    .one {
+        padding: 5vh 5% 5vh 0;
+    }
+    .container {
+        flex-direction: column;
+    }
+    #image {
+        display: none;
+    }
+    .logo {
+        font-size: 3.5vh;
+        padding: 0vh 30% 0 30%;
+    }
+    #create {
+        margin: 10px 25px 0px 0px;
+    }
+    #cancel {
+        margin: 10px 10px 10px 0px;
+    }
+}

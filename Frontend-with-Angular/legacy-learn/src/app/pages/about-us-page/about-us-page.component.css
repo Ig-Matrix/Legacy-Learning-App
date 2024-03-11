@@ -1,0 +1,28 @@
+.content {
+    display: flex;
+}
+
+main {
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    color: #4d5160;
+    margin: 8% 0 0 50px;
+    font-size: 2vh;
+}
+.container {
+    margin-top: 5%;
+    margin-left: 5%;
+    padding: 2% 5%;
+}
+
+@media screen and (max-width: 1020px) {
+    main {
+        margin: 10% 0 0 70px;
+        font-size: 1.75vh;
+    }
+    .container {
+        margin-top: 20%;
+        margin-left: 12%;
+    }
+}

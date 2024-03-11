@@ -1,0 +1,79 @@
+.content {
+    display: flex;
+}
+main {
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    color: #4d5160;
+    margin: 5% 0 0 50px;
+    font-size: 1.8vh;
+}
+.container {
+    padding: 5vh 10vh;
+}
+.firstContainer {
+    display: flex;
+    flex-direction: row;
+}
+h1 {
+    font-size: 4.5vh;
+}
+.h-one, .h-two, .h-three  {
+    font-size: 2.3vh;
+}
+h2 {
+    font-size: 3.3vh;
+}
+.h-three {
+    font-weight: bold;
+}
+.h-four {
+    font-size: 2vh;
+}
+.one, .two {
+    flex: 1;
+}
+.one {
+    padding-right: 7.5vh;
+}
+.two {
+    padding-top: 3vh;
+    padding-left: 7.5vh;
+}
+.three {
+    padding: 4vh;
+}
+.image {
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+}
+
+@media screen and (max-width: 1020px) {
+    main {
+        margin: 10% 0 0 55px;
+        font-size: 1.6vh;
+    }
+    .container {
+        padding: 3vh 1vh;
+    }
+    .image {
+        margin-top: 5vh;
+    }
+    .firstContainer {
+        flex-direction: column;
+    }
+    .one, .two, .three {
+        padding: 1vh;
+    }
+    h1 {
+        font-size: 3.5vh;
+    }
+    h2 {
+        font-size: 3vh;
+    }
+    .h-one, .h-two, .h-three  {
+        font-size: 2vh;
+    }
+}
