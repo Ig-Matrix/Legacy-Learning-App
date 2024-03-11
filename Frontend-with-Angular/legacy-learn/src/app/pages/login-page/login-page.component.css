@@ -1,0 +1,140 @@
+main {
+    height: 100%;
+    width: 100%;
+    font-size: 2vh;
+    color: #4d5160;
+    height: 100%;
+    background-color:#edeff7;
+}
+.image {
+    padding: 2%;
+    width: 50%;
+    flex: 1;
+}
+.pageInput {
+    padding: 2%;
+    flex: 1;
+}
+.logo {
+    font-family: 'Sacramento', sans-serif;
+    font-size: 4.5vh;
+    font-weight: bold;
+    color: #2f57e5;
+    padding: 0 10%;
+}
+span {
+    color: orange !important;
+}
+.container {
+    padding: 5% 5% 10% 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+input {
+    height: 60px;
+    width: 80%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 3px solid lightgrey;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    padding-left: 40px;
+}
+input[type="text"] {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>');
+    background-position: 5px center;
+    background-repeat: no-repeat;
+    background-size: 9px;
+}
+input[type="password"] {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>');
+    background-position: 5px center;
+    background-repeat: no-repeat;
+    background-size: 9px;
+}
+button {
+    padding: 15px 40px;
+    margin-right: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2f57e5;
+    color: #edeff7;
+    font-size: 1.8vh;
+    font-weight: 600;
+}
+button:hover, button:focus {
+    background-color: #2d51b4;
+    transform: scale(1.03);
+    transition: transform 0.2s ease-in-out;
+}
+input:hover, input:focus {
+    outline: none;
+    border: 2px solid #2f57e5;
+    transform: scale(1.03);
+    transition: transform 0.2s ease-in-out;
+}
+.password-container {
+    position: relative;
+}
+.eyeicon {
+    margin-top: 20px;
+    right: 20%;
+    cursor: pointer;
+    position: absolute;
+}
+.ngIf, .ngIfError {
+    color: red;
+    margin-bottom: 10px;
+    font-size: 1.8vh;
+}
+
+@media screen and (max-width: 1020px) {
+    main {
+        height: 100%;
+        width: 100%;
+        font-size: 1.5vh;
+    }
+    .container {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .logo {
+        font-size: 4vh;
+        padding: 5px 10%;
+    }
+    .image, .pageInput {
+        flex: 1;
+    }
+    .image {
+        height: 100%;
+        width: 100%;
+    }
+    input {
+        width: 100%;
+        height: 50px;
+        font-size: 1.8vh;
+        border-radius: 10px;
+        margin: 0 0 10px 0;
+    }
+    .pageInput {
+        padding: 20%;
+    }
+    button {
+        font-size: 1.5vh;
+        font-weight: bold;
+        padding: 15px 50px;
+        margin: 5px 10px 5px 0;
+    }
+    .welcome {
+        font-size: 1.7vh;
+        text-align: center;
+        padding: 5px 0;
+    }
+    .ngIf, .ngIfError {
+        font-size: 1.6vh;
+    }
+
+}

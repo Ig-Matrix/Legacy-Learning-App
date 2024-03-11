@@ -1,1 +1,44 @@
-<p>login-page works!</p>
+<main>
+    <div class="container">      
+      <section class="pageInput">
+        <p class="logo">Lea<span>rn</span> 2.0</p>
+        <p class="welcome">Welcome back to Legacy Learn!  Let's get you logged in and ready to dive back into your educational journey.</p>
+        <form id="login-form" [formGroup]="loginForm" (submit)="onSubmit()">
+          <input type="text" id="username" name="username" required
+          placeholder="Username" formControlName="username"/><br>
+          
+          <div class="ngIf" *ngIf="loginForm.get('username')!.hasError('required') && loginForm.get('username')!.touched">Username is required.</div>
+          
+          <div>
+            <div class="password-container">
+              <input [type]="showPassword ? 'password' : 'text'"
+              placeholder="Password"
+              id="pwd" required formControlName="password"/>
+              <span class="eyeicon" (click)="togglePasswordVisibility()">y
+                <i [ngClass]="switchIcon ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+              </span>
+            </div>
+            <div class="ngIf"
+              *ngIf="loginForm.get('password')!.hasError('required') && loginForm.get('password')!.touched">Password is required.
+            </div>
+            <div class="ngIf" *ngIf="loginForm.get('password')!.hasError('minlength') && loginForm.get('password')!.touched">Password must be at least 5 characters long.
+            </div>
+          </div><br />
+          <section class="btn-container">
+            <button type="submit">{{isLoading?'PLEASE WAIT...': 'LOG IN'}}
+            </button>
+            <button routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">CANCEL</button>
+            <br />
+          </section>
+          <div class="ngIfError" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </div>
+        </form>
+      </section>
+      <img src="assets/images/login.jpg" class="image">
+    </div>
+</main>
+
+<footer>
+  <app-footer></app-footer>
+</footer>

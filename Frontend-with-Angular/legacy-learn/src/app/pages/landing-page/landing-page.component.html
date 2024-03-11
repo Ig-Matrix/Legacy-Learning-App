@@ -1,3 +1,7 @@
+<nav>
+    <app-nav-bar></app-nav-bar>
+</nav>
+
 <main>
     <div class="padded">
         <div class="top-view">
@@ -5,8 +9,8 @@
         
             <section class="second-half">
                 <h1>Legacy Learn: Empowering Students, Engaging Administrators</h1>
-                <p>Welcome to Legacy Learn, where education meets innovation! We understand the unique challenges that students and administrators face in managing coursework, scores, projects, and feedback. That's why we've crafted a cutting-edge learning app designed to streamline the educational journey, enhance collaboration, and provide valuable insights for administrators.</p>
-                <button id="start">Get Started</button>
+                <p id="welcome">Welcome to Legacy Learn, where education meets innovation! We understand the unique challenges that students and administrators face in managing coursework, scores, projects, and feedback. That's why we've crafted a cutting-edge learning app designed to streamline the educational journey, enhance collaboration, and provide valuable insights for administrators.</p>
+                <button id="start" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Get Started</button>
             </section>
         </div>
     
@@ -49,8 +53,8 @@
                         <p class="no-margin">Legacy Learn boasts an intuitive design, ensuring a smooth user experience for both students and administrators.</p>
                     </section>
                     <section>
-                        <h3>Customized Permissions:</h3>
-                        <p class="no-margin">Tailor access levels to meet your institution's needs. Legacy Learn allows administrators to set permissions, ensuring the right information is accessible to the right people.</p>
+                        <h3>Collaborative Learning Environment:</h3>
+                        <p class="no-margin">Foster collaboration and engagement among students and educators. Legacy Learn creates a dynamic space where everyone can contribute to the learning experience.</p>
                     </section>
                 </div>
                 <div class="written">
@@ -59,8 +63,8 @@
                         <p class="no-margin">Your data's security is our top priority. Legacy Learn employs robust security measures to protect your information and ensure confidentiality.</p>
                     </section>
                     <section>
-                        <h3>Collaborative Learning Environment:</h3>
-                        <p class="no-margin">Foster collaboration and engagement among students and educators. Legacy Learn creates a dynamic space where everyone can contribute to the learning experience.</p>
+                        <h3>Customized Permissions:</h3>
+                        <p class="no-margin">Tailor access levels to meet your institution's needs. Legacy Learn allows administrators to set permissions, ensuring the right information is accessible to the right people.</p>
                     </section>
                 </div>
             </section>
@@ -68,8 +72,11 @@
             <section>
                 <h2>Ready to Transform Education?</h2>
                 <p>Embark on a journey where knowledge meets innovation. Experience the future of learning with Legacy Learn. Your pathway to academic excellence awaits – embrace it today!</p>
-                <p>Ready to experience the next generation of education? <a href="">Get Started!</a></p>
+                <p>Ready to experience the next generation of education? <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Get Started!</a></p>
             </section>
         </div>    
     </div>
 </main>
+<footer>
+    <app-footer></app-footer>
+</footer>

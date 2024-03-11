@@ -1,19 +1,27 @@
 .full {
     display: flex;
-    align-items: end;
     justify-content: space-between;
-}
-.mynav {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border: 2px solid #edeff7;
-    border-radius: 5px;
-    padding: 10px 20px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    border-radius: 5px;
+    background-color: #edeff7;
+}
+.logo {
+    font-family: 'Sacramento', sans-serif;
+    font-size: 3.5vh;
+    font-weight: bold;
+    color: #2f57e5;
+    padding: 0 3vh;
+}
+span {
+    color: orange !important;
+}
+.mynav {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
     transition: 0.3s ease-in-out;
 }
 .mynav .icon {
@@ -29,10 +37,10 @@
 .mynav a:hover {
     color: #2f57e5;
 }
-.mynav.active {
+.full.active {
     align-items: start;
 }
-.mynav a.active {
+.full a.active {
     border-bottom: 5px solid #2f57e5;
     border-radius: 2px;
     margin-bottom: -3px;
@@ -41,18 +49,22 @@
 
 
 @media screen and (max-width: 1020px) {
+    .full {
+        border: none;
+    }
     .mynav {
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: end;
         border: none;   
     }
     .mynav .icon {
         display: block;
-        font-size: 3vh;
+        align-items: end;
+        font-size: 3.5vh;
     }
     .mynav a {
-        font-size: 2vh;
+        font-size: 1.75vh;
     }
     .mynav .down {
         float: right;
@@ -60,16 +72,17 @@
     .mynav.active {
         flex-direction: column;
         width: 200px;
-        height: 100%;
-        background-color: #edeff7;
+        height: 50%;
+        background-color: #b7b8be;
     }
     .mynav a:not(:first-child) {
         display: none;
     }
-    .mynav.active a:not(:first-child) {
+    .full.active a:not(:first-child) {
         display: block;
     }
-    /* .mynav.active {
-        position: relative;
-    } */
+    .full a.active {
+        border: none !important;
+        display: none;
+    }
 }
