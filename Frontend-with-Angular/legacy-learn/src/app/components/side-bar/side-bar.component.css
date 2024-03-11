@@ -70,4 +70,12 @@
         padding: 10px 7px;
     }
   }
-  
+  @media screen and (max-width: 600px) {
+    .sidebar {
+      width: 45px;
+    }
+    .sidebar img {
+      width: 20px;
+      height: 20px;
+    }
+  }

@@ -60,6 +60,7 @@ h2 {
     }
     .image {
         margin-top: 5vh;
+        border-radius: 50px;
     }
     .firstContainer {
         flex-direction: column;
@@ -68,12 +69,17 @@ h2 {
         padding: 1vh;
     }
     h1 {
-        font-size: 3.5vh;
+        font-size: 2.8vh;
     }
     h2 {
-        font-size: 3vh;
+        font-size: 2.35vh;
     }
-    .h-one, .h-two, .h-three  {
-        font-size: 2vh;
+    .h-one, .h-two, .h-three, .h-four {
+        font-size: 1.8vh;
     }
+}
+@media screen and (max-width: 600px) {
+    .image {
+        border-radius: 25px;
+    }   
 }

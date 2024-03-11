@@ -7,12 +7,20 @@ main {
     width: 100%;
     color: #4d5160;
     margin: 5% 0 0 100px;
-    font-size: 1.8vh;
+    font-size: 2vh;
+}
+.container {
+    margin: 3.5%;
+    padding: 2.5%;
 }
 
 @media screen and (max-width: 1020px) {
     main {
         margin: 10% 0 0 75px;
         font-size: 1.6vh;
+    }
+    .container {
+        margin: 10% 1% 0 1%;
+        padding: 7.5% 1% 0 1%;
     }
 }
