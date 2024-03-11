@@ -1,5 +1,19 @@
 body {
     font-family: 'Poppins', sans-serif;
+    background-color: white;
+    position: relative;
+}
+
+.glass-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.3;
 }
 
 /* @media screen and (max-width: 1024px) {

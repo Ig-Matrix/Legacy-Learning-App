@@ -1,0 +1,88 @@
+.full {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #edeff7;
+}
+.logo {
+    font-family: 'Sacramento', sans-serif;
+    font-size: 3.5vh;
+    font-weight: bold;
+    color: #2f57e5;
+    padding: 0 3vh;
+}
+span {
+    color: orange !important;
+}
+.mynav {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    transition: 0.3s ease-in-out;
+}
+.mynav .icon {
+    display: none;
+}
+.mynav a {
+    color: #4d5160;
+    font-weight: bolder;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 2.5vh;
+}
+.mynav a:hover {
+    color: #2f57e5;
+}
+.full.active {
+    align-items: start;
+}
+.full a.active {
+    border-bottom: 5px solid #2f57e5;
+    border-radius: 2px;
+    margin-bottom: -3px;
+}
+
+
+
+@media screen and (max-width: 1020px) {
+    .full {
+        border: none;
+    }
+    .mynav {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        border: none;   
+    }
+    .mynav .icon {
+        display: block;
+        align-items: end;
+        font-size: 3.5vh;
+    }
+    .mynav a {
+        font-size: 1.75vh;
+    }
+    .mynav .down {
+        float: right;
+    }
+    .mynav.active {
+        flex-direction: column;
+        width: 200px;
+        height: 50%;
+        background-color: #b7b8be;
+    }
+    .mynav a:not(:first-child) {
+        display: none;
+    }
+    .full.active a:not(:first-child) {
+        display: block;
+    }
+    .full a.active {
+        border: none !important;
+        display: none;
+    }
+}

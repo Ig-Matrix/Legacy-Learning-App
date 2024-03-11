@@ -8,18 +8,23 @@ import { StudentAnnouncementPageComponent } from './pages/Students/student-annou
 import { PortfolioPageComponent } from './pages/Students/portfolio-page/portfolio-page.component';
 import { FeedbackPageComponent } from './pages/Admin/feedback-page/feedback-page.component';
 import { StudentFeedbackPageComponent } from './pages/Students/student-feedback-page/student-feedback-page.component';
+import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
+import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
 import { Error404PageComponent } from './pages/error-404-page/error-404-page.component';
 
 
 export const routes: Routes = [
     {path: '', title:'Landing Page', component: LandingPageComponent},
     {path: 'home', title:'Home Page', component: HomePageComponent},
-    {path: 'create-user', title:'Create-user Page', component: CreateUserPageComponent},
+    {path: 'create', title:'Create-user Page', component: CreateUserPageComponent},
     {path: 'login', title:'Log-in Page', component:LoginPageComponent},
     {path: 'announcement', title:'Announcement Page', component: AnnouncementPageComponent},
     {path: 'portfolio', title:'Portfolio Page', component: PortfolioPageComponent},
-    {path: 'feedback', title:'Feedback Page', component: FeedbackPageComponent},
-    {path: 'student-announcement', title:'Announcement Page', component: StudentAnnouncementPageComponent},
-    {path: 'student-feedback', title:'Feedback Page', component: StudentFeedbackPageComponent},
+    {path: 'feeds', title:'Feedback Page', component: FeedbackPageComponent},
+    {path: 'news', title:'Announcement Page', component: StudentAnnouncementPageComponent},
+    {path: 'feedback', title:'Feedback Page', component: StudentFeedbackPageComponent},
+    {path: 'about', title:'About Page', component: AboutUsPageComponent},
+    {path: 'contact', title:'Contact Page', component: ContactUsPageComponent},
     {path: '**', title: 'Error-404', component: Error404PageComponent},
 ];
+

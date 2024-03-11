@@ -1,1 +1,24 @@
-<p>nav-bar works!</p>
+<div class="full" [ngClass]="{'active':isNavActive}">
+    <section class="logo">
+        <p>Lea<span>rn</span> 2.0</p>
+    </section>
+    <section class="mynav">
+        <a class="icon" (click)="toggleNavBar()">
+            <fa-icon [icon]="barsIcon"></fa-icon>
+        </a>
+        <a href="#" class="up">Home</a>
+        <a href="#" class="up">Announcements</a>
+        <a href="#" class="down">Feedback</a>
+        <a href="#" class="down">Portfolio</a>
+        <a href="#" class="down">About</a>
+        <a href="#" class="down">Contact Us</a>
+        <!-- <a href="#" class="down">Get Started</a> -->
+    </section>
+</div>
+
+<!-- <ul>
+    <li *ngFor="let link of navLinks">
+        <a [routerLink]="link.path" [ngClass]="{'active': isActive(link.path)}">{{ link.label }}</a>
+        <span *ngIf="link.showOn && !isActive(link.path)"> (Only on {{ link.showOn.join(', ') }})</span>
+      </li>
+</ul> -->
