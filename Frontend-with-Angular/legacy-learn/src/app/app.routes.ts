@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { CreateUserPageComponent } from './pages/Admin/create-user-page/create-user-page.component';
+import { CreateUserPageComponent } from './pages/create-user-page/create-user-page.component';
 import { AnnouncementPageComponent } from './pages/Admin/announcement-page/announcement-page.component';
 import { StudentAnnouncementPageComponent } from './pages/Students/student-announcement-page/student-announcement-page.component';
 import { PortfolioPageComponent } from './pages/Students/portfolio-page/portfolio-page.component';
