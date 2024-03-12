@@ -16,7 +16,6 @@
             <span (click)="togglePasswordVisibility()">
               <img class="eyeicon" [src] ="switchIcon ? 'assets/fonts/eye-slash-solid.svg' : 'assets/fonts/eye-solid.svg'">
             </span>
-            <!-- <i [ngClass]="switchIcon ? 'fas fa-eye-slash' : 'fas fa-eye'"></i> -->
           </div>
           <div class="ngIf"
             *ngIf="loginForm.get('password')!.hasError('required') && loginForm.get('password')!.touched">Password is required.
