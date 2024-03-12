@@ -16,11 +16,11 @@ main {
 
 @media screen and (max-width: 1020px) {
     main {
-        margin: 10% 0 0 75px;
+        margin: 10% 0 75px 0;
         font-size: 1.6vh;
     }
     .container {
         margin: 10% 1% 0 1%;
-        padding: 7.5% 1% 0 1%;
+        padding: 7.5% 2% 0 2%;
     }
 }
