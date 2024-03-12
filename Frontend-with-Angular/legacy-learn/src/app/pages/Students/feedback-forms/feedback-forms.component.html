@@ -1,70 +1,80 @@
-<p>feedback-forms works!</p>
-<h1>Welcome Jabronis</h1>
-@if (feedbackTypes.length > 0) {
-<h2>Feedback Form</h2>
-<select name="type" id="type" (change)="selectFeedbackType($event)" [(ngModel)]="selectedFeedbackType">
+<section class="p-4">
+  .
+  <h1>Welcome Jabronis</h1>
+  @if (feedbackTypes.length > 0) {
+  <h2>Feedback Form</h2>
+  <select
+    name="type"
+    id="type"
+    (change)="selectFeedbackType($event)"
+    [(ngModel)]="selectedFeedbackType"
+  >
     @for (type of feedbackTypes; track $index) {
     <option [value]="type.value">
-        {{type.label}}
+      {{ type.label }}
     </option>
     }
-</select>
-
-<div class="p-6">
+  </select>
+  
+  <div class="p-6">
     @if (selectedFeedbackType) {
     <form [formGroup]="feedbackForm">
-        @if (currentQuestion) {
-        <h3>{{ currentQuestion.text }}</h3>
-        @for (option of currentQuestion.options; track option.label) {
-        <input type="radio" formControlName="{{ currentQuestion.name }}" [value]="option.value" id="{{option.value}}"
-            name="{{currentQuestion.name}}" />
-        <label for="{{option.value}}">
-            {{ option.label }}
-        </label>
-        <br>
+      @if (currentQuestion) {
+      <h3>{{ currentQuestion.text }}</h3>
+      @for (option of currentQuestion.options; track option.label) { @if
+      (option.label==='') {
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="10"
+        placeholder="enter message"
+        class="border"
+        formControlName="{{ currentQuestion.name }}"
+      ></textarea>
+      }@else {
+      <input
+        type="radio"
+        formControlName="{{ currentQuestion.name }}"
+        [value]="option.value"
+        id="{{ option.value }}"
+        name="{{ currentQuestion.name }}"
+      />
+      <label for="{{ option.value }}">
+        {{ option.label }}
+      </label>
+      <br />
+      } } } @if (!currentQuestion) {
+      <p>No more questions for this feedback type</p>
+      }
+      <div class="button-container">
+        <!-- @if (currentQuestionIndex > 0) {
+              <button type="button" (click)="onPrev()">Previous</button>
+              } -->
+        <button
+          type="button"
+          (click)="onPrev()"
+          [disabled]="currentQuestionIndex === 0"
+          [ngClass]="{ invisible: currentQuestionIndex === 0 }"
+        >
+          Previous
+        </button>
+        @if (currentQuestionIndex < getSelectedFeedbackType().questions.length-1)
+        { <button type="button" (click)="onNext()">Next</button>
+        } @if (currentQuestionIndex ===
+        getSelectedFeedbackType().questions.length-1) {
+        <button
+          type="submit"
+          [disabled]="!feedbackForm.valid"
+          (click)="onSubmit()"
+        >
+          Submit
+        </button>
         }
-        }
-        @if (!currentQuestion) {
-        <p>No more questions for this feedback type</p>
-        }
-        <div class="button-container">
-            @if (currentQuestionIndex > 0) {
-            <button type="button" (click)="onPrev()">Previous</button>
-            }
-            @if (currentQuestionIndex < getSelectedFeedbackType().questions.length-1) { 
-                <button type="button"(click)="onNext()">Next</button>
-            }
-            @if (currentQuestionIndex === getSelectedFeedbackType().questions.length-1) {
-                <button type="submit" [disabled]="!feedbackForm.valid" (click)="onSubmit()">Submit</button>
-            }
-        </div>
+      </div>
     </form>
     }
-</div>
-
-<!-- <h2>Feedback Form</h2>
-<select [(ngModel)]="selectedFeedbackType" (change)="selectFeedbackType($event)">
-    <option *ngFor="let type of feedbackTypes" [value]="type.value">
-        {{ type.label }}
-    </option>
-</select>
-
-<div *ngIf="selectedFeedbackType">
-    <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
-        <div *ngIf="currentQuestion">
-            <h3>{{ currentQuestion.text }}</h3>
-            <div *ngFor="let option of currentQuestion.options">
-                <input type="radio" formControlName="{{ currentQuestion.id }}" [value]="option.value">
-                {{ option.label }}<br>
-            </div>
-        </div>
-        <div *ngIf="!currentQuestion">
-            No more questions for this feedback type.
-        </div>
-        <button (click)="onPrev()">prev</button>
-        <button (click)="onNext()">Next</button>
-        <button type="submit" (click)="onSubmit()">Submit</button>
-    </form>
-</div> -->
-
-}
+  </div>
+  
+  }
+</section>

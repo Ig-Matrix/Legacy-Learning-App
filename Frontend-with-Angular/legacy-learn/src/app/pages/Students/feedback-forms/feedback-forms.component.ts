@@ -8,12 +8,12 @@ import {
   FormsModule,
 } from '@angular/forms';
 import { FeedbackType } from '../../../../models/Interfaces/Feedback';
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-feedback-forms',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, NgFor, NgIf],
+  imports: [ReactiveFormsModule, FormsModule, NgClass],
   templateUrl: './feedback-forms.component.html',
   styleUrl: './feedback-forms.component.css',
 })
@@ -53,7 +53,7 @@ export class FeedbackFormsComponent {
       //   question.options.length > 1
       //     ? this.fb.control(null, Validators.required)
       //     : this.fb.control('');
-      formGroup.addControl(question.name,this.fb.control(''));
+      formGroup.addControl(question.name, this.fb.control(''));
     });
 
     this.feedbackForm = formGroup;
