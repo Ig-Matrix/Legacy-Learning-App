@@ -14,7 +14,9 @@ import { FooterComponent } from "../../components/footer/footer.component";
     imports: [RouterLink, RouterLinkActive, CommonModule, FontAwesomeModule, ReactiveFormsModule, FooterComponent]
 })
 export class LoginPageComponent {
-  icons = { faEye, faEyeSlash };
+  icons = [
+    { name: 'eye', src: 'assets/fonts/eye-solid.svg'},
+    { name: 'eye-slash', src: 'assets/fonts/eye-slash-solid.svg'}]  
   switchIcon: boolean = true;
   showPassword: boolean = true;
   isLoading: boolean = false;
