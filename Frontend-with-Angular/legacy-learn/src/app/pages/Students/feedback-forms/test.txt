@@ -1,0 +1,62 @@
+  feedbackTypes: FeedbackType[] = feedbackTypes;
+  selectedFeedbackType: string = '';
+  currentQuestionIndex = 0;
+  feedbackForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.feedbackForm = this.fb.group({});
+  }
+
+  selectFeedbackType(value: Event) {
+    this.selectedFeedbackType = (value.target as HTMLSelectElement).value;
+    this.currentQuestionIndex = 0;
+    this.buildForm();
+  }
+
+  get currentQuestion() {
+    const questions = this.getSelectedFeedbackType().questions;
+    return questions[this.currentQuestionIndex] || null;
+  }
+
+  getSelectedFeedbackType(): FeedbackType {
+    return this.feedbackTypes.find(
+      (type) => type.value === this.selectedFeedbackType
+    )!;
+  }
+
+  buildForm() {
+    const questions = this.getSelectedFeedbackType().questions;
+    const formGroup = this.fb.group({});
+
+    questions.forEach((question) => {
+      const control =
+        question.options.length > 1
+          ? this.fb.control(null, Validators.required)
+          : this.fb.control('');
+      formGroup.addControl(question.id.toString(), control);
+    });
+
+    this.feedbackForm = formGroup;
+  }
+
+  onNext() {
+    if (
+      this.currentQuestionIndex <
+      this.getSelectedFeedbackType().questions.length - 1
+    ) {
+      this.currentQuestionIndex++;
+    }
+  }
+
+08028928726
+President ASSBIF
+  onPrev() {
+    if (this.currentQuestionIndex > 0) {
+      this.currentQuestionIndex--;
+    }
+  }
+
+  onSubmit() {
+    const formValues = this.feedbackForm.value;
+    console.log('Form submitted:', formValues);
+  }

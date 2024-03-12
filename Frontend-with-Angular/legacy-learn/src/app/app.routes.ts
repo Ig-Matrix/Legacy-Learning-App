@@ -12,6 +12,7 @@ import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.compon
 import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
 import { Error404PageComponent } from './pages/error-404-page/error-404-page.component';
 import { AdminCreateUserComponent } from './pages/Admin/admin-create-user/admin-create-user.component';
+import { FeedbackFormsComponent } from './pages/Students/feedback-forms/feedback-forms.component';
 
 
 export const routes: Routes = [
@@ -25,8 +26,9 @@ export const routes: Routes = [
     {path: 'news', title:'Announcement Page', component: StudentAnnouncementPageComponent},
     {path: 'feedback', title:'Feedback Page', component: StudentFeedbackPageComponent},
     {path: 'about', title:'About Page', component: AboutUsPageComponent},
-    {path: 'contact', title:'Contact Page', component: ContactUsPageComponent},
+    {path: 'contact', title:'Contact Page', component: ContactUsPageComponent}, 
     {path: 'create', title:'Create User Page', component: AdminCreateUserComponent},
+    {path: 'feedbackforms', title:'Feedback Forms', component: FeedbackFormsComponent}, 
     {path: '**', title: 'Error-404', component: Error404PageComponent},
 ];
 

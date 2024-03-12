@@ -1,0 +1,87 @@
+<section class="p-4 flex flex-col sm:flex-row-reverse h-screen">
+  <div class="form flex-1 bg-slate-100 h-full p-2">
+    <h1 class="font-mono font-bold text-center text-lg">Welcome Jabronis</h1>
+    @if (feedbackTypes.length > 0) {
+    <h2 class="font-medium italic text-[1rem] ">Select the type of feedback from the drop dowm below</h2>
+    <select
+      name="type"
+      id="type"
+      (change)="selectFeedbackType($event)"
+      [(ngModel)]="selectedFeedbackType"
+    >
+      @for (type of feedbackTypes; track $index) {
+      <option [value]="type.value">
+        {{ type.label }}
+      </option>
+      }
+    </select>
+    
+    <div class="bg-slate-50">
+      @if (selectedFeedbackType) {
+      <form [formGroup]="feedbackForm">
+        @if (currentQuestion) {
+        <h3>{{ currentQuestion.text }}</h3>
+        @for (option of currentQuestion.options; track option.label) { @if
+        (option.label==='') {
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          placeholder="enter message"
+          class="border"
+          formControlName="{{ currentQuestion.name }}"
+        ></textarea>
+        }@else {
+        <input
+          type="radio"
+          formControlName="{{ currentQuestion.name }}"
+          [value]="option.value"
+          id="{{ option.value }}"
+          name="{{ currentQuestion.name }}"
+        />
+        <label for="{{ option.value }}">
+          {{ option.label }}
+        </label>
+        <br />
+        } } } @if (!currentQuestion) {
+        <p>No more questions for this feedback type</p>
+        }
+        <div class="button-container flex justify-between">
+          <!-- @if (currentQuestionIndex > 0) {
+                <button type="button" (click)="onPrev()">Previous</button>
+                } -->
+          <button
+            type="button"
+            class="bg-blue-500 text-white rounded-sm p-4"
+            (click)="onPrev()"
+            [disabled]="currentQuestionIndex === 0"
+            [ngClass]="{ invisible: currentQuestionIndex === 0 }"
+          >
+            Previous
+          </button>
+          @if (currentQuestionIndex < getSelectedFeedbackType().questions.length-1)
+          { <button type="button"
+          class="bg-blue-500 text-white rounded-sm p-4" (click)="onNext()">Next</button>
+          } @if (currentQuestionIndex ===
+          getSelectedFeedbackType().questions.length-1) {
+          <button
+            type="submit"
+            class="bg-blue-500 text-white rounded-sm p-4"
+            [disabled]="!feedbackForm.valid"
+            (click)="onSubmit()"
+          >
+            Submit
+          </button>
+          }
+        </div>
+      </form>
+      }
+    </div>
+    
+    }  
+  </div>
+  <div class="img flex-1 bg-blue-500">
+    <img src="../../../../assets/images/Survey 2.png" alt="feedback img" class="">
+  </div>
+</section>
