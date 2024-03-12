@@ -9,21 +9,20 @@
           
           <div class="ngIf" *ngIf="loginForm.get('username')!.hasError('required') && loginForm.get('username')!.touched">Username is required.</div>
           
-          <div>
-            <div class="password-container">
-              <input [type]="showPassword ? 'password' : 'text'"
-              placeholder="Password"
-              id="pwd" required formControlName="password"/>
-              <span class="eyeicon" (click)="togglePasswordVisibility()">
-                <i [ngClass]="switchIcon ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-              </span>
-            </div>
-            <div class="ngIf"
-              *ngIf="loginForm.get('password')!.hasError('required') && loginForm.get('password')!.touched">Password is required.
-            </div>
-            <div class="ngIf" *ngIf="loginForm.get('password')!.hasError('minlength') && loginForm.get('password')!.touched">Password must be at least 5 characters long.
-            </div>
-          </div><br />
+          <div class="password-container">
+            <input [type]="showPassword ? 'password' : 'text'"
+            placeholder="Password"
+            id="pwd" required formControlName="password"/>
+            <span (click)="togglePasswordVisibility()">
+              <img class="eyeicon" [src] ="switchIcon ? 'assets/fonts/eye-slash-solid.svg' : 'assets/fonts/eye-solid.svg'">
+            </span>
+            <!-- <i [ngClass]="switchIcon ? 'fas fa-eye-slash' : 'fas fa-eye'"></i> -->
+          </div>
+          <div class="ngIf"
+            *ngIf="loginForm.get('password')!.hasError('required') && loginForm.get('password')!.touched">Password is required.
+          </div>
+          <div class="ngIf" *ngIf="loginForm.get('password')!.hasError('minlength') && loginForm.get('password')!.touched">Password must be at least 5 characters long.
+          </div><br/>
           <section class="btn-container">
             <button type="submit">{{isLoading?'PLEASE WAIT...': 'LOG IN'}}
             </button>
