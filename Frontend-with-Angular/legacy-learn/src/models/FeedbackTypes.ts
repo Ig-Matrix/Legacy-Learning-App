@@ -1,6 +1,7 @@
 import { AssessmentFeedback } from './FeedbackQuestions/AssessmentFeedback';
 import { CourseFeedback } from './FeedbackQuestions/CourseFeedback';
 import { InstructorFeedback } from './FeedbackQuestions/InstructorFeedback';
+import { FeedbackType } from './Interfaces/Feedback';
 
 export const feedbackTypes: FeedbackType[] = [
   {

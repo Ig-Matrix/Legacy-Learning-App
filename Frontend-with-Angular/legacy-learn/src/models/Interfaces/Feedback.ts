@@ -1,16 +1,17 @@
-type QuestionOption = {
+export interface QuestionOption {
   label: string;
   value: string;
-};
+}
 
-type Question = {
+export interface Question {
   id: number;
   text: string;
+  name: string;
   options: QuestionOption[];
-};
+}
 
-type FeedbackType = {
+export interface FeedbackType {
   label: string;
   value: string;
   questions: Question[];
-};
+}
