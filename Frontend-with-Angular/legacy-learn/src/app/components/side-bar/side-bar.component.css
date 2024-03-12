@@ -76,7 +76,7 @@
     .sidebar img {
         width: 25px; 
         height: 25px;
-        margin: 0 2vh;
+        margin: 0 2.2vh;
     }
     .sidebar li {
         margin: 0;
@@ -90,6 +90,6 @@
     .sidebar img {
       width: 20px;
       height: 20px;
-      margin: 0 1vh;
+      margin: 0 0.75vh;
     }
   }

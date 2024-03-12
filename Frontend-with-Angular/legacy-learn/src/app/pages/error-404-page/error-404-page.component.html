@@ -1,1 +1,22 @@
-<p>error-404-page works!</p>
+<nav>
+    <app-home-navigation></app-home-navigation>
+</nav>
+
+<div class="content">
+    <app-side-bar></app-side-bar>
+    <main>
+        <div class="container">
+            <section class="one">
+                <h2>404: Page Not Found
+                </h2>
+    
+                <p>The page you requested could not be found. It might be unavailable or permanently removed.<br>
+                    Check the URL for any typos.<br>
+                    Use the navigation menu or site search to find what you're looking for.<br>
+                    Click <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">here</a> to visit our homepage.
+                </p>
+            </section>
+            <img src="assets/images/error404.jpg" class="image" alt="">
+        </div>
+    </main>
+</div>

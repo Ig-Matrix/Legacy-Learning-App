@@ -27,11 +27,17 @@ a:hover, a:focus {
 
 @media screen and (max-width: 1020px) {
     main {
-        margin: 10% 0 75px 0;
+        margin: 7.5% 0 75px 0;
         font-size: 1.6vh;
     }
     .container {
-        margin: 10% 1%;
-        padding: 6% 2%;
+        margin: 5% 1%;
+        padding: 2%;
+    }
+}
+@media screen and (max-width: 600px) {
+    main {
+        margin: 10% 0 75px 0;
+        font-size: 1.6vh;
     }
 }
