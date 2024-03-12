@@ -52,7 +52,7 @@ h2 {
 
 @media screen and (max-width: 1020px) {
     main {
-        margin: 10% 0 0 55px;
+        margin: 6% 0 0 55px;
         font-size: 1.6vh;
     }
     .container {
@@ -79,6 +79,10 @@ h2 {
     }
 }
 @media screen and (max-width: 600px) {
+    main {
+        margin: 10% 0 0 55px;
+        font-size: 1.6vh;
+    }
     .image {
         border-radius: 25px;
     }   

@@ -11,21 +11,23 @@ import { StudentFeedbackPageComponent } from './pages/Students/student-feedback-
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
 import { Error404PageComponent } from './pages/error-404-page/error-404-page.component';
+import { AdminCreateUserComponent } from './pages/Admin/admin-create-user/admin-create-user.component';
 import { FeedbackFormsComponent } from './pages/Students/feedback-forms/feedback-forms.component';
 
 
 export const routes: Routes = [
     {path: '', title:'Landing Page', component: LandingPageComponent},
     {path: 'home', title:'Home Page', component: HomePageComponent},
-    {path: 'create', title:'Create-user Page', component: CreateUserPageComponent},
+    {path: 'signup', title:'Sign-up Page', component: CreateUserPageComponent},
     {path: 'login', title:'Log-in Page', component:LoginPageComponent},
-    {path: 'announcement', title:'Announcement Page', component: AnnouncementPageComponent},
+    {path: 'announce', title:'Announcement Page', component: AnnouncementPageComponent},
     {path: 'portfolio', title:'Portfolio Page', component: PortfolioPageComponent},
-    {path: 'feeds', title:'Feedback Page', component: FeedbackPageComponent},
+    {path: 'view-feedback', title:'Feedback Page', component: FeedbackPageComponent},
     {path: 'news', title:'Announcement Page', component: StudentAnnouncementPageComponent},
     {path: 'feedback', title:'Feedback Page', component: StudentFeedbackPageComponent},
     {path: 'about', title:'About Page', component: AboutUsPageComponent},
     {path: 'contact', title:'Contact Page', component: ContactUsPageComponent}, 
+    {path: 'create', title:'Create User Page', component: AdminCreateUserComponent},
     {path: 'feedbackforms', title:'Feedback Forms', component: FeedbackFormsComponent}, 
     {path: '**', title: 'Error-404', component: Error404PageComponent},
 ];

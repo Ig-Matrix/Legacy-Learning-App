@@ -88,7 +88,8 @@ a:hover, a:focus {
 }
 .eyeicon {
     margin-top: 20px;
-    right: 20%;
+    left: 80%;
+    height: 10px;
     cursor: pointer;
     position: absolute;
 }
@@ -126,6 +127,10 @@ a:hover, a:focus {
         font-size: 1.8vh;
         border-radius: 10px;
         margin: 0 0 10px 0;
+    }
+    .eyeicon {
+        left: 100%;
+        margin-top: -40px;
     }
     .pageInput {
         padding: 20%;

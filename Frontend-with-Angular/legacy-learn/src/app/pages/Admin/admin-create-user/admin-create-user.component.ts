@@ -3,12 +3,12 @@ import { HomeNavigationComponent } from "../../../components/home-navigation/hom
 import { SideBarComponent } from "../../../components/side-bar/side-bar.component";
 
 @Component({
-    selector: 'app-feedback-page',
+    selector: 'app-admin-create-user',
     standalone: true,
-    templateUrl: './feedback-page.component.html',
-    styleUrl: './feedback-page.component.css',
+    templateUrl: './admin-create-user.component.html',
+    styleUrl: './admin-create-user.component.css',
     imports: [HomeNavigationComponent, SideBarComponent]
 })
-export class FeedbackPageComponent {
+export class AdminCreateUserComponent {
 
 }
