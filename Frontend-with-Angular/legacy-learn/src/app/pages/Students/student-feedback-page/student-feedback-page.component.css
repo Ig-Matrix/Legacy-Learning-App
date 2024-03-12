@@ -51,12 +51,12 @@ a:hover, a:focus {
 }
 @media screen and (max-width: 1020px) {
     main {
-        margin: 12% 0 0 60px;
+        margin: 12% 0 60px 0;
         font-size: 1.6vh;
     }
     .container {
         margin: 10% 1%;
-        padding: 5% 1%;
+        padding: 5% 2%;
     }
     input {
         height: 100px;
