@@ -8,12 +8,14 @@ import {
   FormsModule,
 } from '@angular/forms';
 import { FeedbackType } from '../../../../models/Interfaces/Feedback';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
+import { ProgressComponent } from '../../../components/progress/progress.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-feedback-forms',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, NgClass],
+  imports: [ReactiveFormsModule, FormsModule, NgClass, ProgressComponent, RouterLink],
   templateUrl: './feedback-forms.component.html',
   styleUrl: './feedback-forms.component.css',
 })
@@ -49,22 +51,26 @@ export class FeedbackFormsComponent {
     const formGroup = this.fb.group({});
 
     questions.forEach((question) => {
-      // const control =
-      //   question.options.length > 1
-      //     ? this.fb.control(null, Validators.required)
-      //     : this.fb.control('');
-      formGroup.addControl(question.name, this.fb.control(''));
+      formGroup.addControl(question.name, this.fb.control('', Validators.required));
     });
 
     this.feedbackForm = formGroup;
   }
 
   onNext() {
-    this.currentQuestionIndex++;
+    if (this.feedbackForm.controls[this.currentQuestion.name].valid) {
+      this.currentQuestionIndex++;
+    } else {
+      console.log('Please answer the current question before moving to the next one.');
+    }
   }
 
   onPrev() {
     this.currentQuestionIndex++;
+  }
+
+  isCurrentQuestionAnswered(): boolean {
+    return this.feedbackForm.controls[this.currentQuestion.name].valid;
   }
 
   onSubmit() {

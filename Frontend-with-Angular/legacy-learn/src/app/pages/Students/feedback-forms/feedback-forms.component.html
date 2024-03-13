@@ -1,8 +1,11 @@
 <section class="p-4 flex flex-col sm:flex-row-reverse h-screen">
   <div class="form flex-1 bg-slate-100 h-full p-2">
     <h1 class="font-mono font-bold text-center text-lg">Welcome Jabronis</h1>
+
     @if (feedbackTypes.length > 0) {
-    <h2 class="font-medium italic text-[1rem] ">Select the type of feedback from the drop dowm below</h2>
+    <h2 class="font-medium italic text-[1rem]">
+      Select the type of feedback from the drop dowm below
+    </h2>
     <select
       name="type"
       id="type"
@@ -15,9 +18,18 @@
       </option>
       }
     </select>
-    
-    <div class="bg-slate-50">
+    <div class="bg-slate-50 py-6">
       @if (selectedFeedbackType) {
+      <div class="relative flex items-center justify-center my-6">
+        <p class="font-medium font-mono absolute text-[#3f51b5]">
+          {{ currentQuestionIndex + 1 }} /
+          {{ getSelectedFeedbackType().questions.length - 1 }}
+        </p>
+        <app-progress
+          [currentQuestion]="currentQuestionIndex"
+          [totalQuestions]="getSelectedFeedbackType().questions.length"
+        />
+      </div>
       <form [formGroup]="feedbackForm">
         @if (currentQuestion) {
         <h3>{{ currentQuestion.text }}</h3>
@@ -60,9 +72,16 @@
           >
             Previous
           </button>
-          @if (currentQuestionIndex < getSelectedFeedbackType().questions.length-1)
-          { <button type="button"
-          class="bg-blue-500 text-white rounded-sm p-4" (click)="onNext()">Next</button>
+          @if (currentQuestionIndex <
+          getSelectedFeedbackType().questions.length-1) {
+          <button
+            type="button"
+            class="bg-blue-500 text-white rounded-sm p-4"
+            (click)="onNext()"
+            [disabled]="!isCurrentQuestionAnswered()"
+          >
+            Next
+          </button>
           } @if (currentQuestionIndex ===
           getSelectedFeedbackType().questions.length-1) {
           <button
@@ -75,13 +94,25 @@
           </button>
           }
         </div>
+        @if (!isCurrentQuestionAnswered()) {
+        <div class="text-red-500 mt-2">
+          Please answer the current question before proceeding.
+        </div>
+        }
       </form>
       }
     </div>
-    
-    }  
+
+    }
   </div>
   <div class="img flex-1 bg-blue-500">
-    <img src="../../../../assets/images/Survey 2.png" alt="feedback img" class="">
+    <img
+      src="../../../../assets/images/Survey 2.png"
+      alt="feedback img"
+      class=""
+    />
   </div>
 </section>
+<div class="flex items-center justify-center">
+  <button class="bg-blue-500 p-3"> <a class="text-white" [routerLink]="['/feedback']">Back</a></button>
+</div>
