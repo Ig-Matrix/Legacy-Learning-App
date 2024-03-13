@@ -11,11 +11,13 @@ import { FeedbackType } from '../../../../models/Interfaces/Feedback';
 import { NgClass } from '@angular/common';
 import { ProgressComponent } from '../../../components/progress/progress.component';
 import { RouterLink } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faArrowRightLong, faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-feedback-forms',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, NgClass, ProgressComponent, RouterLink],
+  imports: [ReactiveFormsModule, FormsModule, NgClass, ProgressComponent, RouterLink, FontAwesomeModule],
   templateUrl: './feedback-forms.component.html',
   styleUrl: './feedback-forms.component.css',
 })
@@ -24,6 +26,8 @@ export class FeedbackFormsComponent {
   selectedFeedbackType: string = '';
   currentQuestionIndex: number = 0;
   feedbackForm: FormGroup;
+  faArrowRightLong = faArrowRightLong;
+  faArrowLeftLong = faArrowLeftLong;
 
   constructor(private fb: FormBuilder) {
     this.feedbackForm = this.fb.group({});
