@@ -5,13 +5,16 @@ import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { CommonModule } from '@angular/common';
 import { Validators , FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from "../../components/footer/footer.component";
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../auth.service';
+import { MyHttpClientModule } from '../../modules/http-client.module';
 
 @Component({
     selector: 'app-login-page',
     standalone: true,
     templateUrl: './login-page.component.html',
     styleUrl: './login-page.component.css',
-    imports: [RouterLink, RouterLinkActive, CommonModule, FontAwesomeModule, ReactiveFormsModule, FooterComponent]
+    imports: [RouterLink, RouterLinkActive, CommonModule, MyHttpClientModule, FontAwesomeModule, ReactiveFormsModule, FooterComponent]
 })
 export class LoginPageComponent {
   icons = [
@@ -22,7 +25,10 @@ export class LoginPageComponent {
   isLoading: boolean = false;
   errorMessage: string = '';
 
-  constructor(private router : Router) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+    ) {}
 
   loginForm: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -39,8 +45,17 @@ export class LoginPageComponent {
   }
 
   onSubmit(): void {
-    this.router.navigate(['/home']);
+    this.authService.login(this.loginForm)
+      .subscribe(
+        (response: any) => {
+          console.log('Login successful:', response);
+        },
+        (error: { error: { message: string; }; }) => {
+          this.errorMessage = error.error.message || 'Login failed';
+        }
+      );
   }
+  
   // onSubmit(): void {
   //   this.isLoading = true;
   //   if (this.loginForm.valid) {
