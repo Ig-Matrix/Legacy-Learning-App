@@ -33,16 +33,4 @@ public class LoginController {
         String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new LoginResponse(token));
     }
-
-    // private AuthenticationManager authenticationManager;
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody LoginForm loginForm) {
-//        Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(loginForm.getUsername(), loginForm.getPassword()));
-//        UserDetails userDetails = userDetailsService.loadUserByUsername(loginForm.getUsername());
-//
-//        String token = jwtTokenUtil.generateToken(userDetails);
-//            return ResponseEntity.ok(new LoginResponse(token));
-//    }
 }
