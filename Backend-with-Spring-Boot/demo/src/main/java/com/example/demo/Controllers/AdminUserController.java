@@ -3,6 +3,8 @@ package com.example.demo.Controllers;
 import com.example.demo.Entity.User;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Services.ApprovedEmailService;
+import com.example.demo.Services.UserService;
+import com.example.demo.Services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AdminUserController {
+    private final UserServiceImpl userServiceImpl;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ApprovedEmailService approvedEmailService;
 
     @Autowired
-    public AdminUserController(UserRepository userRepository, PasswordEncoder passwordEncoder, ApprovedEmailService approvedEmailService) {
+    public AdminUserController(UserServiceImpl userServiceImpl, UserRepository userRepository, PasswordEncoder passwordEncoder, ApprovedEmailService approvedEmailService) {
+        this.userServiceImpl = userServiceImpl;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.approvedEmailService = approvedEmailService;
@@ -31,14 +35,43 @@ public class AdminUserController {
 
     @Secured("ROLE_ADMIN")
     @PostMapping("/admin/users")
-    public ResponseEntity<String> createUser(@RequestBody User user) {
+    public ResponseEntity<String> createAdminUser(@RequestBody User user) {
         if (user.getUsername() == null || user.getPassword() == null) {
             return ResponseEntity.badRequest().body("Username and password are required");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            return ResponseEntity.badRequest().body("Username is already taken");
+        }
         user.setAdmin(true);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        boolean isApproved = userServiceImpl.checkApprovalStatus(user.getEmail());
+        user.setApproved(isApproved);
         userRepository.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
+    }
+
+    @Secured("ROLE_ADMIN")
+    @PostMapping("/student/users")
+    public ResponseEntity<String> createStudentUser(@RequestBody User user) {
+        if (user.getUsername() == null || user.getPassword() == null) {
+            return ResponseEntity.badRequest().body("Username and password are required");
+        }
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            return ResponseEntity.badRequest().body("Username is already taken");
+        }
+        user.setAdmin(false);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        boolean isApproved = userServiceImpl.checkApprovalStatus(user.getEmail());
+        user.setApproved(isApproved);
+        userRepository.save(user);
+
+        if (isApproved) {
+            return ResponseEntity.status(HttpStatus.CREATED).body("User created and approved successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.CREATED).body("User created but not yet approved. Please contact Admin to approve the email first.");
+        }
     }
 
     @Secured("ROLE_ADMIN")

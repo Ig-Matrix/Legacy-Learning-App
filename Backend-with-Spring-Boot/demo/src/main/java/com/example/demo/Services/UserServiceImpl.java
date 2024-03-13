@@ -1,6 +1,7 @@
 package com.example.demo.Services;
 
 import com.example.demo.Entity.User;
+import com.example.demo.Repository.ApprovedEmailRepository;
 import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,10 +11,15 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final ApprovedEmailRepository approvedEmailRepository;
     @Autowired
     private  PasswordEncoder passwordEncoder;
+
+    public UserServiceImpl(UserRepository userRepository, ApprovedEmailRepository approvedEmailRepository) {
+        this.userRepository = userRepository;
+        this.approvedEmailRepository = approvedEmailRepository;
+    }
 
     @Override
     public User findByUsername(String username) {
@@ -38,21 +44,8 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
-
-    public void approveUser(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found"));
-        user.setApproved(true);
-        userRepository.save(user);
-    }
-
-    public void rejectUser(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found"));
-        user.setApproved(false);
-        userRepository.save(user);
-    }
-
     public boolean checkApprovalStatus(String email) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        return userOptional.isPresent() && userOptional.get().isApproved();
+        return approvedEmailRepository.existsByEmail(email);
     }
+
 }
