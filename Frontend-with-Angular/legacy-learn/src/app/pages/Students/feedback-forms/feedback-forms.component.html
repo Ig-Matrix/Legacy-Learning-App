@@ -93,19 +93,19 @@
           getSelectedFeedbackType().questions.length-1) {
           <button
             type="submit"
-            class="bg-blue-500 text-white rounded-sm p-4"
-            [disabled]="!feedbackForm.valid"
+            class="bg-blue-500 text-white rounded-md p-3"
+            [ngClass]="{ 'opacity-5': !isCurrentQuestionAnswered() }"
+            [disabled]="!isCurrentQuestionAnswered()"
             (click)="onSubmit()"
           >
-            Submit
+            @if (isLoading) { 
+              Submitting <fa-icon [icon]="faPaperPlane" class="animate-pulse text-xl transition-all duration-100" />
+            }@else { Submit
+            <fa-icon [icon]="faPaperPlane" />
+            }
           </button>
           }
         </div>
-        <!-- @if (!isCurrentQuestionAnswered()) {
-        <div class="text-red-500 mt-2">
-          Please answer the current question before proceeding.
-        </div>
-        } -->
       </form>
       }
     </div>
