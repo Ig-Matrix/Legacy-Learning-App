@@ -65,18 +65,36 @@
       </td>
       }@else if (editingCourseIndex === i) {
 
-      <td class="px-6 py-4 whitespace-nowrap">
-        <input class="border text-sm" type="text" [(ngModel)]="courses[i].name" />
+      <td class="px-4 py-2 whitespace-nowrap">
+        <input
+          class="border text-sm w-[60%]"
+          type="text"
+          [(ngModel)]="courses[i].name"
+        />
       </td>
-      <td class="px-6 py-4 whitespace-nowrap">
-        <input class="border text-sm" type="text" [(ngModel)]="courses[i].code" />
+      <td class="px-4 py-2 whitespace-nowrap">
+        <input
+          class="border text-sm w-[60%]"
+          type="text"
+          [(ngModel)]="courses[i].code"
+        />
       </td>
-      <td class="px-6 py-4 whitespace-nowrap">
-        <input class="border text-sm" type="number" [(ngModel)]="courses[i].score" />
+      <td class="px-4 py-2 whitespace-nowrap">
+        <input
+          class="border text-sm w-[60%]"
+          type="number"
+          [(ngModel)]="courses[i].score"
+        />
       </td>
-      <td class="px-6 py-4 whitespace-nowrap">{{ course.unit }}</td>
-      <td class="px-6 py-4 whitespace-nowrap">{{ course.grade }}</td>
-      <td class="px-6 py-4 whitespace-nowrap">
+      <td class="px-4 py-2 whitespace-nowrap">
+        <input
+          class="border text-sm w-[60%]"
+          type="number"
+          [(ngModel)]="courses[i].unit"
+        />
+      </td>
+      <td class="px-4 py-2 whitespace-nowrap">{{ courses[i].grade }}</td>
+      <td class="px-4 py-2 whitespace-nowrap">
         <button
           (click)="saveCourse(courses[i])"
           class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"

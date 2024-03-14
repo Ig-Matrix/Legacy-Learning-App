@@ -99,8 +99,9 @@ export class StudentPortfolioComponent {
 
   saveCourse(course: Course) {
     if (this.editingCourseIndex !== null && this.editingCourseIndex >= 0) {
-      this.courses[this.editingCourseIndex] = course; // Update course at the edited index
-      this.editingCourseIndex = null; // Reset editing course index
+      this.courses[this.editingCourseIndex].score = course.score;  // Update score directly
+      this.courses[this.editingCourseIndex].grade = this.calculateGrade(course.score); // Recalculate grade
+      this.editingCourseIndex = null;
       this.cgpa = null; // Invalidate CGPA after course edit
     }
   }
