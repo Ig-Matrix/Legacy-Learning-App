@@ -19,6 +19,9 @@ public class User {
     private String username;
     private String password;
 
-    private boolean isAdmin;
-    private boolean approved;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    private boolean approved = false;
 }
+

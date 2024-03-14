@@ -1,32 +1,26 @@
 package com.example.demo.Services;
 
 import com.example.demo.Entity.User;
-import com.example.demo.Repository.ApprovedEmailRepository;
 import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
-    private final ApprovedEmailRepository approvedEmailRepository;
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private  PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, ApprovedEmailRepository approvedEmailRepository) {
-        this.userRepository = userRepository;
-        this.approvedEmailRepository = approvedEmailRepository;
+    public User registerUser(User user) throws UsernameAlreadyExistsException {
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            throw new UsernameAlreadyExistsException("Username already exists!");
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setApproved(false);
+        return userRepository.save(user);
     }
-
-    @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    @Override
     public boolean authenticate(String username, String password) {
         User user = userRepository.findByUsername(username);
         if (user != null) {
@@ -34,18 +28,16 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
-
-    public User createUser(User user) {
-        boolean isApproved = checkApprovalStatus(user.getEmail());
-        user.setApproved(isApproved);
-        if (userRepository.findByUsername(user.getUsername()) != null) {
-            throw new IllegalArgumentException("Username is already taken");
-        }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
-    }
-    public boolean checkApprovalStatus(String email) {
-        return approvedEmailRepository.existsByEmail(email);
-    }
-
 }
+
+//public User approveUser(Long userId) throws UsernameAlreadyExistsException {
+//    User user = userRepository.findById(userId)
+//            .orElseThrow(() -> new UserNotFoundException("User not found!"));
+//    user.setApproved(true);
+//    return userRepository.save(user);
+//}
+
+//    public UserServiceImpl(UserRepository userRepository, ApprovedEmailRepository approvedEmailRepository) {
+//        this.userRepository = userRepository;
+//        this.approvedEmailRepository = approvedEmailRepository;
+//    }

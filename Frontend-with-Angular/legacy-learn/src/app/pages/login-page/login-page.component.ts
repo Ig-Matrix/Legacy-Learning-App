@@ -6,9 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Validators , FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from "../../components/footer/footer.component";
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../../auth.service';
-import { LoginResponse } from '../../modules/login.response';
-import { UserService } from '../../services/UserService/user.service';
+import { LoginService } from '../../services/LoginService/login-service.service';
 
 @Component({
     selector: 'app-login-page',
@@ -29,8 +27,7 @@ export class LoginPageComponent {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private authService: AuthService,
-    private userService: UserService
+    private loginService: LoginService
     ) {}
 
   loginForm: FormGroup = new FormGroup({
@@ -47,40 +44,32 @@ export class LoginPageComponent {
   this.errorMessage = '';
   }
 
-  onSubmit() {
-    this.isLoading = true;
-    this.errorMessage = '';
+  // onSubmit() {
+  //   this.isLoading = true;
+  //   this.errorMessage = '';
 
-    this.userService.login(this.loginForm)
-    .subscribe(
-      response => {
-        const token = response.token;
-        localStorage.setItem('authToken', token);
-        this.router.navigate(['/home']);
-      },
-      error => {
-        this.errorMessage = 'Invalid username or password';
-        console.log('Login error: ', error);
-      },
-      () => {
-        this.isLoading = false;
-        setTimeout(() => {
-          this.clearErrorMessage();
-        }, 3000);
-      });
-  }
-
-  // onSubmit(): void {
-  //   this.authService.login(this.loginForm)
-  //     .subscribe(
-  //       (response: any) => {
-  //         console.log('Login successful:', response);
-  //       },
-  //       (error: { error: { message: string; }; }) => {
-  //         this.errorMessage = error.error.message || 'Login failed';
-  //       }
-  //     );
+  //   this.loginService.login(this.loginForm)
+  //   .subscribe(
+  //     response => {
+  //       const token = response.token;
+  //       localStorage.setItem('authToken', token);
+  //       this.router.navigate(['/home']);
+  //     },
+  //     error => {
+  //       this.errorMessage = 'Invalid username or password';
+  //       console.log('Login error: ', error);
+  //     },
+  //     () => {
+  //       this.isLoading = false;
+  //       setTimeout(() => {
+  //         this.clearErrorMessage();
+  //       }, 3000);
+  //     });
   // }
+
+  onSubmit(): void {
+    this.router.navigate(['/home']);
+  }
   
   // onSubmit(): void {
   //   this.isLoading = true;

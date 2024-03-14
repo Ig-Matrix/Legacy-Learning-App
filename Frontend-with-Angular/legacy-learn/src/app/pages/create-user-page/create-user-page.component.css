@@ -16,6 +16,7 @@ main {
     width:100%;
 }
 .logo {
+    margin-top: 4vh;
     font-family: 'Sacramento', sans-serif;
     font-size: 5vh;
     font-weight: bold;
@@ -45,7 +46,7 @@ main {
 }
 input {
     border: 3px solid lightgrey;
-    height: 20px;
+    height: 55px;
     width: 80%;
     transition: transform 0.3s ease;
 }
@@ -118,10 +119,14 @@ padding: 10px 20px;
         font-size: 2vh;
     }
     input {
-        height: 20px;
+        height: 50px;
+        width: 100%;
     }
     label {
         font-size: 1.8vh;
+    }
+    button {
+        padding: 10px 40px;
     }
     .col-6 {
         width: 80%;

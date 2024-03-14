@@ -8,27 +8,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl: string = 'http://localhost:8080';
+  private baseUrl: string = 'http://localhost:8080/api';
 
   constructor(
     private http: HttpClient,
   ) { }
 
   createAdminUser(user: User): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/admin/users`, user);
+    return this.http.post<string>(`${this.baseUrl}/admins/register`, user);
   }
   
   createStudentUser(user: User): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/student/users`, user);
-  }
-  
-  approveEmail(email: string): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/approve`, email);
-  }
-
-  login(loginForm: FormGroup): Observable<{token: string}> {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post<any>(`${this.baseUrl}/login`, loginForm.value, {headers});
+    return this.http.post<string>(`${this.baseUrl}/students/register`, user);
   }
   
 }

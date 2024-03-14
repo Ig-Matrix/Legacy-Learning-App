@@ -22,6 +22,9 @@ main {
     color: #2f57e5;
     padding: 5px 0 5px 30%;
 }
+.welcome {
+    margin: 15px 0;
+}
 #logo1 {
     color: orange !important;
 }
@@ -33,10 +36,10 @@ main {
     align-items: center;
 }
 input {
-    height: 45px;
+    height: 50px;
     width: 80%;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border: 3px solid lightgrey;
     font-family: 'Poppins', sans-serif;
     outline: none;
@@ -55,7 +58,7 @@ input[type="password"] {
     background-size: 9px;
 }
 button {
-    padding: 12px 50px;
+    padding: 10px 50px;
     margin-right: 15px;
     border: none;
     border-radius: 8px;
@@ -87,8 +90,8 @@ a:hover, a:focus {
     position: relative;
 }
 .eyeicon {
-    margin-top: 20px;
-    left: 80%;
+    top: 30%;
+    left: 70%;
     height: 10px;
     cursor: pointer;
     position: absolute;
@@ -129,8 +132,7 @@ a:hover, a:focus {
         margin: 0 0 10px 0;
     }
     .eyeicon {
-        left: 100%;
-        margin-top: -40px;
+        left: 90%;
     }
     .pageInput {
         padding: 20%;
@@ -138,7 +140,7 @@ a:hover, a:focus {
     button {
         font-size: 1.5vh;
         font-weight: bold;
-        padding: 15px 50px;
+        padding: 12px 50px;
         margin: 5px 10px 5px 0;
     }
     .welcome {

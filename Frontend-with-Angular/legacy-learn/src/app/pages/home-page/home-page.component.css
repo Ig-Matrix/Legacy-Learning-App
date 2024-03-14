@@ -16,8 +16,12 @@ main {
     display: flex;
     flex-direction: row;
 }
+h1, h2, h3 {
+    font-weight: bold;
+}
 h1 {
     font-size: 4.5vh;
+    margin-top: 4vh;
 }
 .h-one, .h-two, .h-three  {
     font-size: 2.3vh;
@@ -42,6 +46,7 @@ h2 {
     padding-left: 7.5vh;
 }
 .three {
+    margin-top: 2.5vh;
     padding: 4vh;
 }
 .image {
@@ -52,11 +57,11 @@ h2 {
 
 @media screen and (max-width: 1020px) {
     main {
-        margin: 6% 0 0 55px;
+        margin: 6% 0 55px 0;
         font-size: 1.6vh;
     }
     .container {
-        padding: 3vh 1vh;
+        padding: 3vh 2vh;
     }
     .image {
         margin-top: 5vh;
@@ -80,7 +85,7 @@ h2 {
 }
 @media screen and (max-width: 600px) {
     main {
-        margin: 10% 0 0 55px;
+        margin: 10% 0 55px 0;
         font-size: 1.6vh;
     }
     .image {

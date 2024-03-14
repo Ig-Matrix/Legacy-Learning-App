@@ -9,30 +9,39 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 public class LoginController {
-    @Autowired
-    private AuthenticationManagerBuilder authenticationManagerBuilder;
-    @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
+    private final AuthenticationManager authenticationManager;
     private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    public LoginController(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
 
     @PostMapping("/login")
-    @ResponseBody
-    public ResponseEntity<?> login(@RequestBody LoginForm loginForm) {
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(
-                new UsernamePasswordAuthenticationToken(loginForm.getUsername(), loginForm.getPassword()));
-        UserDetails userDetails = userDetailsService.loadUserByUsername(loginForm.getUsername());
+    public ResponseEntity<?> login(@RequestBody LoginForm loginForm) throws Exception {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                loginForm.getUsername(), loginForm.getPassword());
+        try {
+            Authentication authentication = authenticationManager.authenticate(token);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new LoginResponse(token));
+            // Generate JWT token from authenticated user
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String jwtToken = jwtTokenUtil.generateAccessToken(userDetails);
+
+            // Create a login response object with JWT token
+            LoginResponse loginResponse = new LoginResponse(jwtToken);
+            return ResponseEntity.ok(loginResponse);
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        }
     }
 }

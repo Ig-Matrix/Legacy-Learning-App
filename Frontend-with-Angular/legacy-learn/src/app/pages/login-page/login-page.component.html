@@ -21,14 +21,14 @@
             *ngIf="loginForm.get('password')!.hasError('required') && loginForm.get('password')!.touched">Password is required.
           </div>
           <div class="ngIf" *ngIf="loginForm.get('password')!.hasError('minlength') && loginForm.get('password')!.touched">Password must be at least 5 characters long.
-          </div><br/>
+          </div>
           <section class="btn-container">
             <button type="submit">{{isLoading?'PLEASE WAIT...': 'LOG IN'}}
             </button>
             <button routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">CANCEL</button>
             <br />
           </section>
-          <p class="welcome">Don't have an account. Click <a routerLink="/create" routerLinkActive="active" ariaCurrentWhenActive="page">here</a> to sign up now - it's free!</p>
+          <p class="welcome">Don't have an account. Click <a routerLink="/signup" routerLinkActive="active" ariaCurrentWhenActive="page">here</a> to sign up now - it's free!</p>
           <div class="ngIfError" *ngIf="errorMessage">
             {{ errorMessage }}
           </div>
