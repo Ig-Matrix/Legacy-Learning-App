@@ -1,0 +1,30 @@
+<h2>Student Portfolio</h2>
+
+@if (!courses.length) {
+<p>No courses entered yet.</p>
+
+}@else {
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>Course Name</th>
+      <th>Course Code</th>
+      <th>Course Score</th>
+      <th>Course Unit</th>
+      <th>Grade</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+}
+
+<button 
+class="bg-purple-400 p-3 rounded-md text-slate-50" (click)="openAddCourseModal()">
+  Add Course
+</button>
+
+@if (showModal) {
+<app-add-course-modal [showModal]="showModal" (courseAdded)="addCourse($event)" />
+}
