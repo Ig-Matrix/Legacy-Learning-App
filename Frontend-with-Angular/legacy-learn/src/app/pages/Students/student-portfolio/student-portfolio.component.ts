@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Course } from '../../../../models/Interfaces/Course';
 import { AddCourseModalComponent } from '../add-course-modal/add-course-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-student-portfolio',
   standalone: true,
-  imports: [AddCourseModalComponent],
+  imports: [AddCourseModalComponent,  FormsModule],
   templateUrl: './student-portfolio.component.html',
   styleUrl: './student-portfolio.component.css',
 })
@@ -13,6 +14,8 @@ export class StudentPortfolioComponent {
   courses: Course[] = []; // Array to store course data
   showModal: boolean = false; // Flag to control modal visibility
   cgpa: number | null = null; // CGPA property to store calculated value
+  editingCourseIndex: number | null = null; // Track the index of the course being edited
+  trackingIndex: number = 1;
 
   openAddCourseModal() {
     this.showModal = true; // Open the modal on button click
@@ -20,6 +23,7 @@ export class StudentPortfolioComponent {
 
   addCourse(course: Course) {
     course.grade = this.calculateGrade(course.score);
+    this.trackingIndex++;
     this.courses.push(course); // Add new course to the array
     this.cgpa = null;
     this.showModal = false; // Close the modal after adding
@@ -81,9 +85,23 @@ export class StudentPortfolioComponent {
 
   deleteCourse(course: Course) {
     const courseIndex = this.courses.findIndex((c) => c === course); //find the index of that course
-    if(courseIndex !== -1) {
-      this.courses.splice(courseIndex, 1) //remove that course from the array
-      this.cgpa=null // invalidatee cgpa
+    if (courseIndex !== -1) {
+      this.courses.splice(courseIndex, 1); //remove that course from the array
+      this.cgpa = null; // invalidatee cgpa
+    }
+  }
+
+  editCourse(course: Course, index: number) {
+    this.editingCourseIndex = index; // Set the editing course index
+    // Consider creating a copy of the course to avoid modifying the original object
+    this.courses[index] = { ...course }; // Optional: Create a copy for editing
+  }
+
+  saveCourse(course: Course) {
+    if (this.editingCourseIndex !== null && this.editingCourseIndex >= 0) {
+      this.courses[this.editingCourseIndex] = course; // Update course at the edited index
+      this.editingCourseIndex = null; // Reset editing course index
+      this.cgpa = null; // Invalidate CGPA after course edit
     }
   }
 }
