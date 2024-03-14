@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../../model/user.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,12 @@ export class UserService {
   }
   
   approveEmail(email: string): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/approve-email`, email);
+    return this.http.post<string>(`${this.baseUrl}/approve`, email);
+  }
+
+  login(loginForm: FormGroup): Observable<{token: string}> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post<any>(`${this.baseUrl}/login`, loginForm.value, {headers});
   }
   
 }

@@ -7,14 +7,15 @@ import { Validators , FormControl, FormGroup, ReactiveFormsModule } from '@angul
 import { FooterComponent } from "../../components/footer/footer.component";
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth.service';
-import { MyHttpClientModule } from '../../modules/http-client.module';
+import { LoginResponse } from '../../modules/login.response';
+import { UserService } from '../../services/UserService/user.service';
 
 @Component({
     selector: 'app-login-page',
     standalone: true,
     templateUrl: './login-page.component.html',
     styleUrl: './login-page.component.css',
-    imports: [RouterLink, RouterLinkActive, CommonModule, MyHttpClientModule, FontAwesomeModule, ReactiveFormsModule, FooterComponent]
+    imports: [RouterLink, RouterLinkActive, CommonModule, FontAwesomeModule, ReactiveFormsModule, FooterComponent]
 })
 export class LoginPageComponent {
   icons = [
@@ -26,8 +27,10 @@ export class LoginPageComponent {
   errorMessage: string = '';
 
   constructor(
+    private router: Router,
     private http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
     ) {}
 
   loginForm: FormGroup = new FormGroup({
@@ -44,17 +47,40 @@ export class LoginPageComponent {
   this.errorMessage = '';
   }
 
-  onSubmit(): void {
-    this.authService.login(this.loginForm)
-      .subscribe(
-        (response: any) => {
-          console.log('Login successful:', response);
-        },
-        (error: { error: { message: string; }; }) => {
-          this.errorMessage = error.error.message || 'Login failed';
-        }
-      );
+  onSubmit() {
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    this.userService.login(this.loginForm)
+    .subscribe(
+      response => {
+        const token = response.token;
+        localStorage.setItem('authToken', token);
+        this.router.navigate(['/home']);
+      },
+      error => {
+        this.errorMessage = 'Invalid username or password';
+        console.log('Login error: ', error);
+      },
+      () => {
+        this.isLoading = false;
+        setTimeout(() => {
+          this.clearErrorMessage();
+        }, 3000);
+      });
   }
+
+  // onSubmit(): void {
+  //   this.authService.login(this.loginForm)
+  //     .subscribe(
+  //       (response: any) => {
+  //         console.log('Login successful:', response);
+  //       },
+  //       (error: { error: { message: string; }; }) => {
+  //         this.errorMessage = error.error.message || 'Login failed';
+  //       }
+  //     );
+  // }
   
   // onSubmit(): void {
   //   this.isLoading = true;
