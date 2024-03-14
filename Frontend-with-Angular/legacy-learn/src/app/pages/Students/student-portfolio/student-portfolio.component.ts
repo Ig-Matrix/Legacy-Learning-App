@@ -20,7 +20,7 @@ export class StudentPortfolioComponent {
 
   addCourse(course: Course) {
     this.courses.push(course);
-    console.log(course);
+    // console.log(course);
      // Add new course to the array
     this.showModal = false; // Close the modal after adding
   }
