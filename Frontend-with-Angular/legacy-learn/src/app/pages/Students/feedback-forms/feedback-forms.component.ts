@@ -8,12 +8,27 @@ import {
   FormsModule,
 } from '@angular/forms';
 import { FeedbackType } from '../../../../models/Interfaces/Feedback';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
+import { ProgressComponent } from '../../../components/progress/progress.component';
+import { RouterLink } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faArrowRightLong,
+  faArrowLeftLong,
+  faPaperPlane,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-feedback-forms',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, NgClass],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    NgClass,
+    ProgressComponent,
+    RouterLink,
+    FontAwesomeModule,
+  ],
   templateUrl: './feedback-forms.component.html',
   styleUrl: './feedback-forms.component.css',
 })
@@ -22,6 +37,10 @@ export class FeedbackFormsComponent {
   selectedFeedbackType: string = '';
   currentQuestionIndex: number = 0;
   feedbackForm: FormGroup;
+  faArrowRightLong = faArrowRightLong;
+  faArrowLeftLong = faArrowLeftLong;
+  faPaperPlane = faPaperPlane;
+  isLoading: boolean= false;
 
   constructor(private fb: FormBuilder) {
     this.feedbackForm = this.fb.group({});
@@ -49,25 +68,38 @@ export class FeedbackFormsComponent {
     const formGroup = this.fb.group({});
 
     questions.forEach((question) => {
-      // const control =
-      //   question.options.length > 1
-      //     ? this.fb.control(null, Validators.required)
-      //     : this.fb.control('');
-      formGroup.addControl(question.name, this.fb.control(''));
+      formGroup.addControl(
+        question.name,
+        this.fb.control('', Validators.required)
+      );
     });
 
     this.feedbackForm = formGroup;
   }
 
   onNext() {
-    this.currentQuestionIndex++;
+    if (this.feedbackForm.controls[this.currentQuestion.name].valid) {
+      this.currentQuestionIndex++;
+    } else {
+      console.log(
+        'Please answer the current question before moving to the next one.'
+      );
+    }
   }
 
   onPrev() {
-    this.currentQuestionIndex++;
+    this.currentQuestionIndex--;
+  }
+
+  isCurrentQuestionAnswered(): boolean {
+    return this.feedbackForm.controls[this.currentQuestion.name].valid;
   }
 
   onSubmit() {
-    console.log('Form Submiited:', this.feedbackForm.value);
+    this.isLoading= true;
+    setTimeout(() => {
+      this.isLoading=false
+      console.log('Form Submiited:', this.feedbackForm.value);
+    }, 5000);
   }
 }
