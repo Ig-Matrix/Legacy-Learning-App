@@ -63,7 +63,6 @@ export class StudentPortfolioComponent {
 
   getGradePoints(score: number): number | null {
     const gradeMap = {
-      // Modify this based on your grading system (e.g., 90-100: 4.0)
       '70-100': 5.0,
       '60-69': 4.0,
       '50-59': 3.0,
@@ -78,5 +77,13 @@ export class StudentPortfolioComponent {
     });
 
     return gradeRange ? gradeMap[gradeRange as keyof typeof gradeMap] : null;
+  }
+
+  deleteCourse(course: Course) {
+    const courseIndex = this.courses.findIndex((c) => c === course); //find the index of that course
+    if(courseIndex !== -1) {
+      this.courses.splice(courseIndex, 1) //remove that course from the array
+      this.cgpa=null // invalidatee cgpa
+    }
   }
 }
