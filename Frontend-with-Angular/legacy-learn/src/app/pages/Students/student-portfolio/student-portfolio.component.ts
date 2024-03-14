@@ -57,12 +57,13 @@ export class StudentPortfolioComponent {
       }
     }
 
-    this.cgpa = totalQualityPoints / totalCreditPoints;
+    this.cgpa = totalQualityPoints / totalCreditPoints || null;
     return totalQualityPoints / totalCreditPoints || null; // Handle division by zero
   }
 
   getGradePoints(score: number): number | null {
     const gradeMap = {
+      // Modify this based on your grading system (e.g., 90-100: 4.0)
       '70-100': 5.0,
       '60-69': 4.0,
       '50-59': 3.0,
