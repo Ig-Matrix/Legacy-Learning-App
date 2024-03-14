@@ -1,0 +1,10 @@
+Creating an admin-user
+{
+"email": "tonyrealzy@gmail.com",
+ "firstName": "Arinze",
+ "lastName": "Umehobi",
+   "username": "tonyrealzy",
+   "password": "realzy2024",
+   "isAdmin": "true",
+   "approved": "false"
+ }

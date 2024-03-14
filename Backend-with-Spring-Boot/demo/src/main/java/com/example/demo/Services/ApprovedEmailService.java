@@ -24,4 +24,14 @@ public class ApprovedEmailService {
         }
         return false;
     }
+
+    // for testing purpose only...
+    public boolean addAdminEmail(String email) {
+        if (approvedEmailRepository.existsByEmail(email)) {
+            return false; // Email already exists, not adding again
+        }
+        approvedEmailRepository.save(new ApprovedEmail(email));
+        return true;
+    }
+
 }

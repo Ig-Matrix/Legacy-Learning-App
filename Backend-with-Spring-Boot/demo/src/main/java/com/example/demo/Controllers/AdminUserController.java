@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Entity.User;
+import com.example.demo.Repository.ApprovedEmailRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Services.ApprovedEmailService;
 import com.example.demo.Services.UserService;
@@ -25,16 +26,19 @@ public class AdminUserController {
     private final PasswordEncoder passwordEncoder;
     private final ApprovedEmailService approvedEmailService;
 
+    private final ApprovedEmailRepository approvedEmailRepository;
+
     @Autowired
-    public AdminUserController(UserServiceImpl userServiceImpl, UserRepository userRepository, PasswordEncoder passwordEncoder, ApprovedEmailService approvedEmailService) {
+    public AdminUserController(UserServiceImpl userServiceImpl, UserRepository userRepository, PasswordEncoder passwordEncoder, ApprovedEmailService approvedEmailService, ApprovedEmailRepository approvedEmailRepository) {
         this.userServiceImpl = userServiceImpl;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.approvedEmailService = approvedEmailService;
+        this.approvedEmailRepository = approvedEmailRepository;
     }
 
     @Secured("ROLE_ADMIN")
-    @PostMapping("/admin/users")
+    @PostMapping("/admin/createUser")
     public ResponseEntity<String> createAdminUser(@RequestBody User user) {
         if (user.getUsername() == null || user.getPassword() == null) {
             return ResponseEntity.badRequest().body("Username and password are required");
@@ -48,11 +52,12 @@ public class AdminUserController {
         boolean isApproved = userServiceImpl.checkApprovalStatus(user.getEmail());
         user.setApproved(isApproved);
         userRepository.save(user);
+        System.out.println(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
     }
 
     @Secured("ROLE_ADMIN")
-    @PostMapping("/student/users")
+    @PostMapping("/student/createUser")
     public ResponseEntity<String> createStudentUser(@RequestBody User user) {
         if (user.getUsername() == null || user.getPassword() == null) {
             return ResponseEntity.badRequest().body("Username and password are required");
@@ -75,7 +80,7 @@ public class AdminUserController {
     }
 
     @Secured("ROLE_ADMIN")
-    @PostMapping("/admin/approve-email")
+    @PostMapping("/admin/approveMail")
     public ResponseEntity<String> approveEmail(@RequestBody String email) {
         if (!isAdmin()) {
             return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
@@ -85,6 +90,16 @@ public class AdminUserController {
             return new ResponseEntity<>("Email approved successfully", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Failed to approve email", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerAdminEmail(@RequestBody String email) {
+        boolean addedEmail = approvedEmailService.addAdminEmail(email);
+        if (addedEmail) {
+            return new ResponseEntity<>("Admin email registered successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Email already approved or failed to register", HttpStatus.CONFLICT);
         }
     }
 
