@@ -143,20 +143,35 @@
       </button>
     </div>
     } @if (courses.length) {
-    <div class="border border-double flex items-center justify-between p-6 my-3">
-      <button class="bg-slate-200 hover:bg-slate-50 text-blue-500 shadow-md p-3 rounded-md tex-" (click)="calculateCGPA()">
+    <div
+      class="border border-double flex items-center justify-between p-6 my-3"
+    >
+      <button
+        class="bg-slate-200 hover:bg-slate-50 text-blue-500 shadow-md p-3 rounded-md tex-"
+        (click)="calculateCGPA()"
+      >
         Calculate CGPA
       </button>
-      <div class="border border-gray-700 border-dotted w-24 h-24 rounded-full flex items-center justify-center">
+      <div
+        class="border border-gray-700 border-dotted w-24 h-24 rounded-full flex items-center justify-center"
+      >
         @if (cgpa) {
-        <p class="text-green-400 text-[1.2rem]"
-        >{{ cgpa.toFixed(2) }}<span class="text-sm">/5.00</span> </p>
+        <p
+          class="text-green-400 text-[1.2rem]"
+        >
+          {{ cgpa.toFixed(2) }}<span class="text-sm">/5.00</span>
+        </p>
         }@else {
-          <p class="text-gray-400">N/A</p>
+        <p class="text-gray-400">N/A</p>
         }
       </div>
     </div>
-
+    <!-- [ngClass]="{ 'text-red-600': cgpa >= 0 && cgpa < 1.0 }"
+    [ngClass]="{ 'text-orange-500': cgpa >= 1 && cgpa < 2.0 }"
+    [ngClass]="{ 'text-amber-600': cgpa >= 2 && cgpa < 3.0 }"
+    [ngClass]="{ 'text-yellow-400': cgpa >= 3 && cgpa < 4.0 }"
+    [ngClass]="{ 'text-green-300': cgpa >= 4 && cgpa < 4.5 }"
+    [ngClass]="{ 'text-green-500': cgpa >= 4.5 }" -->
     } @if (showModal) {
     <app-add-course-modal
       [showModal]="showModal"

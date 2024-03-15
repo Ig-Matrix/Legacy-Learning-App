@@ -69,6 +69,8 @@ export class StudentPortfolioComponent {
     }
 
     this.cgpa = totalQualityPoints / totalCreditPoints || null;
+    console.log(this.cgpa);
+    
     return totalQualityPoints / totalCreditPoints || null; // Handle division by zero
   }
 
