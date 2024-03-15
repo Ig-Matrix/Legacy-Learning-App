@@ -1,12 +1,16 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Entity.LoginForm;
+import com.example.demo.Entity.LoginResponse;
 import com.example.demo.Services.UserService;
 import com.example.demo.utilty.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +23,7 @@ public class LoginController {
     private final AuthenticationManager authenticationManager;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+    @Autowired
     private UserService userService;
 
     public LoginController(AuthenticationManager authenticationManager) {
@@ -27,10 +32,16 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public String token (@RequestBody LoginForm loginForm) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginForm.getUsername(), loginForm.getPassword()));
-        return jwtTokenUtil.generateAccessToken((UserDetails) authentication);
+    public ResponseEntity<?> login(@RequestBody LoginForm loginForm) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    loginForm.getUsername(), loginForm.getPassword()));
+            String jwtToken = jwtTokenUtil.generateAccessToken((UserDetails) authentication);
+            LoginResponse loginResponse = new LoginResponse(jwtToken);
+            return ResponseEntity.ok(loginResponse);
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 }
 
