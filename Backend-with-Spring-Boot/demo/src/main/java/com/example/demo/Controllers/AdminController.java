@@ -31,6 +31,7 @@ public class AdminController {
             throw new UnauthorizedAccessException("You are not authorized to create admins!", "/api/admins/create", "POST");
         }
         user.setRole(UserRole.ADMIN);
+        user.setApproved(true);
         User registeredUser = userServiceImpl.registerUser(user);
         return ResponseEntity.ok(registeredUser);
     }

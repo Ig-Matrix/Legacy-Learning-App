@@ -20,6 +20,7 @@ public class UserController {
     @PostMapping("students/register")
     public ResponseEntity<User> registerStudent(@RequestBody User user) throws UsernameAlreadyExistsException {
         user.setRole(UserRole.STUDENT);
+        user.setApproved(true);
         User registeredUser = userServiceImpl.registerUser(user);
         return ResponseEntity.ok(registeredUser);
     }

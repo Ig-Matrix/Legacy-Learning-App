@@ -8,9 +8,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -25,14 +28,32 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/admins/register").hasRole("ADMIN")
+                        .requestMatchers("/", "/login").permitAll()
+                        .requestMatchers("/admins/**").hasRole("ADMIN")
+                        .requestMatchers("/students/**").hasRole("STUDENT")
                         .anyRequest().authenticated()
-                ).formLogin()
+                )
+                .formLogin()
                 .loginPage("/api/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll();
         return http.build();
+    }
+
+    @Bean
+    public InMemoryUserDetailsManager userDetailsManager() {
+        UserDetails admins = User.withDefaultPasswordEncoder()
+                .username("admins")
+                .password("password")
+                .roles("ADMIN")
+                .build();
+        UserDetails students = User.withDefaultPasswordEncoder()
+                .username("students")
+                .password("password")
+                .roles("STUDENT")
+                .build();
+        return new InMemoryUserDetailsManager(admins, students);
     }
 
     @Bean
@@ -51,15 +72,5 @@ public class SecurityConfig {
     }
 }
 
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("admin")
-//                .password(passwordEncoder.encode("password"))
-//                .roles("ADMIN")
-//                .and()
-//                .withUser("student") // Add student user with desired password (encoded)
-//                .password(passwordEncoder.encode("student_password"))
-//                .roles("STUDENT"); // Assign student role
-//    }
 
 

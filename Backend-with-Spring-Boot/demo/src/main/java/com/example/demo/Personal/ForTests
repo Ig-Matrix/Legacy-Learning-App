@@ -5,6 +5,6 @@ Creating an admin-user
  "lastName": "Umehobi",
    "username": "tonyrealzy",
    "password": "realzy2024",
-   "role": "USER",
+   "role": "ADMIN",
    "approved": "false"
  }
