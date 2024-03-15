@@ -12,12 +12,23 @@ import { NgClass } from '@angular/common';
 import { ProgressComponent } from '../../../components/progress/progress.component';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faArrowRightLong, faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowRightLong,
+  faArrowLeftLong,
+  faPaperPlane,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-feedback-forms',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, NgClass, ProgressComponent, RouterLink, FontAwesomeModule],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    NgClass,
+    ProgressComponent,
+    RouterLink,
+    FontAwesomeModule,
+  ],
   templateUrl: './feedback-forms.component.html',
   styleUrl: './feedback-forms.component.css',
 })
@@ -28,6 +39,8 @@ export class FeedbackFormsComponent {
   feedbackForm: FormGroup;
   faArrowRightLong = faArrowRightLong;
   faArrowLeftLong = faArrowLeftLong;
+  faPaperPlane = faPaperPlane;
+  isLoading: boolean= false;
 
   constructor(private fb: FormBuilder) {
     this.feedbackForm = this.fb.group({});
@@ -55,7 +68,10 @@ export class FeedbackFormsComponent {
     const formGroup = this.fb.group({});
 
     questions.forEach((question) => {
-      formGroup.addControl(question.name, this.fb.control('', Validators.required));
+      formGroup.addControl(
+        question.name,
+        this.fb.control('', Validators.required)
+      );
     });
 
     this.feedbackForm = formGroup;
@@ -65,12 +81,14 @@ export class FeedbackFormsComponent {
     if (this.feedbackForm.controls[this.currentQuestion.name].valid) {
       this.currentQuestionIndex++;
     } else {
-      console.log('Please answer the current question before moving to the next one.');
+      console.log(
+        'Please answer the current question before moving to the next one.'
+      );
     }
   }
 
   onPrev() {
-    this.currentQuestionIndex++;
+    this.currentQuestionIndex--;
   }
 
   isCurrentQuestionAnswered(): boolean {
@@ -78,6 +96,10 @@ export class FeedbackFormsComponent {
   }
 
   onSubmit() {
-    console.log('Form Submiited:', this.feedbackForm.value);
+    this.isLoading= true;
+    setTimeout(() => {
+      this.isLoading=false
+      console.log('Form Submiited:', this.feedbackForm.value);
+    }, 5000);
   }
 }

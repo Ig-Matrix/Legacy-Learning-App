@@ -1,0 +1,136 @@
+<h2>Student Portfolio</h2>
+
+@if (!courses.length) {
+<p>No courses entered yet.</p>
+
+}@else {
+
+<table class="table w-full divide-y divide-gray-200">
+  <thead>
+    <tr>
+      <th
+        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+      >
+        Course Name
+      </th>
+      <th
+        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+      >
+        Course Code
+      </th>
+      <th
+        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+      >
+        Course Score
+      </th>
+      <th
+        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+      >
+        Course Unit
+      </th>
+      <th
+        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+      >
+        Course Grade
+      </th>
+      <th
+        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+      >
+        Action
+      </th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200">
+    @for (course of courses; track trackingIndex; let i = $index) {
+    <tr>
+      @if (editingCourseIndex !== i) {
+      <td class="px-6 py-4 whitespace-nowrap">{{ course.name }}</td>
+      <td class="px-6 py-4 whitespace-nowrap">{{ course.code }}</td>
+      <td class="px-6 py-4 whitespace-nowrap">{{ course.score }}</td>
+      <td class="px-6 py-4 whitespace-nowrap">{{ course.unit }}</td>
+      <td class="px-6 py-4 whitespace-nowrap">{{ course.grade }}</td>
+      <td class="px-6 py-4 whitespace-nowrap">
+        <button
+          class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
+          (click)="editCourse(course, i)"
+        >
+          Edit
+        </button>
+        <button
+          class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
+          (click)="deleteCourse(course)"
+        >
+          Delete
+        </button>
+      </td>
+      }@else if (editingCourseIndex === i) {
+
+      <td class="px-4 py-2 whitespace-nowrap">
+        <input
+          class="border text-sm w-[60%]"
+          type="text"
+          [(ngModel)]="courses[i].name"
+        />
+      </td>
+      <td class="px-4 py-2 whitespace-nowrap">
+        <input
+          class="border text-sm w-[60%]"
+          type="text"
+          [(ngModel)]="courses[i].code"
+        />
+      </td>
+      <td class="px-4 py-2 whitespace-nowrap">
+        <input
+          class="border text-sm w-[60%]"
+          type="number"
+          [(ngModel)]="courses[i].score"
+        />
+      </td>
+      <td class="px-4 py-2 whitespace-nowrap">
+        <input
+          class="border text-sm w-[60%]"
+          type="number"
+          [(ngModel)]="courses[i].unit"
+        />
+      </td>
+      <td class="px-4 py-2 whitespace-nowrap">{{ courses[i].grade }}</td>
+      <td class="px-4 py-2 whitespace-nowrap">
+        <button
+          (click)="saveCourse(courses[i])"
+          class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
+        >
+          Save
+        </button>
+        <button
+          (click)="editingCourseIndex = null"
+          class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
+        >
+          Cancel
+        </button>
+      </td>
+      }
+    </tr>
+    }
+  </tbody>
+</table>
+
+}
+
+<button
+  class="bg-purple-400 p-3 rounded-md text-slate-50"
+  (click)="openAddCourseModal()"
+>
+  Add Course
+</button>
+
+@if (courses.length) {
+<p>CGPA: {{ cgpa?.toFixed(2) || "No CGPA yet" }}</p>
+<button class="bg-slate-400 p-3 rounded-md" (click)="calculateCGPA()">
+  Calculate CGPA
+</button>
+} @if (showModal) {
+<app-add-course-modal
+  [showModal]="showModal"
+  (courseAdded)="addCourse($event)"
+/>
+}

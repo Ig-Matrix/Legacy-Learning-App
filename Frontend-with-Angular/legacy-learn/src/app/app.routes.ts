@@ -13,6 +13,7 @@ import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.
 import { Error404PageComponent } from './pages/error-404-page/error-404-page.component';
 import { AdminCreateUserComponent } from './pages/Admin/admin-create-user/admin-create-user.component';
 import { FeedbackFormsComponent } from './pages/Students/feedback-forms/feedback-forms.component';
+import { StudentPortfolioComponent } from './pages/Students/student-portfolio/student-portfolio.component';
 import { LoginGuard } from './services/login.guard';
 
 
@@ -30,6 +31,7 @@ export const routes: Routes = [
     {path: 'contact', title:'Contact Page', component: ContactUsPageComponent, canActivate: [LoginGuard]}, 
     {path: 'create', title:'Create User Page', component: AdminCreateUserComponent},
     {path: 'feedbackforms', title:'Feedback Forms', component: FeedbackFormsComponent}, 
+    {path: 'portfoliogpa', title:'Gpa page', component: StudentPortfolioComponent}, 
     {path: '**', title: 'Error-404', component: Error404PageComponent},
 ];
 
