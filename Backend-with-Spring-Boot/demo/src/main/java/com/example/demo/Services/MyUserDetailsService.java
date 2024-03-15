@@ -15,8 +15,11 @@ import java.util.Collections;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
+    private final UserRepository userRepository;
     @Autowired
-    private UserRepository userRepository;
+    public MyUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
 //    @Autowired
 //    public MyUserDetailsService(UserRepository userRepository) {

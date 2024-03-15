@@ -1,8 +1,8 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Entity.LoginForm;
-import com.example.demo.Entity.LoginResponse;
 import com.example.demo.Services.UserService;
+import com.example.demo.utilty.JwtAuthResponse;
 import com.example.demo.utilty.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,15 +32,13 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginForm loginForm) {
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginForm loginForm) {
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginForm.getUsername(), loginForm.getPassword()));
-            if (authentication.getPrincipal() instanceof UserDetails) {
-                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            if (authentication.getPrincipal() instanceof UserDetails userDetails) {
                 String jwtToken = jwtTokenUtil.generateAccessToken(userDetails);
-                LoginResponse loginResponse = new LoginResponse(jwtToken);
-                return new ResponseEntity<>(loginResponse, HttpStatus.OK);
+                return new ResponseEntity<>(new JwtAuthResponse(jwtToken), HttpStatus.OK);
             } else {
                 throw new RuntimeException("Unexpected authentication object type");
             }
