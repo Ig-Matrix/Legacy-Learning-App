@@ -2,11 +2,15 @@ import { Component } from '@angular/core';
 import { Course } from '../../../../models/Interfaces/Course';
 import { AddCourseModalComponent } from '../add-course-modal/add-course-modal.component';
 import { FormsModule } from '@angular/forms';
+import { faCheck, faLessThan, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-student-portfolio',
   standalone: true,
-  imports: [AddCourseModalComponent,  FormsModule],
+  imports: [ RouterLink, AddCourseModalComponent,  FormsModule, FontAwesomeModule, NgClass],
   templateUrl: './student-portfolio.component.html',
   styleUrl: './student-portfolio.component.css',
 })
@@ -16,9 +20,12 @@ export class StudentPortfolioComponent {
   cgpa: number | null = null; // CGPA property to store calculated value
   editingCourseIndex: number | null = null; // Track the index of the course being edited
   trackingIndex: number = 1;
+  faBackward = faLessThan
+  check=faCheck
+  cancel=faXmark;
 
   openAddCourseModal() {
-    this.showModal = true; // Open the modal on button click
+    this.showModal = !this.showModal; // Open the modal on button click
   }
 
   addCourse(course: Course) {
@@ -62,6 +69,8 @@ export class StudentPortfolioComponent {
     }
 
     this.cgpa = totalQualityPoints / totalCreditPoints || null;
+    console.log(this.cgpa);
+    
     return totalQualityPoints / totalCreditPoints || null; // Handle division by zero
   }
 
