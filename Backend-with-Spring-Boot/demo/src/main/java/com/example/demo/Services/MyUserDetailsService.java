@@ -18,6 +18,12 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+//    @Autowired
+//    public MyUserDetailsService(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//    }
+//            return new User(user.getUsername(), user.getPassword());
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);

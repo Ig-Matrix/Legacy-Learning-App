@@ -32,18 +32,25 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginForm loginForm) {
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginForm loginForm) {
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginForm.getUsername(), loginForm.getPassword()));
-            String jwtToken = jwtTokenUtil.generateAccessToken((UserDetails) authentication);
-            LoginResponse loginResponse = new LoginResponse(jwtToken);
-            return ResponseEntity.ok(loginResponse);
+            if (authentication.getPrincipal() instanceof UserDetails) {
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                String jwtToken = jwtTokenUtil.generateAccessToken(userDetails);
+                LoginResponse loginResponse = new LoginResponse(jwtToken);
+                return new ResponseEntity<>(loginResponse, HttpStatus.OK);
+            } else {
+                throw new RuntimeException("Unexpected authentication object type");
+            }
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 }
+
+
 
 //    @PostMapping("/login")
 //    public ResponseEntity<?> login(@RequestBody LoginForm loginForm) {
