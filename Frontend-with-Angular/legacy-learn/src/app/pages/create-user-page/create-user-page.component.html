@@ -25,8 +25,8 @@
           <label>Password:</label><br />
           <div class="password-container">
             <input [type]="showPassword ? 'password' : 'text'" id="pwd" formControlName="password" required>
-            <span class="eyeicon" (click)="togglePasswordVisibility('password')">
-                <i [ngClass]="switchIcon1 ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+            <span (click)="togglePasswordVisibility('password')">
+              <img class="eyeicon" [src] ="switchIcon1 ? 'assets/fonts/eye-slash-solid.svg' : 'assets/fonts/eye-solid.svg'">
             </span>
           </div>
           <div class="ngIf" *ngIf="signUpForm.get('password')!.hasError('required') && signUpForm.get('password')!.touched">
@@ -36,8 +36,8 @@
           <label>Confirm password:</label><br />
           <div class="password-container">
             <input [type]= "showConfirmPassword ? 'password':'text'" id="confirmPwd" formControlName="confirmPassword" required>
-            <span class="eyeicon" (click)="toggleConfirmPasswordVisibility('confirmPassword')">
-            <i [ngClass]="switchIcon2 ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+            <span (click)="toggleConfirmPasswordVisibility('confirmPassword')">
+              <img class="eyeicon" [src] ="switchIcon2 ? 'assets/fonts/eye-slash-solid.svg' : 'assets/fonts/eye-solid.svg'">
           </span>
           </div>
           <div class="ngIf" *ngIf="signUpForm.get('confirmPassword')!.hasError('required') && signUpForm.get('confirmPassword')!.touched">
@@ -57,12 +57,12 @@
           <div class="ngIf" *ngIf="signUpForm.get('email')!.hasError('required') && signUpForm.get('email')!.touched">
             Valid email address is required.
           </div>
-          <!-- <div class="ngIf" *ngIf="signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched">
+          <div class="ngIf" *ngIf="signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched">
             Invalid email address.
-          </div> -->
+          </div>
   
           <button id="create">{{ isLoading ? "PLEASE WAIT..." : "CREATE" }}</button>
-          <button id="cancel" [routerLink]="['/login']"
+          <button id="cancel" [routerLink]="['/loginPage']"
           routerLinkActive="active active-style"
           [routerLinkActiveOptions]="{ exact: true }">CANCEL</button><br>
           <div class="ngIfError" *ngIf="errorMessage">

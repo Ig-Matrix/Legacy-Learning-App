@@ -6,11 +6,11 @@
         <a class="icon" (click)="toggleNavBar()">
             <fa-icon [icon]="barsIcon"></fa-icon>
         </a>
-        <a href="#" class="up">Home</a>
-        <a href="#" class="up">Announcements</a>
-        <a href="#" class="down">Feedback</a>
-        <a href="#" class="down">Portfolio</a>
-        <a href="#" class="down">About</a>
-        <a href="#" class="down">Contact Us</a>
+        <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" class="up">Home</a>
+        <a routerLink="/news" routerLinkActive="active" ariaCurrentWhenActive="page" class="up">Announcements</a>
+        <a routerLink="/feedback" routerLinkActive="active" ariaCurrentWhenActive="page" class="down">Feedback</a>
+        <a routerLink="/portfolio" routerLinkActive="active" ariaCurrentWhenActive="page" class="down">Portfolio</a>
+        <a routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page" class="down">About</a>
+        <a routerLink="/contact" routerLinkActive="active" ariaCurrentWhenActive="page" class="down">Contact Us</a>
     </section>
 </div>

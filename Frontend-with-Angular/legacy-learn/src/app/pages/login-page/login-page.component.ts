@@ -44,32 +44,39 @@ export class LoginPageComponent {
   this.errorMessage = '';
   }
 
-  // onSubmit() {
-  //   this.isLoading = true;
-  //   this.errorMessage = '';
-
-  //   this.loginService.login(this.loginForm)
-  //   .subscribe(
-  //     response => {
-  //       const token = response.token;
-  //       localStorage.setItem('authToken', token);
-  //       this.router.navigate(['/home']);
-  //     },
-  //     error => {
-  //       this.errorMessage = 'Invalid username or password';
-  //       console.log('Login error: ', error);
-  //     },
-  //     () => {
-  //       this.isLoading = false;
-  //       setTimeout(() => {
-  //         this.clearErrorMessage();
-  //       }, 3000);
-  //     });
-  // }
-
   onSubmit(): void {
-    this.router.navigate(['/home']);
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    this.loginService.login(this.loginForm)
+    .subscribe(
+      response => {
+        this.isLoading = false;
+        console.log('Login successful!');
+        this.errorMessage = '';
+        this.router.navigate(['/home']);
+        // const token = response.token;
+        // localStorage.setItem('authToken', token);
+      },
+      error => {
+        this.errorMessage = 'Invalid username or password';
+        this.isLoading = false;
+        console.log('Login error: ', error);
+        setTimeout(() => {
+          this.clearErrorMessage();
+        }, 3000);
+      },
+      () => {
+        this.isLoading = false;
+        setTimeout(() => {
+          this.clearErrorMessage();
+        }, 3000);
+      });
   }
+
+  // onSubmit(): void {
+  //   this.router.navigate(['/home']);
+  // }
   
   // onSubmit(): void {
   //   this.isLoading = true;

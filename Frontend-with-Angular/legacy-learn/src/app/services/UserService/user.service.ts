@@ -14,12 +14,14 @@ export class UserService {
     private http: HttpClient,
   ) { }
 
-  createAdminUser(user: User): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/admins/register`, user);
+  createAdminUser(user: User) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post<User>(`${this.baseUrl}/registerAdmin`, user, {headers});
   }
   
-  createStudentUser(user: User): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/students/register`, user);
+  createStudentUser(user: User) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post<User>(`${this.baseUrl}/registerStudent`, user, {headers});
   }
   
 }

@@ -41,8 +41,9 @@ main {
 }
 .eyeicon {
     position: absolute;
-    margin-top: 22px;
-    right: 10%;
+    width: 20px;
+    top: 40%;
+    left: 90%;
 }
 input {
     border: 3px solid lightgrey;
@@ -155,5 +156,8 @@ padding: 10px 20px;
     }
     #cancel {
         margin: 10px 10px 10px 0px;
+    }
+    .eyeicon {
+        width: 15px;
     }
 }
