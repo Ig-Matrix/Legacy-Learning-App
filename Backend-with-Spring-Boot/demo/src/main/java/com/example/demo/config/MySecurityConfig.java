@@ -1,7 +1,6 @@
 package com.example.demo.config;
 
-import com.example.demo.Controllers.JwtTokenUtil;
-import org.springframework.beans.factory.annotation.Value;
+import com.example.demo.utilty.JwtTokenUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +14,7 @@ public class MySecurityConfig {
     @Bean
     public SecretKey secretKey() {
         // Retrieve secret key string from secure property source
-        String secretKeyString = "20245249";
+        String secretKeyString = "52$notAroguE$49";
 
         // Generate the SecretKey object
         byte[] keyBytes = secretKeyString.getBytes(StandardCharsets.UTF_8);

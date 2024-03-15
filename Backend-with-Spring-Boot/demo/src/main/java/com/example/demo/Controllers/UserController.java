@@ -7,7 +7,10 @@ import com.example.demo.Services.UserServiceImpl;
 import com.example.demo.Services.UsernameAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
@@ -17,7 +20,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("students/register")
+    @PostMapping("/registerStudent")
     public ResponseEntity<User> registerStudent(@RequestBody User user) throws UsernameAlreadyExistsException {
         user.setRole(UserRole.STUDENT);
         user.setApproved(true);
@@ -26,3 +29,10 @@ public class UserController {
     }
 
 }
+
+//    @PostMapping("/registerStudent")
+//    public ResponseEntity<?> register(@RequestBody LoginForm loginForm) {
+//        // Register user (implementation omitted)
+//        String token = userServiceImpl.allowUser(loginForm); // Assume UserService generates a token
+//        return ResponseEntity.ok(new LoginResponse(token));
+//    }

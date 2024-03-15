@@ -5,6 +5,7 @@ import com.example.demo.Entity.UserRole;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Services.UserServiceImpl;
 import com.example.demo.Services.UsernameAlreadyExistsException;
+import com.example.demo.utilty.UnauthorizedAccessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,7 +25,7 @@ public class AdminController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("admins/register")
+    @PostMapping("/registerAdmin")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<User> registerAdmin(@RequestBody User user, @AuthenticationPrincipal UserDetails userDetails) throws UsernameAlreadyExistsException, UnauthorizedAccessException {
         if (!userDetails.getAuthorities().contains(new SimpleGrantedAuthority(UserRole.ADMIN.name()))) {

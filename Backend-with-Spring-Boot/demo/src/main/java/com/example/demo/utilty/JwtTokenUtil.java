@@ -1,16 +1,12 @@
-package com.example.demo.Controllers;
+package com.example.demo.utilty;
 
 import io.jsonwebtoken.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.crypto.SecretKey;
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import javax.crypto.SecretKey;
-
-import io.jsonwebtoken.security.Keys;
 
 public class JwtTokenUtil {
 
@@ -75,8 +71,10 @@ public class JwtTokenUtil {
     }
 
     private List<String> extractRoles(Collection<? extends GrantedAuthority> authorities) {
-        return authorities.stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
+        List<String> roles = new ArrayList<>();
+        for (GrantedAuthority authority : authorities) {
+            roles.add(authority.getAuthority()); // Extract role name from GrantedAuthority
+        }
+        return roles;
     }
 }

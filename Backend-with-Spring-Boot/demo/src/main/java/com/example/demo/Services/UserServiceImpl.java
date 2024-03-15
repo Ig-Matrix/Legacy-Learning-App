@@ -11,7 +11,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private  PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     public User registerUser(User user) throws UsernameAlreadyExistsException {
         if (userRepository.findByUsername(user.getUsername()) != null) {
@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
         user.setApproved(false);
         return userRepository.save(user);
     }
+
     public boolean authenticate(String username, String password) {
         User user = userRepository.findByUsername(username);
         if (user != null) {
@@ -30,14 +31,31 @@ public class UserServiceImpl implements UserService {
     }
 }
 
+//    public String allowUser(LoginForm loginForm) {
+//        String username = loginForm.getUsername();
+//        // Basic validation (replace with more robust validation)
+//        if (usernameTokenMap.containsKey(username)) {
+//            throw new IllegalArgumentException("Username already exists");
+//        }
+//
+//        // Generate a random token (use a cryptographically secure method)
+//        String token = generateToken(username);
+//
+//        // Store username and token (in-memory, not secure)
+//        usernameTokenMap.put(username, token);
+//
+//        return token;
+//    }
+//    // for testing purpose only...
+//    public String generateToken(String username) {
+//        // Here's a basic (insecure) example for demonstration purposes only
+//        return UUID.randomUUID().toString(); // Replace with a secure token generation method
+//    }
+
+
 //public User approveUser(Long userId) throws UsernameAlreadyExistsException {
 //    User user = userRepository.findById(userId)
 //            .orElseThrow(() -> new UserNotFoundException("User not found!"));
 //    user.setApproved(true);
 //    return userRepository.save(user);
 //}
-
-//    public UserServiceImpl(UserRepository userRepository, ApprovedEmailRepository approvedEmailRepository) {
-//        this.userRepository = userRepository;
-//        this.approvedEmailRepository = approvedEmailRepository;
-//    }
