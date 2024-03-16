@@ -23,15 +23,15 @@ export const routes: Routes = [
     {path: 'signup', title:'Sign-up Page', component: CreateUserPageComponent},
     {path: 'loginPage', title:'Log-in Page', component:LoginPageComponent},
     {path: 'announce', title:'Announcement Page', component: AnnouncementPageComponent},
-    {path: 'portfolio', title:'Portfolio Page', component: PortfolioPageComponent, canActivate: [LoginGuard] },
+    {path: 'portfolio', title:'Portfolio Page', component: PortfolioPageComponent },
     {path: 'view-feedback', title:'Feedback Page', component: FeedbackPageComponent},
     {path: 'news', title:'Announcement Page', component: StudentAnnouncementPageComponent, canActivate: [LoginGuard]},
     {path: 'feedback', title:'Feedback Page', component: StudentFeedbackPageComponent, canActivate: [LoginGuard]},
     {path: 'about', title:'About Page', component: AboutUsPageComponent, canActivate: [LoginGuard]},
     {path: 'contact', title:'Contact Page', component: ContactUsPageComponent, canActivate: [LoginGuard]}, 
-    {path: 'create', title:'Create User Page', component: AdminCreateUserComponent},
+    {path: 'create', title:'Create User Page', component: AdminCreateUserComponent },
     {path: 'feedbackforms', title:'Feedback Forms', component: FeedbackFormsComponent, canActivate: [LoginGuard]}, 
-    {path: 'portfoliogpa', title:'Gpa page', component: StudentPortfolioComponent, canActivate: [LoginGuard]}, 
+    {path: 'portfoliogpa', title:'Gpa page', component: StudentPortfolioComponent, canActivate: [LoginGuard] }, 
     {path: '**', title: 'Error-404', component: Error404PageComponent},
 ];
 
