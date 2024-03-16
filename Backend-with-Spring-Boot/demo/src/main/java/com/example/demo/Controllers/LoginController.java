@@ -1,7 +1,6 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Entity.LoginForm;
-import com.example.demo.Services.UserService;
 import com.example.demo.utilty.JwtAuthResponse;
 import com.example.demo.utilty.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,28 +19,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class LoginController {
-    private final AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-    @Autowired
-    private UserService userService;
-
-    public LoginController(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
-
 
     @PostMapping("/login")
-    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginForm loginForm) {
+    public ResponseEntity<JwtAuthResponse> LoginRequest(@RequestBody LoginForm loginForm) {
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginForm.getUsername(), loginForm.getPassword()));
-            if (authentication.getPrincipal() instanceof UserDetails userDetails) {
-                String jwtToken = jwtTokenUtil.generateAccessToken(userDetails);
-                return new ResponseEntity<>(new JwtAuthResponse(jwtToken), HttpStatus.OK);
-            } else {
-                throw new RuntimeException("Unexpected authentication object type");
-            }
+//            SecurityContextHolder.getContext()setAuthentication(authentication);
+            String token = jwtTokenUtil.generateAccessToken((UserDetails) authentication);
+            return new ResponseEntity<>(new JwtAuthResponse(token), HttpStatus.OK);
+//            if (authentication.getPrincipal() instanceof UserDetails userDetails) {
+//                String jwtToken = jwtTokenUtil.generateAccessToken(userDetails);
+//                return new ResponseEntity<>(new JwtAuthResponse(jwtToken), HttpStatus.OK);
+//            } else {
+//                throw new RuntimeException("Unexpected authentication object type");
+//            }
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
