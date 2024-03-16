@@ -84,21 +84,21 @@ export class StudentPortfolioComponent {
   }
 
   getGradePoints(score: number): number | null {
-    const gradeMap = {
-      '70-100': 5.0,
-      '60-69': 4.0,
-      '50-59': 3.0,
-      '45-49': 2.0,
-      '40-44': 1.0,
-      '0-39': 0.0,
-    };
-
-    const gradeRange = Object.keys(gradeMap).find((range) => {
-      const [min, max] = range.split('-').map(Number);
-      return score >= min && score <= max;
-    });
-
-    return gradeRange ? gradeMap[gradeRange as keyof typeof gradeMap] : null;
+    if (score >= 70) {
+      return 5.0;
+    } else if (score >= 60) {
+      return 4.0;
+    } else if (score >= 50) {
+      return 3.0;
+    } else if (score >= 45) {
+      return 2.0;
+    } else if (score >= 40) {
+      return 1.0;
+    } else if (score >= 1) {
+      return (score / 39) * 0.9;
+    } else {
+      return null; // Return null for scores below 1
+    }
   }
 
   deleteCourse(course: Course) {
