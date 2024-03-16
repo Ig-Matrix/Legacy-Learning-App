@@ -49,31 +49,6 @@ public class LoginController {
 }
 
 
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody LoginForm loginForm) {
-//        try {
-//            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-//                    loginForm.getUsername(), loginForm.getPassword());
-//            Authentication authentication = authenticationManager.authenticate(token);
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//            // **Cast authentication to UserDetails:**
-//            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//
-//            // Generate JWT token using userDetails
-//            String jwtToken = jwtTokenUtil.generateAccessToken(userDetails);
-//
-//            // Create a login response object with JWT token
-//            LoginResponse loginResponse = new LoginResponse(jwtToken);
-//            return ResponseEntity.ok(loginResponse);
-//        } catch (AuthenticationException e) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//        }
-//    }
-//}
-
-
 //    @PostMapping("/login")
 //    public ResponseEntity<?> login(@RequestBody LoginForm loginForm) {
 //        String username = loginForm.getUsername();
