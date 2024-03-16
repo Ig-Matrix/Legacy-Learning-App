@@ -6,7 +6,7 @@ main {
     height: 100%;
     width: 100%;
     color: #4d5160;
-    margin: 5% 0 0 100px;
+    margin: 5% 0 0 75px;
     font-size: 1.9vh;
 }
 .container {
@@ -41,6 +41,19 @@ button:hover, button:focus {
     transform: scale(1.03);
     transition: transform 0.2s ease-in-out;
 }
+ul {
+    list-style-type: disc;
+    list-style-position: inside;
+}
+h2 {
+    font-size: 3.5vh;
+}
+h3 {
+    font-size: 2.5vh;
+}
+h2, h3 {
+    font-weight: bolder;
+}
 
 @media screen and (max-width: 1020px) {
     main {
@@ -48,11 +61,17 @@ button:hover, button:focus {
         font-size: 1.6vh;
     }
     .container {
-        margin: 5% 1%;
-        padding: 6% 2%;
+        margin: 6% 0;
+        padding: 6% 4%;
     }
     input {
         height: 100px;
+    }
+    h2 {
+        font-size: 3vh;
+    }
+    h3 {
+        font-size: 2vh;
     }
 }
 @media screen and (max-width: 600px) {
@@ -61,7 +80,10 @@ button:hover, button:focus {
         font-size: 1.6vh;
     }
     .container {
-        margin: 10% 1%;
-        padding: 5% 2%;
+        margin: 10% 0;
+        padding: 4%;
+    }
+    h2 {
+        font-size: 2.5vh;
     }
 }

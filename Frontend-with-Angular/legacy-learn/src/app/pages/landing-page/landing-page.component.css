@@ -1,13 +1,13 @@
 main {
     margin: 5vh 0 0 0;
-    font-size: 1.6vh;
+    font-size: 1.8vh;
     color: #4d5160;
 }
 .padded {
     padding: 3vh 8vh 3vh 8vh;
 }
 .top-view {
-    margin: 5vh 0;
+    margin: 11vh 0 8vh 0;
     display: flex;
     flex-direction: row;
     padding: 5vh;
@@ -40,6 +40,9 @@ h2 {
     text-align: left;
     padding-left: 20px;
 }
+h3{
+    font-weight: bold;
+}
 #start {
     padding: 13px 50px;
     border: none;
@@ -69,18 +72,19 @@ a:hover, a:focus {
 .others2 {
     margin-top: 0;
     background-color:#edeff7;
-    padding: 30px 0;
+    padding: 30px 3vh;
 }
 .cards {
     display: flex;
     flex-direction: row;
+    margin-top: 2vh;
 }
 .card {
     flex: 1;
     border: 3px solid #4d5160;
     border-radius: 8px;
     text-align: center;
-    padding: 16px 10px;
+    padding: 50px 10px;
     margin: 0px 10px;
     color: #4d5160;
     background-color: #edeff7;
@@ -103,6 +107,10 @@ a:hover, a:focus {
 .write {
     display: flex;
     flex-direction: row;
+    padding: 1vh 0;
+}
+.write2 {
+    padding: 1vh 0;
 }
 .written {
     flex: 1;
@@ -121,7 +129,7 @@ a:hover, a:focus {
     .top-view {
         display: flex;
         flex-direction: column;
-        padding: 2vh;
+        padding: 2vh 2vh;
         margin: 5vh 0;
     }
     .others, .others2 {
@@ -160,9 +168,11 @@ a:hover, a:focus {
     }
     .cards {
         flex-direction: column;
+        margin-top: 0.5vh;
     }
     .card {
         margin: 10px 0px;
+        padding: 20px 10px;
     }
     .background {
         height: 50%;

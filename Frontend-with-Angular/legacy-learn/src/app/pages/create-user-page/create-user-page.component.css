@@ -16,6 +16,7 @@ main {
     width:100%;
 }
 .logo {
+    margin-top: 4vh;
     font-family: 'Sacramento', sans-serif;
     font-size: 5vh;
     font-weight: bold;
@@ -40,12 +41,13 @@ main {
 }
 .eyeicon {
     position: absolute;
-    margin-top: 22px;
-    right: 10%;
+    width: 20px;
+    top: 40%;
+    left: 90%;
 }
 input {
     border: 3px solid lightgrey;
-    height: 20px;
+    height: 55px;
     width: 80%;
     transition: transform 0.3s ease;
 }
@@ -118,10 +120,14 @@ padding: 10px 20px;
         font-size: 2vh;
     }
     input {
-        height: 20px;
+        height: 50px;
+        width: 100%;
     }
     label {
         font-size: 1.8vh;
+    }
+    button {
+        padding: 10px 40px;
     }
     .col-6 {
         width: 80%;
@@ -150,5 +156,8 @@ padding: 10px 20px;
     }
     #cancel {
         margin: 10px 10px 10px 0px;
+    }
+    .eyeicon {
+        width: 15px;
     }
 }

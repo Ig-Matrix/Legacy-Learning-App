@@ -6,12 +6,21 @@ main {
     height: 100%;
     width: 100%;
     color: #4d5160;
-    margin: 5% 0 0 100px;
+    margin: 5% 0 0 75px;
     font-size: 1.9vh;
 }
 .container {
     margin: 1.5% 1.5%;
     padding: 2.5%;
+}
+h2, h3 {
+    font-weight: bolder;
+}
+h2 {
+    font-size: 4vh;
+}
+h3 {
+    font-size: 3vh;
 }
 input {
     border: 3px solid lightgrey;
@@ -55,11 +64,17 @@ a:hover, a:focus {
         font-size: 1.6vh;
     }
     .container {
-        margin: 5% 1%;
-        padding: 6% 2%;
+        margin-top: 5%;
+        padding: 6%;
     }
     input {
         height: 100px;
+    }
+    h2 {
+        font-size: 3vh;
+    }
+    h3 {
+        font-size: 2vh;
     }
 }
 @media screen and (max-width: 600px) {
@@ -68,7 +83,7 @@ a:hover, a:focus {
         font-size: 1.6vh;
     }
     .container {
-        margin: 10% 1%;
-        padding: 5% 2%;
+        margin-top: 10%;
+        padding: 5% 5%;
     }
 }
