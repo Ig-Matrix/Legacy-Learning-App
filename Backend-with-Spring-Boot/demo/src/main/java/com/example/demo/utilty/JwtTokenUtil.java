@@ -1,6 +1,7 @@
 package com.example.demo.utilty;
 
 import io.jsonwebtoken.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -20,13 +21,15 @@ public class JwtTokenUtil {
         this.refreshExpirationInMs = refreshExpirationInMs;
     }
 
-    public String generateAccessToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("username", userDetails.getUsername());
-        claims.put("roles", extractRoles(userDetails.getAuthorities()));
+    public String generateAccessToken(Authentication authentication) {
+        String username = authentication.getName();
+//        Map<String, Object> claims = new HashMap<>();
+//        claims.put("username", userDetails.getUsername());
+//        claims.put("roles", extractRoles(userDetails.getAuthorities()));
 
         return Jwts.builder()
-                .setClaims(claims)
+//                .setClaims(claims)
+                .setSubject(username)
                 .setExpiration(generateExpirationDate(jwtExpirationInMs))
                 .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import {Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { LoginResponse } from './modules/login.response';
+import { LoginResponse } from './modules/jwt.auth.response';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

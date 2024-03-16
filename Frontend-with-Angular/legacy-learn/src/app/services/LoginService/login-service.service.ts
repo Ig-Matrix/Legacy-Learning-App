@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, map } from 'rxjs';
-import { LoginResponse } from '../../modules/login.response';
+import { Observable, catchError, map, throwError } from 'rxjs';
+import { JwtAuthResponse } from '../../modules/jwt.auth.response';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +14,15 @@ export class LoginService {
   constructor(private http: HttpClient,
     ) { }
 
-  login(loginForm: FormGroup): Observable<LoginResponse> {
+  login(loginForm: FormGroup): Observable<JwtAuthResponse> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post<LoginResponse>(`${this.baseUrl}/login`, loginForm.value, {headers})
+    return this.http.post<JwtAuthResponse>(`${this.baseUrl}/login`, loginForm.value, {headers})
     .pipe(
-      map((response: { token: string; }) => {
-        // Store the token in local storage (or a more secure mechanism)
-        localStorage.setItem('token', response.token);
-        return response;
+      map(response => response),
+      catchError(error => {
+        // Handle login errors here
+        console.error('Login error:', error);
+        return throwError(error); 
       })
     );
   }

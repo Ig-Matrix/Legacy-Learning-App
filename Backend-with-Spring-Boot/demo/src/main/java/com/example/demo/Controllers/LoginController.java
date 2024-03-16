@@ -10,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +28,7 @@ public class LoginController {
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginForm.getUsername(), loginForm.getPassword()));
-//            SecurityContextHolder.getContext()setAuthentication(authentication);
-            String token = jwtTokenUtil.generateAccessToken((UserDetails) authentication);
+            String token = jwtTokenUtil.generateAccessToken(authentication);
             return new ResponseEntity<>(new JwtAuthResponse(token), HttpStatus.OK);
 //            if (authentication.getPrincipal() instanceof UserDetails userDetails) {
 //                String jwtToken = jwtTokenUtil.generateAccessToken(userDetails);
