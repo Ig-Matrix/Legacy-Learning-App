@@ -9,11 +9,10 @@
 <section class="p-4 flex flex-col sm:flex-row-reverse">
   <div class="form flex-1 bg-slate-100 h-full p-2">
     <h1 class="font-mono font-bold text-center text-lg">Welcome Jabronis</h1>
-
+    <br>
     @if (feedbackTypes.length > 0) {
-    <h2 class="font-medium italic text-[1rem]">
-      Select the type of feedback from the drop dowm below
-    </h2>
+    <h2 class="font-medium italic text-[1rem] ">Select the type of feedback from the drop down below:</h2>
+    <br><br>
     <select
       name="type"
       id="type"
@@ -93,19 +92,19 @@
           getSelectedFeedbackType().questions.length-1) {
           <button
             type="submit"
-            class="bg-blue-500 text-white rounded-sm p-4"
-            [disabled]="!feedbackForm.valid"
+            class="bg-blue-500 text-white rounded-md p-3"
+            [ngClass]="{ 'opacity-5': !isCurrentQuestionAnswered() }"
+            [disabled]="!isCurrentQuestionAnswered()"
             (click)="onSubmit()"
           >
-            Submit
+            @if (isLoading) { 
+              Submitting <fa-icon [icon]="faPaperPlane" class="animate-pulse text-xl transition-all duration-100" />
+            }@else { Submit
+            <fa-icon [icon]="faPaperPlane" />
+            }
           </button>
           }
         </div>
-        <!-- @if (!isCurrentQuestionAnswered()) {
-        <div class="text-red-500 mt-2">
-          Please answer the current question before proceeding.
-        </div>
-        } -->
       </form>
       }
     </div>
