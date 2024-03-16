@@ -2,11 +2,25 @@ import { Component } from '@angular/core';
 import { Course } from '../../../../models/Interfaces/Course';
 import { AddCourseModalComponent } from '../add-course-modal/add-course-modal.component';
 import { FormsModule } from '@angular/forms';
+import {
+  faCheck,
+  faLessThan,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-student-portfolio',
   standalone: true,
-  imports: [AddCourseModalComponent,  FormsModule],
+  imports: [
+    RouterLink,
+    AddCourseModalComponent,
+    FormsModule,
+    FontAwesomeModule,
+    NgClass,
+  ],
   templateUrl: './student-portfolio.component.html',
   styleUrl: './student-portfolio.component.css',
 })
@@ -16,9 +30,12 @@ export class StudentPortfolioComponent {
   cgpa: number | null = null; // CGPA property to store calculated value
   editingCourseIndex: number | null = null; // Track the index of the course being edited
   trackingIndex: number = 1;
+  faBackward = faLessThan;
+  check = faCheck;
+  cancel = faXmark;
 
   openAddCourseModal() {
-    this.showModal = true; // Open the modal on button click
+    this.showModal = !this.showModal; // Open the modal on button click
   }
 
   addCourse(course: Course) {
@@ -61,26 +78,27 @@ export class StudentPortfolioComponent {
       }
     }
 
-    this.cgpa = totalQualityPoints / totalCreditPoints || null;
-    return totalQualityPoints / totalCreditPoints || null; // Handle division by zero
+    this.cgpa =
+      totalCreditPoints > 0 ? totalQualityPoints / totalCreditPoints : 0;
+    return totalCreditPoints > 0 ? totalQualityPoints / totalCreditPoints : 0; // Calculate CGPA if totalCreditPoints is non-zero, otherwise return 0
   }
 
   getGradePoints(score: number): number | null {
-    const gradeMap = {
-      '70-100': 5.0,
-      '60-69': 4.0,
-      '50-59': 3.0,
-      '45-49': 2.0,
-      '40-44': 1.0,
-      '0-39': 0.0,
-    };
-
-    const gradeRange = Object.keys(gradeMap).find((range) => {
-      const [min, max] = range.split('-').map(Number);
-      return score >= min && score <= max;
-    });
-
-    return gradeRange ? gradeMap[gradeRange as keyof typeof gradeMap] : null;
+    if (score >= 70) {
+      return 5.0;
+    } else if (score >= 60) {
+      return 4.0;
+    } else if (score >= 50) {
+      return 3.0;
+    } else if (score >= 45) {
+      return 2.0;
+    } else if (score >= 40) {
+      return 1.0;
+    } else if (score >= 1) {
+      return (score / 39) * 0.9;
+    } else {
+      return null; // Return null for scores below 1
+    }
   }
 
   deleteCourse(course: Course) {
@@ -99,8 +117,10 @@ export class StudentPortfolioComponent {
 
   saveCourse(course: Course) {
     if (this.editingCourseIndex !== null && this.editingCourseIndex >= 0) {
-      this.courses[this.editingCourseIndex].score = course.score;  // Update score directly
-      this.courses[this.editingCourseIndex].grade = this.calculateGrade(course.score); // Recalculate grade
+      this.courses[this.editingCourseIndex].score = course.score; // Update score directly
+      this.courses[this.editingCourseIndex].grade = this.calculateGrade(
+        course.score
+      ); // Recalculate grade
       this.editingCourseIndex = null;
       this.cgpa = null; // Invalidate CGPA after course edit
     }

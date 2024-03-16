@@ -1,8 +1,8 @@
 @if (showModal) {
 <div
-  class="fixed top-0 left-0 w-full h-full bg-gray-900 opacity-75 z-50 flex justify-center items-center"
+  class=" fixed top-0 left-0 w-full h-full bg-gray-900 opacity-75 z-50 flex justify-center items-center"
 >
-  <div class="bg-white rounded-lg shadow-md p-8 w-1/2">
+  <div class="bg-white rounded-lg shadow-md p-8 w-[86%] sm:w-3/5  md:w-2/4">
     <div
       class="flex justify-between items-center pb-4 border-b border-gray-200"
     >
@@ -39,6 +39,7 @@
           id="courseName"
           name="courseName"
           [(ngModel)]="course.name"
+          placeholder="enter course name"
           required
         />
       </div>
@@ -52,6 +53,7 @@
           id="courseCode"
           name="courseCode"
           [(ngModel)]="course.code"
+          placeholder="e.g MTH110"
           required
         />
       </div>
@@ -82,17 +84,17 @@
         />
       </div>
     </form>
-    <div class="flex justify-end space-x-2">
+    <div class="flex justify-end space-x-2 ">
       <button
         type="button"
-        class="text-gray-500 px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        class="text-gray-500 px-2 sm:px-4 py-1 sm:py-2 rounded-md border border-gray-300 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         (click)="closeModal()"
       >
         Close
       </button>
       <button
         type="button"
-        class="bg-indigo-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        class="bg-indigo-500  text-white px-2 sm:px-4 py-1 sm:py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         (click)="submitCourse()"
         [disabled]="!courseForm.valid"
       >
