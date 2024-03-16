@@ -153,11 +153,27 @@
         Calculate CGPA
       </button>
       <div
-        class="border border-gray-700 border-dotted w-24 h-24 rounded-full flex items-center justify-center"
+        class="border-2  border-dotted w-24 h-24 rounded-full flex items-center justify-center"
+        [ngClass]="{
+          'border-red-600 ': cgpa !== null && cgpa < 1.0,
+          'border-orange-600 ': cgpa !== null && cgpa >= 1.0 && cgpa < 2.0,
+          'border-yellow-600 ': cgpa !== null && cgpa >= 2.0 && cgpa < 3.0,
+          'border-green-600 ': cgpa !== null && cgpa >= 3.0 && cgpa < 4.0,
+          'border-blue-600 ': cgpa !== null && cgpa >= 4.0 && cgpa < 4.5,
+          'border-purple-600 ': cgpa !== null && cgpa >= 4.5
+        }"
       >
-        @if (cgpa) {
+        @if (cgpa !== null) {
         <p
-          class="text-green-400 text-[1.2rem]"
+          class="text-[1.2rem]"
+          [ngClass]="{
+            'text-red-600': cgpa !== null && cgpa < 1.0,
+            'text-orange-600': cgpa !== null && cgpa >= 1.0 && cgpa < 2.0,
+            'text-yellow-600': cgpa !== null && cgpa >= 2.0 && cgpa < 3.0,
+            'text-green-600': cgpa !== null && cgpa >= 3.0 && cgpa < 4.0,
+            'text-blue-600': cgpa !== null && cgpa >= 4.0 && cgpa < 4.5,
+            'text-purple-600': cgpa !== null && cgpa >= 4.5
+          }"
         >
           {{ cgpa.toFixed(2) }}<span class="text-sm">/5.00</span>
         </p>
@@ -166,12 +182,7 @@
         }
       </div>
     </div>
-    <!-- [ngClass]="{ 'text-red-600': cgpa >= 0 && cgpa < 1.0 }"
-    [ngClass]="{ 'text-orange-500': cgpa >= 1 && cgpa < 2.0 }"
-    [ngClass]="{ 'text-amber-600': cgpa >= 2 && cgpa < 3.0 }"
-    [ngClass]="{ 'text-yellow-400': cgpa >= 3 && cgpa < 4.0 }"
-    [ngClass]="{ 'text-green-300': cgpa >= 4 && cgpa < 4.5 }"
-    [ngClass]="{ 'text-green-500': cgpa >= 4.5 }" -->
+
     } @if (showModal) {
     <app-add-course-modal
       [showModal]="showModal"
