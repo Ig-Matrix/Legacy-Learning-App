@@ -4,5 +4,8 @@
         <a routerLink="/{{ icon.name }}"><img [src]="icon.iconPath" alt="{{ icon.name }}" title="{{ icon.title }}">
         </a>
         </li>
+        <li *ngFor="let icon of icons1">
+            <a routerLink="/" (click)="logout()"><img [src]="icon.iconPath" alt="{{ icon.name }}"></a>
+        </li>
     </ul>
 </div>

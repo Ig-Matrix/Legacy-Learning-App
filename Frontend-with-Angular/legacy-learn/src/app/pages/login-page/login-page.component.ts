@@ -53,10 +53,12 @@ export class LoginPageComponent {
       response => {
         this.isLoading = false;
         console.log('Login successful!');
-        this.errorMessage = '';
-        this.router.navigate(['/home']);
         const accessToken = response.accessToken;
         const tokenType = response.tokenType;
+        localStorage.setItem('auth_token', accessToken);
+        localStorage.setItem('token_type', tokenType);
+        this.errorMessage = '';
+        this.router.navigate(['/home']);
       },
       error => {
         this.errorMessage = 'Invalid username or password';
