@@ -155,10 +155,8 @@
       <div
         class="border border-gray-700 border-dotted w-24 h-24 rounded-full flex items-center justify-center"
       >
-        @if (cgpa) {
-        <p
-          class="text-green-400 text-[1.2rem]"
-        >
+        @if (cgpa !== null) {
+        <p class="text-green-400 text-[1.2rem]">
           {{ cgpa.toFixed(2) }}<span class="text-sm">/5.00</span>
         </p>
         }@else {

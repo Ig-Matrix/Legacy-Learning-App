@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { Course } from '../../../../models/Interfaces/Course';
 import { AddCourseModalComponent } from '../add-course-modal/add-course-modal.component';
 import { FormsModule } from '@angular/forms';
-import { faCheck, faLessThan, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheck,
+  faLessThan,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
@@ -10,7 +14,13 @@ import { NgClass } from '@angular/common';
 @Component({
   selector: 'app-student-portfolio',
   standalone: true,
-  imports: [ RouterLink, AddCourseModalComponent,  FormsModule, FontAwesomeModule, NgClass],
+  imports: [
+    RouterLink,
+    AddCourseModalComponent,
+    FormsModule,
+    FontAwesomeModule,
+    NgClass,
+  ],
   templateUrl: './student-portfolio.component.html',
   styleUrl: './student-portfolio.component.css',
 })
@@ -20,9 +30,9 @@ export class StudentPortfolioComponent {
   cgpa: number | null = null; // CGPA property to store calculated value
   editingCourseIndex: number | null = null; // Track the index of the course being edited
   trackingIndex: number = 1;
-  faBackward = faLessThan
-  check=faCheck
-  cancel=faXmark;
+  faBackward = faLessThan;
+  check = faCheck;
+  cancel = faXmark;
 
   openAddCourseModal() {
     this.showModal = !this.showModal; // Open the modal on button click
@@ -68,10 +78,9 @@ export class StudentPortfolioComponent {
       }
     }
 
-    this.cgpa = totalQualityPoints / totalCreditPoints || null;
-    console.log(this.cgpa);
-    
-    return totalQualityPoints / totalCreditPoints || null; // Handle division by zero
+    this.cgpa =
+      totalCreditPoints > 0 ? totalQualityPoints / totalCreditPoints : 0;
+    return totalCreditPoints > 0 ? totalQualityPoints / totalCreditPoints : 0; // Calculate CGPA if totalCreditPoints is non-zero, otherwise return 0
   }
 
   getGradePoints(score: number): number | null {
@@ -108,8 +117,10 @@ export class StudentPortfolioComponent {
 
   saveCourse(course: Course) {
     if (this.editingCourseIndex !== null && this.editingCourseIndex >= 0) {
-      this.courses[this.editingCourseIndex].score = course.score;  // Update score directly
-      this.courses[this.editingCourseIndex].grade = this.calculateGrade(course.score); // Recalculate grade
+      this.courses[this.editingCourseIndex].score = course.score; // Update score directly
+      this.courses[this.editingCourseIndex].grade = this.calculateGrade(
+        course.score
+      ); // Recalculate grade
       this.editingCourseIndex = null;
       this.cgpa = null; // Invalidate CGPA after course edit
     }
