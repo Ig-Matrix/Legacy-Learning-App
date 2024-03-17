@@ -11,27 +11,25 @@ import { StudentFeedbackPageComponent } from './pages/Students/student-feedback-
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
 import { Error404PageComponent } from './pages/error-404-page/error-404-page.component';
-import { AdminCreateUserComponent } from './pages/Admin/admin-create-user/admin-create-user.component';
 import { FeedbackFormsComponent } from './pages/Students/feedback-forms/feedback-forms.component';
 import { StudentPortfolioComponent } from './pages/Students/student-portfolio/student-portfolio.component';
 import { LoginGuard } from './services/login.guard';
 
 
 export const routes: Routes = [
-    {path: '', title:'Landing Page', component: LandingPageComponent},
-    {path: 'home', title:'Home Page', component: HomePageComponent, canActivate: [LoginGuard]},
-    {path: 'signup', title:'Sign-up Page', component: CreateUserPageComponent},
-    {path: 'loginPage', title:'Log-in Page', component:LoginPageComponent},
-    {path: 'announce', title:'Announcement Page', component: AnnouncementPageComponent},
-    {path: 'portfolio', title:'Portfolio Page', component: PortfolioPageComponent },
-    {path: 'view-feedback', title:'Feedback Page', component: FeedbackPageComponent},
-    {path: 'news', title:'Announcement Page', component: StudentAnnouncementPageComponent, canActivate: [LoginGuard]},
-    {path: 'feedback', title:'Feedback Page', component: StudentFeedbackPageComponent, canActivate: [LoginGuard]},
-    {path: 'about', title:'About Page', component: AboutUsPageComponent, canActivate: [LoginGuard]},
-    {path: 'contact', title:'Contact Page', component: ContactUsPageComponent, canActivate: [LoginGuard]}, 
-    {path: 'create', title:'Create User Page', component: AdminCreateUserComponent },
-    {path: 'feedbackforms', title:'Feedback Forms', component: FeedbackFormsComponent, canActivate: [LoginGuard]}, 
-    {path: 'portfoliogpa', title:'Gpa page', component: StudentPortfolioComponent, canActivate: [LoginGuard] }, 
-    {path: '**', title: 'Error-404', component: Error404PageComponent},
+    {path: '', title:'Landing Page', component: LandingPageComponent}, //both
+    {path: 'loginPage', title:'Log-in Page', component:LoginPageComponent}, //both
+    {path: 'home', title:'Home Page', component: HomePageComponent, canActivate: [LoginGuard]}, //both
+    {path: 'signup', title:'Sign-up Page', component: CreateUserPageComponent}, //both
+    {path: 'contact', title:'Contact Page', component: ContactUsPageComponent, canActivate: [LoginGuard]}, //both
+    {path: 'about', title:'About Page', component: AboutUsPageComponent, canActivate: [LoginGuard]}, //both
+    {path: 'announce', title:'AdminAnnouncement Page', component: AnnouncementPageComponent, canActivate: [LoginGuard]}, //admin
+    {path: 'view-feedback', title:'AdminFeedback Page', component: FeedbackPageComponent, canActivate: [LoginGuard]}, //admin
+    {path: 'news', title:'Announcement Page', component: StudentAnnouncementPageComponent, canActivate: [LoginGuard]}, //student
+    {path: 'feedback', title:'Feedback Page', component: StudentFeedbackPageComponent, canActivate: [LoginGuard]}, //student
+    {path: 'portfolio', title:'Portfolio Page', component: PortfolioPageComponent, canActivate: [LoginGuard]}, //student
+    {path: 'feedbackforms', title:'Feedback Forms', component: FeedbackFormsComponent, canActivate: [LoginGuard]}, //student
+    {path: 'portfoliogpa', title:'Gpa page', component: StudentPortfolioComponent, canActivate: [LoginGuard] }, //student 
+    {path: '**', title: 'Error-404', component: Error404PageComponent}, //both
 ];
 
