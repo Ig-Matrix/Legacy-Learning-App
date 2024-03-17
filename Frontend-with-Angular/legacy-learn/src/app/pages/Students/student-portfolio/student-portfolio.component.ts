@@ -35,7 +35,11 @@ export class StudentPortfolioComponent {
   cancel = faXmark;
 
   openAddCourseModal() {
-    this.showModal = !this.showModal; // Open the modal on button click
+    this.showModal = true; // Open the modal on button click
+  }
+
+  closeCourseModal() {
+    this.showModal = false;
   }
 
   addCourse(course: Course) {

@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 import { Course } from '../../../../models/Interfaces/Course';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
@@ -12,18 +18,31 @@ import { NgClass } from '@angular/common';
 })
 export class AddCourseModalComponent {
   @Input() showModal = false; // Flag to control modal visibility (received from parent)
-  @Output() courseAdded = new EventEmitter<Course>(); // Event emitter for course data
+  @Output() courseAdded = new EventEmitter<Course>(); // Event emitter for course
+  @Output() closeModalEvent = new EventEmitter();
 
   course: Course = { name: '', code: '', score: 0, unit: 0 }; // New course object
-  
-  closeModal() {
+
+  closeModal(event: Event) {
     this.showModal = false; // Hide the modal on close button click
     this.course = { name: '', code: '', score: 0, unit: 0 }; // Reset course object
+    event.stopPropagation();
+    this.closeModalEvent.emit(event);
   }
-  
 
-  submitCourse() {
+  stopPropagation(event: Event): void {
+    event.stopPropagation();
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscKeydownHandler(event: KeyboardEvent) {
+    if (this.showModal) {
+      this.closeModal(event);
+    }
+  }
+
+  submitCourse(event: Event) {
     this.courseAdded.emit(this.course); // Emit the course object on submit
-    this.closeModal(); // Close the modal after submission
+    this.closeModal(event); // Close the modal after submission
   }
 }
