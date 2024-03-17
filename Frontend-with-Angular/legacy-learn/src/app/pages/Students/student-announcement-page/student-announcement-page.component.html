@@ -11,9 +11,10 @@
                 <p>We're thrilled to announce some exciting developments happening at Legacy Learn! We're constantly working to improve your learning experience and empower you on your academic journey. Here's what's new:</p>
             </section>
             
-            <section class="announcement">
-                <p>Brand New Feature: Personalized Learning Paths! (Replace with your actual new feature) <br> Get ready to personalize your learning like never before! We're excited to introduce our brand new feature: Personalized Learning Paths. This innovative tool analyzes your learning style, strengths, and goals to create a customized roadmap for your academic success. No more navigating through a sea of irrelevant information - focus on what matters most and accelerate your learning!
-                </p>
+            <section class="announcement" *ngFor="let announcement of announcements">
+                <p>{{ announcement }}</p>
+                <!-- <p>Brand New Feature: Personalized Learning Paths! (Replace with your actual new feature) <br> Get ready to personalize your learning like never before! We're excited to introduce our brand new feature: Personalized Learning Paths. This innovative tool analyzes your learning style, strengths, and goals to create a customized roadmap for your academic success. No more navigating through a sea of irrelevant information - focus on what matters most and accelerate your learning!
+                </p> -->
             </section>
             
             <section>
