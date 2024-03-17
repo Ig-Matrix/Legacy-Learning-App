@@ -10,9 +10,10 @@ import { FeedbackPageComponent } from './pages/Admin/feedback-page/feedback-page
 import { StudentFeedbackPageComponent } from './pages/Students/student-feedback-page/student-feedback-page.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
-import { Error404PageComponent } from './pages/error-404-page/error-404-page.component';
+import { CreateAdminPageComponent } from './pages/Admin/create-admin-page/create-admin-page.component';
 import { FeedbackFormsComponent } from './pages/Students/feedback-forms/feedback-forms.component';
 import { StudentPortfolioComponent } from './pages/Students/student-portfolio/student-portfolio.component';
+import { Error404PageComponent } from './pages/error-404-page/error-404-page.component';
 import { LoginGuard } from './services/login.guard';
 
 
@@ -20,11 +21,12 @@ export const routes: Routes = [
     {path: '', title:'Landing Page', component: LandingPageComponent}, //both
     {path: 'loginPage', title:'Log-in Page', component:LoginPageComponent}, //both
     {path: 'home', title:'Home Page', component: HomePageComponent, canActivate: [LoginGuard]}, //both
-    {path: 'signup', title:'Sign-up Page', component: CreateUserPageComponent}, //both
+    {path: 'signup', title:'Sign-up Page', component: CreateUserPageComponent}, //student
     {path: 'contact', title:'Contact Page', component: ContactUsPageComponent, canActivate: [LoginGuard]}, //both
     {path: 'about', title:'About Page', component: AboutUsPageComponent, canActivate: [LoginGuard]}, //both
     {path: 'announce', title:'AdminAnnouncement Page', component: AnnouncementPageComponent, canActivate: [LoginGuard]}, //admin
     {path: 'view-feedback', title:'AdminFeedback Page', component: FeedbackPageComponent, canActivate: [LoginGuard]}, //admin
+    {path: 'create-admin', title:'Create Admin Page', component: CreateAdminPageComponent, canActivate: [LoginGuard]}, //admin
     {path: 'news', title:'Announcement Page', component: StudentAnnouncementPageComponent, canActivate: [LoginGuard]}, //student
     {path: 'feedback', title:'Feedback Page', component: StudentFeedbackPageComponent, canActivate: [LoginGuard]}, //student
     {path: 'portfolio', title:'Portfolio Page', component: PortfolioPageComponent, canActivate: [LoginGuard]}, //student

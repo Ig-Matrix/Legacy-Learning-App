@@ -9,17 +9,26 @@
           <div class="ngIf" *ngIf="signUpForm.get('firstname')!.hasError('required') && signUpForm.get('firstname')!.touched">
             First name is required.
           </div>
+          <div class="ngIf" *ngIf="signUpForm.get('firstname')!.hasError('minlength') && signUpForm.get('firstname')!.touched">
+            Name must be at least 3 characters long.
+          </div>
           
           <label>Last name:</label><br />
           <input type="text" id="lastname" name="lastName" formControlName="lastname" required /><br />
           <div class="ngIf" *ngIf="signUpForm.get('lastname')!.hasError('required') && signUpForm.get('lastname')!.touched">
             Last name is required.
           </div>
+          <div class="ngIf" *ngIf="signUpForm.get('lastname')!.hasError('minlength') && signUpForm.get('lastname')!.touched">
+            Name must be at least 3 characters long.
+          </div>
           
           <label>Username:</label><br />
           <input type="text" id="username" name="userName" required formControlName="username"/><br />
           <div class="ngIf" *ngIf="signUpForm.get('username')!.hasError('required') && signUpForm.get('username')!.touched">
             Username is required.
+          </div>
+          <div class="ngIf" *ngIf="signUpForm.get('username')!.hasError('minlength') && signUpForm.get('username')!.touched">
+            Name must be at least 3 characters long.
           </div>
   
           <label>Password:</label><br />
@@ -31,6 +40,9 @@
           </div>
           <div class="ngIf" *ngIf="signUpForm.get('password')!.hasError('required') && signUpForm.get('password')!.touched">
             Password is required.
+          </div>
+          <div class="ngIf" *ngIf="signUpForm.get('password')!.hasError('minlength') && signUpForm.get('password')!.touched">
+            Password must be at least 8 characters long.
           </div>
   
           <label>Confirm password:</label><br />

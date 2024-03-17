@@ -1,0 +1,98 @@
+<div class="content">
+    <app-side-bar></app-side-bar>
+    <main>
+        <div class="container">
+          <section id="one">
+            <p class="logo">Lea<span id="logo1">rn</span> 2.0</p>
+            <p id="title">Create Your Free Legacy Learn Account and unlock a world of learning opportunities, empowering your academic journey! Join a supportive community of learners and educators! Signing up is quick and easy - get started now!</p><br>
+            <form class="col-6" [formGroup]="signUpAdminForm" (submit)="onSubmit()"><br />
+              <label>First name:</label><br />
+              <input type="text" id="firstname" name="firstName" formControlName="firstname" required /><br />
+              <div class="ngIf" *ngIf="signUpAdminForm.get('firstname')!.hasError('required') && signUpAdminForm.get('firstname')!.touched">
+                First name is required.
+              </div>
+              <div class="ngIf" *ngIf="signUpAdminForm.get('firstname')!.hasError('minlength') && signUpAdminForm.get('firstname')!.touched">
+                Name must be at least 3 characters long.
+              </div>
+              
+              <label>Last name:</label><br />
+              <input type="text" id="lastname" name="lastName" formControlName="lastname" required /><br />
+              <div class="ngIf" *ngIf="signUpAdminForm.get('lastname')!.hasError('required') && signUpAdminForm.get('lastname')!.touched">
+                Last name is required.
+              </div>
+              <div class="ngIf" *ngIf="signUpAdminForm.get('lastname')!.hasError('minlength') && signUpAdminForm.get('lastname')!.touched">
+                Name must be at least 3 characters long.
+              </div>
+              
+              <label>Username:</label><br />
+              <input type="text" id="username" name="userName" required formControlName="username"/><br />
+              <div class="ngIf" *ngIf="signUpAdminForm.get('username')!.hasError('required') && signUpAdminForm.get('username')!.touched">
+                Username is required.
+              </div>
+              <div class="ngIf" *ngIf="signUpAdminForm.get('username')!.hasError('minlength') && signUpAdminForm.get('username')!.touched">
+                Name must be at least 3 characters long.
+              </div>
+      
+              <label>Password:</label><br />
+              <div class="password-container">
+                <input [type]="showPassword ? 'password' : 'text'" id="pwd" formControlName="password" required>
+                <span (click)="togglePasswordVisibility('password')">
+                  <img class="eyeicon" [src] ="switchIcon1 ? 'assets/fonts/eye-slash-solid.svg' : 'assets/fonts/eye-solid.svg'">
+                </span>
+              </div>
+              <div class="ngIf" *ngIf="signUpAdminForm.get('password')!.hasError('required') && signUpAdminForm.get('password')!.touched">
+                Password is required.
+              </div>
+              <div class="ngIf" *ngIf="signUpAdminForm.get('password')!.hasError('minlength') && signUpAdminForm.get('password')!.touched">
+                Password must be at least 8 characters long.
+              </div>
+      
+              <label>Confirm password:</label><br />
+              <div class="password-container">
+                <input [type]= "showConfirmPassword ? 'password':'text'" id="confirmPwd" formControlName="confirmPassword" required>
+                <span (click)="toggleConfirmPasswordVisibility('confirmPassword')">
+                  <img class="eyeicon" [src] ="switchIcon2 ? 'assets/fonts/eye-slash-solid.svg' : 'assets/fonts/eye-solid.svg'">
+              </span>
+              </div>
+              <div class="ngIf" *ngIf="signUpAdminForm.get('confirmPassword')!.hasError('required') && signUpAdminForm.get('confirmPassword')!.touched">
+                Password is required.
+              </div>
+              <div class="ngIf" *ngIf="signUpAdminForm.hasError('mismatch') && signUpAdminForm.get('confirmPassword')!.touched">
+                Passwords do not match.
+              </div>        
+      
+              <label >Email:</label><br />
+              <input
+                type="text"
+                id="email"
+                name="email"
+                formControlName="email" required
+              /><br />
+              <div class="ngIf" *ngIf="signUpAdminForm.get('email')!.hasError('required') && signUpAdminForm.get('email')!.touched">
+                Valid email address is required.
+              </div>
+              <div class="ngIf" *ngIf="signUpAdminForm.get('email')?.hasError('email') && signUpAdminForm.get('email')?.touched">
+                Invalid email address.
+              </div>
+      
+              <button id="create">{{ isLoading ? "PLEASE WAIT..." : "CREATE" }}</button>
+              <button id="cancel" [routerLink]="['/home']"
+              routerLinkActive="active active-style"
+              [routerLinkActiveOptions]="{ exact: true }">CANCEL</button><br>
+              <div class="ngIfError" *ngIf="errorMessage">
+                {{errorMessage}}
+              </div>
+              <br />
+            </form>
+          </section>
+      
+          <section id="two">
+            <img
+              id="image"
+              src="assets/images/signUp1.jpg"
+              alt=""
+            />
+          </section>
+        </div>
+    </main>
+</div>

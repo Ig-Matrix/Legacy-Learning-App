@@ -37,30 +37,16 @@ export class SideBarComponent {
       });
 
       this.filteredMenus.forEach((menuItem: any) => {
-        console.log(
-          `<a routerLink="${menuItem.path}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            <i class="${menuItem.iconPath}"></i>
-            ${menuItem.title}
-          </a>`);
+        console.log('Roles filtered now!');
       });
     }
-    
 
     logout() {
       this.loginService.logout();
       this.router.navigate(["/"]);
     }
+
     icons = [
       { name: '', iconPath: 'assets/fonts/right-from-bracket-solid.svg', title: 'Logout'}
     ];
   }
-
-  // icons = [
-  //   { name: 'home', iconPath: 'assets/fonts/house-solid.svg', title: 'Home'},
-  //   { name: 'news', iconPath: 'assets/fonts/newspaper-solid.svg', title: 'News'},
-  //   { name: 'feedback', iconPath: 'assets/fonts/comment-solid.svg', title: 'Feedback'},
-  //   { name: 'portfolio', iconPath: 'assets/fonts/briefcase-solid.svg', title: 'Portfolio'},
-  //   {name: 'about', iconPath: 'assets/fonts/location-dot-solid.svg', title: 'About Us'},
-  //   { name: 'contact', iconPath: 'assets/fonts/address-card-solid.svg', title: 'Contact Us'},
-  // ];
-  
