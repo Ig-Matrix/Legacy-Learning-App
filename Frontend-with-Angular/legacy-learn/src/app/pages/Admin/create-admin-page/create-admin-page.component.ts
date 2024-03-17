@@ -3,17 +3,18 @@ import { AbstractControlOptions, FormControl, FormGroup, ReactiveFormsModule, Va
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FooterComponent } from "../../components/footer/footer.component";
-import { UserService } from '../../services/UserService/user.service';
+import { UserService } from '../../../services/UserService/user.service';
+import { SideBarComponent } from "../../../components/side-bar/side-bar.component";
+import { HomeNavigationComponent } from "../../../components/home-navigation/home-navigation.component";
 
 @Component({
-    selector: 'app-create-user-page',
+    selector: 'app-create-admin-page',
     standalone: true,
-    templateUrl: './create-user-page.component.html',
-    styleUrl: './create-user-page.component.css',
-    imports: [ReactiveFormsModule, CommonModule, FontAwesomeModule, RouterLink, RouterLinkActive, FooterComponent]
+    templateUrl: './create-admin-page.component.html',
+    styleUrl: './create-admin-page.component.css',
+    imports: [ReactiveFormsModule, CommonModule, FontAwesomeModule, RouterLink, RouterLinkActive, SideBarComponent, HomeNavigationComponent]
 })
-export class CreateUserPageComponent {
+export class CreateAdminPageComponent {
   icons = [
     { name: 'eye', src: 'assets/fonts/eye-solid.svg'},
     { name: 'eye-slash', src: 'assets/fonts/eye-slash-solid.svg'}]
@@ -23,7 +24,7 @@ export class CreateUserPageComponent {
   showConfirmPassword = true;
   isLoading: boolean= false;
 
-  signUpForm: FormGroup = new FormGroup({
+  signUpAdminForm: FormGroup = new FormGroup({
     lastname: new FormControl('', [Validators.required, Validators.minLength(3)]),
     firstname: new FormControl('', [Validators.required, Validators.minLength(3)]),
     username: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -72,18 +73,18 @@ export class CreateUserPageComponent {
     this.errorMessage = '';
 
     const user = {
-      firstName: this.signUpForm.value.firstname,
-      lastName: this.signUpForm.value.lastname,
-      username: this.signUpForm.value.username,
-      password: this.signUpForm.value.password,
-      email: this.signUpForm.value.email,
+      firstName: this.signUpAdminForm.value.firstname,
+      lastName: this.signUpAdminForm.value.lastname,
+      username: this.signUpAdminForm.value.username,
+      password: this.signUpAdminForm.value.password,
+      email: this.signUpAdminForm.value.email,
     }
 
-    this.userService.createStudentUser(user)
+    this.userService.createAdminUser(user)
     .subscribe(
       (user) => {
-        console.log("Registration successful!", user);
-        this.router.navigate(['/loginPage']);
+        console.log("Registration successful!");
+        this.router.navigate(['/home']);
       },
       error => {
         this.errorMessage = 'Registration error';

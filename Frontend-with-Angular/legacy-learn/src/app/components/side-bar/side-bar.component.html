@@ -5,7 +5,7 @@
         </a>
         </li>
         <li *ngFor="let icon of icons">
-            <a routerLink="/" (click)="logout()"><img [src]="icon.iconPath" alt="{{ icon.name }}"></a>
+            <a routerLink="/" (click)="logout()"><img [src]="icon.iconPath" alt="{{ icon.name }}" title="{{ icon.title }}"></a>
         </li>
     </ul>
 </div>

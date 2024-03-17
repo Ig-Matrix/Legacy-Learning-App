@@ -23,25 +23,25 @@ export const MenuConstant = {
     },
     {
         path: 'announce',
-        title: 'Create Announcement Page',
+        title: 'Create Announcements',
         iconPath: 'assets/fonts/newspaper-solid.svg',
         roles: ['ADMIN']
     },
     {
-        path: 'signup',
-        title: 'Sign-Up Page',
+        path: 'create-admin',
+        title: 'Create Admin',
         iconPath: 'assets/fonts/user-solid.svg',
         roles: ['ADMIN']
     },
     {
         path: 'view-feedback',
-        title: 'View Feedback Page',
+        title: 'View Feedback',
         iconPath: 'assets/fonts/comment-solid.svg',
         roles: ['ADMIN']
     },
     {
         path: 'news',
-        title: 'Announcement Page',
+        title: 'View Announcements',
         iconPath: 'assets/fonts/newspaper-solid.svg',
         roles: ['STUDENT']
     },
@@ -53,7 +53,7 @@ export const MenuConstant = {
     },
     {
         path: 'portfolio',
-        title: 'Portfolio Page',
+        title: 'Portfolio',
         iconPath: 'assets/fonts/briefcase-solid.svg',
         roles: ['STUDENT']
     }]

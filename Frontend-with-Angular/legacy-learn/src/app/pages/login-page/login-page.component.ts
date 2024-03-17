@@ -52,8 +52,7 @@ export class LoginPageComponent {
     .subscribe(
       response => {
         this.isLoading = false;
-        console.log('Login successful!', response);
-        // jwt.verify(response.accessToken)
+        console.log('Login successful!');
         const accessToken = response.accessToken;
         const tokenType = response.tokenType;
         localStorage.setItem('auth_token', accessToken);
@@ -78,35 +77,3 @@ export class LoginPageComponent {
       });
   }
 }
-
-  // onSubmit(): void {
-  //   this.isLoading = true;
-  //   this.errorMessage = '';
-
-  //   this.loginService.login(this.loginForm)
-  //   .subscribe(
-  //     response => {
-  //       this.isLoading = false;
-  //       console.log('Login successful!');
-  //       const accessToken = response.accessToken;
-  //       const tokenType = response.tokenType;
-  //       localStorage.setItem('auth_token', accessToken);
-  //       localStorage.setItem('token_type', tokenType);
-  //       this.errorMessage = '';
-  //       this.router.navigate(['/home']);
-  //     },
-  //     error => {
-  //       this.errorMessage = 'Invalid username or password';
-  //       this.isLoading = false;
-  //       console.log('Login error: ', error);
-  //       setTimeout(() => {
-  //         this.clearErrorMessage();
-  //       }, 3000);
-  //     },
-  //     () => {
-  //       this.isLoading = false;
-  //       setTimeout(() => {
-  //         this.clearErrorMessage();
-  //       }, 3000);
-  //     });
-  // }

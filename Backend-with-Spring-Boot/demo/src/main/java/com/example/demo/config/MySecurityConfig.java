@@ -18,7 +18,7 @@ public class MySecurityConfig {
 
     @Bean
     public JwtTokenUtil jwtTokenUtil(SecretKey secretKey) {
-        int jwtExpirationInMs = 3600000;  // 1 hour in milliseconds
+        int jwtExpirationInMs = 1800000;  // 1/2 hour in milliseconds
         int refreshExpirationInMs = 86400000;  // 24 hours in milliseconds
         return new JwtTokenUtil(secretKey, jwtExpirationInMs, refreshExpirationInMs);
     }
