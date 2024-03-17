@@ -28,8 +28,6 @@ public class LoginController {
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginForm.getUsername(), loginForm.getPassword()));
-//            UserDetails details = User()
-
             String token = jwtTokenUtil.generateAccessToken(authentication);
             return new ResponseEntity<>(new JwtAuthResponse(token), HttpStatus.OK);
         } catch (AuthenticationException e) {
@@ -37,10 +35,4 @@ public class LoginController {
         }
     }
 }
-// NOTES: Would help in determining roles after user authentication...
-//if (userDetails.getAuthorities().contains(new SimpleGrantedAuthority(UserRole.ADMIN.name()))) {
-//        // Redirect to admin dashboard
-//        } else {
-//        // Redirect to student dashboard
-//        }
 
