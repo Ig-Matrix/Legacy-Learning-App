@@ -28,30 +28,19 @@ public class LoginController {
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginForm.getUsername(), loginForm.getPassword()));
+//            UserDetails details = User()
+
             String token = jwtTokenUtil.generateAccessToken(authentication);
             return new ResponseEntity<>(new JwtAuthResponse(token), HttpStatus.OK);
-//            if (authentication.getPrincipal() instanceof UserDetails userDetails) {
-//                String jwtToken = jwtTokenUtil.generateAccessToken(userDetails);
-//                return new ResponseEntity<>(new JwtAuthResponse(jwtToken), HttpStatus.OK);
-//            } else {
-//                throw new RuntimeException("Unexpected authentication object type");
-//            }
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 }
-
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody LoginForm loginForm) {
-//        String username = loginForm.getUsername();
-//        String token = userService.generateToken(username); // UserService retrieves token
-//
-//        // Weak validation: only check if token exists
-//        if (token != null) {
-//            return ResponseEntity.ok(new LoginResponse(token));
+// NOTES: Would help in determining roles after user authentication...
+//if (userDetails.getAuthorities().contains(new SimpleGrantedAuthority(UserRole.ADMIN.name()))) {
+//        // Redirect to admin dashboard
 //        } else {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//        // Redirect to student dashboard
 //        }
-//    }
+

@@ -12,5 +12,4 @@ import { HomeNavigationComponent } from "../../components/home-navigation/home-n
     imports: [NavBarComponent, FooterComponent, SideBarComponent, HomeNavigationComponent]
 })
 export class HomePageComponent {
-
 }

@@ -27,12 +27,5 @@ public class UserController {
         User registeredUser = userServiceImpl.registerUser(user);
         return ResponseEntity.ok(registeredUser);
     }
-
 }
 
-//    @PostMapping("/registerStudent")
-//    public ResponseEntity<?> register(@RequestBody LoginForm loginForm) {
-//        // Register user (implementation omitted)
-//        String token = userServiceImpl.allowUser(loginForm); // Assume UserService generates a token
-//        return ResponseEntity.ok(new LoginResponse(token));
-//    }

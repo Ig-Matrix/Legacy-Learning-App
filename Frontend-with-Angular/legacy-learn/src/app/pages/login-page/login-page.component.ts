@@ -52,11 +52,13 @@ export class LoginPageComponent {
     .subscribe(
       response => {
         this.isLoading = false;
-        console.log('Login successful!');
+        console.log('Login successful!', response);
+        // jwt.verify(response.accessToken)
         const accessToken = response.accessToken;
         const tokenType = response.tokenType;
         localStorage.setItem('auth_token', accessToken);
         localStorage.setItem('token_type', tokenType);
+        localStorage.setItem('localUserData', JSON.stringify(response));
         this.errorMessage = '';
         this.router.navigate(['/home']);
       },
@@ -75,41 +77,36 @@ export class LoginPageComponent {
         }, 3000);
       });
   }
+}
 
-  // onSubmit(): void {
-  //   this.router.navigate(['/home']);
-  // }
-  
   // onSubmit(): void {
   //   this.isLoading = true;
-  //   if (this.loginForm.valid) {
-  //     const loginData = this.loginForm.value;
-  //     this.loginService.login(loginData).subscribe(
-  //       (response) => {
-  //         this.isLoading = false;
-  //         this.userDetails.setUsername(response.username);
-  //         this.userDetails.setEmail(response.email);
-  //         this.router.navigate(['/homepage']);
-  //         this.errorMessage = '';
-  //       },
-  //       (error) => {
-  //         this.errorMessage = error.error.message;
-  //         console.log(error);
-  //         this.isLoading = false;
+  //   this.errorMessage = '';
 
-  //         setTimeout(() => {
-  //           this.clearErrorMessage();
-  //         }, 3000);
-  //       },
-  //     );
-  //   } else {
-  //     this.isLoading = false;
-  //     console.log('Invalid form');
-  //     this.errorMessage='Invalid form';
-
-  //     setTimeout(() => {
-  //       this.clearErrorMessage();
-  //     }, 3000);
-  //   }
-
-}
+  //   this.loginService.login(this.loginForm)
+  //   .subscribe(
+  //     response => {
+  //       this.isLoading = false;
+  //       console.log('Login successful!');
+  //       const accessToken = response.accessToken;
+  //       const tokenType = response.tokenType;
+  //       localStorage.setItem('auth_token', accessToken);
+  //       localStorage.setItem('token_type', tokenType);
+  //       this.errorMessage = '';
+  //       this.router.navigate(['/home']);
+  //     },
+  //     error => {
+  //       this.errorMessage = 'Invalid username or password';
+  //       this.isLoading = false;
+  //       console.log('Login error: ', error);
+  //       setTimeout(() => {
+  //         this.clearErrorMessage();
+  //       }, 3000);
+  //     },
+  //     () => {
+  //       this.isLoading = false;
+  //       setTimeout(() => {
+  //         this.clearErrorMessage();
+  //       }, 3000);
+  //     });
+  // }
