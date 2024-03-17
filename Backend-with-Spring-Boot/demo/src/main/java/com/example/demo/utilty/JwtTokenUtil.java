@@ -22,14 +22,13 @@ public class JwtTokenUtil {
     }
 
     public String generateAccessToken(Authentication authentication) {
-        String username = authentication.getName();
-//        Map<String, Object> claims = new HashMap<>();
-//        claims.put("username", userDetails.getUsername());
-//        claims.put("roles", extractRoles(userDetails.getAuthorities()));
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("username", authentication.getName());
+        claims.put("roles", authentication.getAuthorities());
 
         return Jwts.builder()
-//                .setClaims(claims)
-                .setSubject(username)
+                .setSubject("user")
+                .setClaims(claims)
                 .setExpiration(generateExpirationDate(jwtExpirationInMs))
                 .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();
