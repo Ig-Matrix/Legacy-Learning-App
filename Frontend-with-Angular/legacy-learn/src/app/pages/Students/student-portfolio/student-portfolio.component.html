@@ -47,7 +47,20 @@
             <td class="px-6 py-4 whitespace-nowrap">{{ course.code }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ course.score }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ course.unit }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{ course.grade }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="px-3 inline-flex leading-5 font-semibold text-xl rounded-full"
+                [ngClass]="{
+                            'text-indigo-600 bg-green-100': course.grade==='A', 
+                            'text-blue-500 bg-blue-100': course.grade==='B', 
+                            'text-green-600 bg-purple-100': course.grade==='C',
+                            'text-yellow-600 bg-yellow-100': course.grade==='D',
+                            'text-orange-600 bg-orange-100': course.grade==='E',
+                            'text-red-600 bg-red-100': course.grade==='F',
+                            }"
+                >{{ course.grade }}
+              </span>
+            </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <button
                 class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
