@@ -4,6 +4,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from "../../components/footer/footer.component";
+import { UserService } from '../../services/UserService/user.service';
 
 @Component({
     selector: 'app-create-user-page',
@@ -13,6 +14,9 @@ import { FooterComponent } from "../../components/footer/footer.component";
     imports: [ReactiveFormsModule, CommonModule, FontAwesomeModule, RouterLink, RouterLinkActive, FooterComponent]
 })
 export class CreateUserPageComponent {
+  icons = [
+    { name: 'eye', src: 'assets/fonts/eye-solid.svg'},
+    { name: 'eye-slash', src: 'assets/fonts/eye-slash-solid.svg'}]
   switchIcon1: boolean = true;
   switchIcon2: boolean = true;
   showPassword: boolean = true;
@@ -20,12 +24,12 @@ export class CreateUserPageComponent {
   isLoading: boolean= false;
 
   signUpForm: FormGroup = new FormGroup({
-    lastname: new FormControl('', [Validators.required]),
-    firstname: new FormControl('', [Validators.required]),
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-    confirmPassword: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required])
+    lastname: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    firstname: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    email: new FormControl('', [Validators.required, Validators.email])
   }, {validators: this.passwordMatchValidator} as AbstractControlOptions);
 
   passwordMatchValidator(group: FormGroup) {
@@ -50,19 +54,51 @@ export class CreateUserPageComponent {
     }
   }
 
+  ngOnInit(): void { }
+
   errorMessage: string = '';
   
   constructor(
     private router: Router,
+    private userService: UserService,
   ) {}
 
   clearErrorMessage() {
     this.errorMessage = '';
   }
 
-  onSubmit(): void {
+  onSubmit() {
     this.isLoading = true;
-    this.router.navigate(['/login']);
+    this.errorMessage = '';
+
+    const user = {
+      firstName: this.signUpForm.value.firstname,
+      lastName: this.signUpForm.value.lastname,
+      username: this.signUpForm.value.username,
+      password: this.signUpForm.value.password,
+      email: this.signUpForm.value.email,
+    }
+
+    this.userService.createStudentUser(user)
+    .subscribe(
+      (user) => {
+        console.log("Registration successful!", user);
+        this.router.navigate(['/loginPage']);
+      },
+      error => {
+        this.errorMessage = 'Registration error';
+        console.log('Error: ', error);
+        this.isLoading = false;
+        setTimeout(() => {
+          this.clearErrorMessage();
+        }, 3000);
+      },
+      () => {
+        this.isLoading = false;
+        setTimeout(() => {
+          this.clearErrorMessage();
+        }, 3000);
+      });
   }
 
 }

@@ -8,11 +8,17 @@
 }
 .logo {
     font-family: 'Sacramento', sans-serif;
-    font-size: 3.5vh;
+    font-size: 5vh;
     font-weight: bold;
     color: #2f57e5;
-    padding: 0 11vh;
+    padding: 1vh 15vh;
 }
 span {
     color: orange !important;
+}
+@media screen and (max-width: 768px) {
+    .logo {
+        padding: 1vh 5vh;
+    }
+    
 }

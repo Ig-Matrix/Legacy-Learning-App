@@ -1,8 +1,11 @@
 <div class="sidebar">
     <ul>
-        <li *ngFor="let icon of icons">
-        <a routerLink="/{{ icon.name }}"><img [src]="icon.iconPath" alt="{{ icon.name }}" title="{{ icon.title }}">
+        <li *ngFor="let menuItem  of filteredMenus">
+        <a routerLink="/{{ menuItem .path }}"><img [src]="menuItem .iconPath" alt="{{ menuItem .title }}" title="{{ menuItem .title }}">
         </a>
+        </li>
+        <li *ngFor="let icon of icons">
+            <a routerLink="/" (click)="logout()"><img [src]="icon.iconPath" alt="{{ icon.name }}" title="{{ icon.title }}"></a>
         </li>
     </ul>
 </div>

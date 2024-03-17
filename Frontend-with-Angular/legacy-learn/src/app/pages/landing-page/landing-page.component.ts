@@ -11,5 +11,4 @@ import { FooterComponent } from "../../components/footer/footer.component";
     imports: [RouterLink, RouterLinkActive, NavBarComponent, FooterComponent]
 })
 export class LandingPageComponent {
-
 }
