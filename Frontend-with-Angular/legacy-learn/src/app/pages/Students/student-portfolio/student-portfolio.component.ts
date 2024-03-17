@@ -10,6 +10,7 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { GpaProgressComponent } from '../../../components/gpa-progress/gpa-progress.component';
 
 @Component({
   selector: 'app-student-portfolio',
@@ -20,6 +21,7 @@ import { NgClass } from '@angular/common';
     FormsModule,
     FontAwesomeModule,
     NgClass,
+    GpaProgressComponent
   ],
   templateUrl: './student-portfolio.component.html',
   styleUrl: './student-portfolio.component.css',
@@ -27,12 +29,13 @@ import { NgClass } from '@angular/common';
 export class StudentPortfolioComponent {
   courses: Course[] = []; // Array to store course data
   showModal: boolean = false; // Flag to control modal visibility
-  cgpa: number | null = null; // CGPA property to store calculated value
+  cgpa!: number; // CGPA property to store calculated value
   editingCourseIndex: number | null = null; // Track the index of the course being edited
   trackingIndex: number = 1;
   faBackward = faLessThan;
   check = faCheck;
   cancel = faXmark;
+  isGpaCalculated: boolean = false;
 
   openAddCourseModal() {
     this.showModal = true; // Open the modal on button click
@@ -46,8 +49,9 @@ export class StudentPortfolioComponent {
     course.grade = this.calculateGrade(course.score);
     this.trackingIndex++;
     this.courses.push(course); // Add new course to the array
-    this.cgpa = null;
+    this.cgpa = 0;
     this.showModal = false; // Close the modal after adding
+    this.isGpaCalculated = false;
   }
 
   calculateGrade(score: number): string {
@@ -66,11 +70,8 @@ export class StudentPortfolioComponent {
     }
   }
 
-  calculateCGPA(): number | null {
-    if (!this.courses.length) {
-      return null; // No courses for calculation
-    }
-
+  calculateCGPA(): number {
+    this.isGpaCalculated=true;
     let totalCreditPoints = 0;
     let totalQualityPoints = 0;
 
@@ -87,7 +88,7 @@ export class StudentPortfolioComponent {
     return totalCreditPoints > 0 ? totalQualityPoints / totalCreditPoints : 0; // Calculate CGPA if totalCreditPoints is non-zero, otherwise return 0
   }
 
-  getGradePoints(score: number): number | null {
+  getGradePoints(score: number): number {
     if (score >= 70) {
       return 5.0;
     } else if (score >= 60) {
@@ -99,9 +100,9 @@ export class StudentPortfolioComponent {
     } else if (score >= 40) {
       return 1.0;
     } else if (score >= 1) {
-      return (score / 39) * 0.9;
+      return (score / 39) * 0.99;
     } else {
-      return null; // Return null for scores below 1
+      return 0; // Return null for scores below 1
     }
   }
 
@@ -109,7 +110,8 @@ export class StudentPortfolioComponent {
     const courseIndex = this.courses.findIndex((c) => c === course); //find the index of that course
     if (courseIndex !== -1) {
       this.courses.splice(courseIndex, 1); //remove that course from the array
-      this.cgpa = null; // invalidatee cgpa
+      this.isGpaCalculated=false;
+      this.cgpa = 0; // invalidatee cgpa
     }
   }
 
@@ -126,7 +128,8 @@ export class StudentPortfolioComponent {
         course.score
       ); // Recalculate grade
       this.editingCourseIndex = null;
-      this.cgpa = null; // Invalidate CGPA after course edit
+      this.isGpaCalculated=false;
+      this.cgpa = 0; // Invalidate CGPA after course edit
     }
   }
 }
