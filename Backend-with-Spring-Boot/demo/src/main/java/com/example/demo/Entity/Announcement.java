@@ -11,6 +11,7 @@ import java.util.Date;
 public class Announcement {
     @Id
     private Long announcementId;
+    private String title;
     private String announcementContent ;
     private Date createdAt;
 }
