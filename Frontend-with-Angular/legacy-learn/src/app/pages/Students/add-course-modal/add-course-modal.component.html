@@ -47,7 +47,7 @@
           required
         />
         @if (courseForm.get('name')?.hasError('nameType') &&
-        courseForm.get('unit')?.touched) {
+        courseForm.get('name')?.touched) {
         <small class="text-red-500">name must contain only alphabets</small>
         }
       </div>
@@ -64,6 +64,10 @@
           placeholder="e.g MTH110"
           required
         />
+        @if (courseForm.get('code')?.hasError('codeType') &&
+        courseForm.get('code')?.touched) {
+        <small class="text-red-500">course code can contain only numbers, alphabets, hyphen, or underscore</small>
+        }
       </div>
       <div class="mb-4">
         <label for="courseScore" class="block text-sm font-medium text-gray-700"
