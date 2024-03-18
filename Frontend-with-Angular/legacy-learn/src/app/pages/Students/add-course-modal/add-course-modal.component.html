@@ -46,6 +46,10 @@
           placeholder="enter course name"
           required
         />
+        @if (courseForm.get('name')?.hasError('nameType') &&
+        courseForm.get('unit')?.touched) {
+        <small class="text-red-500">name must contain only alphabets</small>
+        }
       </div>
       <div class="mb-4">
         <label for="courseCode" class="block text-sm font-medium text-gray-700"
@@ -75,7 +79,8 @@
         />
         @if (courseForm.get('score')?.hasError('scoreRange')) {
         <small class="text-red-500"> Score must be between 0 and 100</small>
-        }@else if (courseForm.get('score')?.hasError('valueType') && courseForm.get('score')?.touched) {
+        }@else if (courseForm.get('score')?.hasError('valueType') &&
+        courseForm.get('score')?.touched) {
         <small class="text-red-500"> must be a number</small>
         }
       </div>

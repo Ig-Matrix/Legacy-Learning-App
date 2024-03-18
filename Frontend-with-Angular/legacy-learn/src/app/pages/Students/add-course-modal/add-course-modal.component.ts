@@ -31,7 +31,7 @@ export class AddCourseModalComponent {
   @Output() closeModalEvent = new EventEmitter();
 
   courseForm: FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required, this.nameValidator]),
     code: new FormControl('', [Validators.required]),
     score: new FormControl('', [Validators.required, this.scoreValidator, this.numberValidator]),
     unit: new FormControl('', [Validators.required, this.numberValidator]),
@@ -54,6 +54,16 @@ export class AddCourseModalComponent {
     }
     return null;
   }
+
+  nameValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (!/^[a-zA-Z]+$/.test(value)) {
+      return { nameType: 'name must contain only alphabets' };
+    }
+    return null;
+  }
+
+  
 
   closeModal(event: Event) {
     this.showModal = false; // Hide the modal on close button click
