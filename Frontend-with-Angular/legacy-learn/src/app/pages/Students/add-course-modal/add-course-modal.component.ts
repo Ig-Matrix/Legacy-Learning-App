@@ -37,7 +37,7 @@ export class AddCourseModalComponent {
     unit: new FormControl('', [Validators.required, this.numberValidator]),
   });
 
-  course: Course = { name: '', code: '', score: 0, unit: 0 }; // New course object
+  // course: Course = { name: '', code: '', score: 0, unit: 0 }; // New course object
 
   scoreValidator(control: AbstractControl): ValidationErrors | null {
     const score = control.value;
@@ -75,7 +75,7 @@ export class AddCourseModalComponent {
 
   closeModal(event: Event) {
     this.showModal = false; // Hide the modal on close button click
-    this.course = { name: '', code: '', score: 0, unit: 0 }; // Reset course object
+    // this.course = { name: '', code: '', score: 0, unit: 0 }; // Reset course object
     event.stopPropagation();
     this.closeModalEvent.emit(event);
   }
@@ -92,7 +92,7 @@ export class AddCourseModalComponent {
   }
 
   submitCourse(event: Event) {
-    this.courseAdded.emit(this.courseForm.value); // Emit the course object on submit
+    this.courseAdded.emit(this.courseForm.value); // Emit the courseForm on submit
     this.closeModal(event); // Close the modal after submission
   }
 }
