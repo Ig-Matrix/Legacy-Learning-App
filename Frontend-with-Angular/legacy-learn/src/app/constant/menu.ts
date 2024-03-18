@@ -47,7 +47,7 @@ export const MenuConstant = {
     },
     {
         path: 'feedback',
-        title: 'About Us',
+        title: 'Send Feedback',
         iconPath: 'assets/fonts/comment-solid.svg',
         roles: ['STUDENT']
     },

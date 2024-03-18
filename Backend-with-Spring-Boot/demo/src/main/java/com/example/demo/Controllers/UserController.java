@@ -4,7 +4,7 @@ import com.example.demo.Entity.User;
 import com.example.demo.Entity.UserRole;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Services.UserServiceImpl;
-import com.example.demo.Services.UsernameAlreadyExistsException;
+import com.example.demo.Exceptions.UsernameAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,6 +1,7 @@
 package com.example.demo.Services;
 
 import com.example.demo.Entity.User;
+import com.example.demo.Exceptions.UsernameAlreadyExistsException;
 import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

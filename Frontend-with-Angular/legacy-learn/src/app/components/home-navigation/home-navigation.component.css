@@ -19,6 +19,7 @@ span {
 @media screen and (max-width: 768px) {
     .logo {
         padding: 1vh 5vh;
+        font-size: 4vh;
     }
     
 }

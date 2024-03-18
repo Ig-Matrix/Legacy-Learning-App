@@ -49,8 +49,6 @@ public class SecurityConfig {
                         .requestMatchers("/api/login").permitAll()
                         .requestMatchers("/api/registerStudent").permitAll()
                         .requestMatchers("/api/registerAdmin").permitAll()
-                        .requestMatchers("/api/admins/**").hasRole("ADMIN")
-                        .requestMatchers("/api/students/**").hasRole("STUDENT")
                         .anyRequest().authenticated()
                 )
                 // Add JWT filter before UsernamePasswordAuthenticationFilter

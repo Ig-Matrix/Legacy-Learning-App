@@ -1,0 +1,17 @@
+<nav>
+    <app-home-navigation></app-home-navigation>
+</nav>
+
+<main>
+    <!-- <div class="announcement-list">
+        <app-announcement-list [announcements]="announcements" (announcementSelected)="onAnnouncementSelected(announcement)"></app-announcement-list>
+    </div>
+
+    <div class="announcement-details" *ngIf="selectedAnnouncement">
+        <app-announcement-details [announcement]="selectedAnnouncement"></app-announcement-details>
+    </div> -->
+
+    <div class="announcement-form">
+        <app-announcement-form (announcementSubmitted)="handleAnnouncementSubmit($event)"></app-announcement-form>
+    </div>
+</main>
