@@ -13,17 +13,13 @@ main {
     margin: 1.5% 1.5%;
     padding: 2.5%;
 }
-input {
-    border: 3px solid lightgrey;
-    height: 120px;
-    width: 80%;
-    transition: transform 0.3s ease;
-    margin: 15px 0 15px 0;
+a {
+    text-decoration: none;
+    color: #2f57e5;
 }
-input:hover, input:focus {
-    outline: none;
-    border: 3px solid #2f57e5;
-    transform: scale(1.03);
+a:hover, a:focus {
+    text-decoration: underline;
+    color: #2d51b4;
 }
 button {
     padding: 12px 50px;

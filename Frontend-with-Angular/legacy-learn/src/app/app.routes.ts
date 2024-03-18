@@ -12,6 +12,7 @@ import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.compon
 import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
 import { CreateAdminPageComponent } from './pages/Admin/create-admin-page/create-admin-page.component';
 import { FeedbackFormsComponent } from './pages/Students/feedback-forms/feedback-forms.component';
+import { NewAnnouncementPageComponent } from './pages/Admin/new-announcement-page/new-announcement-page.component';
 import { StudentPortfolioComponent } from './pages/Students/student-portfolio/student-portfolio.component';
 import { Error404PageComponent } from './pages/error-404-page/error-404-page.component';
 import { LoginGuard } from './services/login.guard';
@@ -27,6 +28,7 @@ export const routes: Routes = [
     {path: 'announce', title:'AdminAnnouncement Page', component: AnnouncementPageComponent, canActivate: [LoginGuard]}, //admin
     {path: 'view-feedback', title:'AdminFeedback Page', component: FeedbackPageComponent, canActivate: [LoginGuard]}, //admin
     {path: 'create-admin', title:'Create Admin Page', component: CreateAdminPageComponent, canActivate: [LoginGuard]}, //admin
+    {path: 'newAnnouncement', title:'Create New Announcement Page', component: NewAnnouncementPageComponent }, //admin 
     {path: 'news', title:'Announcement Page', component: StudentAnnouncementPageComponent, canActivate: [LoginGuard]}, //student
     {path: 'feedback', title:'Feedback Page', component: StudentFeedbackPageComponent, canActivate: [LoginGuard]}, //student
     {path: 'portfolio', title:'Portfolio Page', component: PortfolioPageComponent, canActivate: [LoginGuard]}, //student

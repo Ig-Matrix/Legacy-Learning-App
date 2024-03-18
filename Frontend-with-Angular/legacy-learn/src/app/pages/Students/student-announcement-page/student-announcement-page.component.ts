@@ -12,18 +12,5 @@ import { Announcement } from '../../../model/announcement.model';
     styleUrl: './student-announcement-page.component.css',
     imports: [SideBarComponent, HomeNavigationComponent, CommonModule]
 })
-export class StudentAnnouncementPageComponent {
-    announcements: Announcement[] = [];
-
-    constructor(
-        private announcementService: AnnouncementService
-    ) {
-        this.fetchAnnouncements();
-    }
-
-    fetchAnnouncements() {
-        this.announcementService.getAnnouncements()
-        .subscribe(announcements => this.announcements = announcements);
-    }
-    
+export class StudentAnnouncementPageComponent {    
 }

@@ -1,3 +1,4 @@
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Component } from '@angular/core';
 import { SideBarComponent } from "../../../components/side-bar/side-bar.component";
 import { HomeNavigationComponent } from "../../../components/home-navigation/home-navigation.component";
@@ -7,8 +8,7 @@ import { HomeNavigationComponent } from "../../../components/home-navigation/hom
     standalone: true,
     templateUrl: './announcement-page.component.html',
     styleUrl: './announcement-page.component.css',
-    imports: [SideBarComponent, HomeNavigationComponent]
+    imports: [SideBarComponent, HomeNavigationComponent, RouterLink, RouterLinkActive]
 })
 export class AnnouncementPageComponent {
-
 }
