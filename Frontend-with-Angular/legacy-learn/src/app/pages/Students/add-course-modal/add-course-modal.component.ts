@@ -57,7 +57,7 @@ export class AddCourseModalComponent {
 
   nameValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
-    if (!/^[a-zA-Z]+$/.test(value)) {
+    if (!/^[a-zA-Z\s]+$/.test(value)) {
       return { nameType: 'name must contain only alphabets' };
     }
     return null;
@@ -66,7 +66,7 @@ export class AddCourseModalComponent {
   
   codeValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
-    if (!/^[a-zA-Z0-9_-]+$/.test(value)) {
+    if (!/^[a-zA-Z\s0-9_-]+$/.test(value)) {
       return { codeType: 'course code can contain only numbers, alphabets, hyphen, or underscore' };
     }
     return null;
