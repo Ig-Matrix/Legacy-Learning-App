@@ -1,6 +1,6 @@
 package com.example.demo.config;
 
-import com.example.demo.Services.MyUserDetailsService;
+import com.example.demo.Repository.MyUserDetailsService;
 import com.example.demo.utilty.JwtAuthEntryPoint;
 import com.example.demo.utilty.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +49,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/login").permitAll()
                         .requestMatchers("/api/registerStudent").permitAll()
                         .requestMatchers("/api/registerAdmin").permitAll()
+                        .requestMatchers("/api/admin/**").permitAll()
+                        .requestMatchers("/api/getAnnouncement").permitAll()
                         .anyRequest().authenticated()
                 )
                 // Add JWT filter before UsernamePasswordAuthenticationFilter

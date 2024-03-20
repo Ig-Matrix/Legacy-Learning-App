@@ -1,6 +1,6 @@
 package com.example.demo.utilty;
 
-import com.example.demo.Services.MyUserDetailsService;
+import com.example.demo.Repository.MyUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,21 +1,21 @@
 package com.example.demo.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class FeedbackResponse {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long feedbackId;
     private String model;
-    private Map<Integer, QuestionAnswer> questions;
 
-    public static class QuestionAnswer {
-        private String question;
-        private String answer;
-    }
+    @OneToMany(mappedBy = "feedbackResponse", cascade = CascadeType.ALL)
+    private List<QuestionAnswer> questions = new ArrayList<>();
 }

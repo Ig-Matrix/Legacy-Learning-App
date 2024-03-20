@@ -1,42 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef  } from '@angular/core';
 import { feedbackTypes } from '../../../../models/FeedbackTypes';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  ReactiveFormsModule,
-  FormsModule,
-} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { FeedbackType } from '../../../../models/Interfaces/Feedback';
 import { NgClass } from '@angular/common';
 import { ProgressComponent } from '../../../components/progress/progress.component';
 import { Router, RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {
-  faArrowRightLong,
-  faArrowLeftLong,
-  faPaperPlane,
-} from '@fortawesome/free-solid-svg-icons';
+import {faArrowRightLong, faArrowLeftLong, faPaperPlane} from '@fortawesome/free-solid-svg-icons';
+import { HomeNavigationComponent } from '../../../components/home-navigation/home-navigation.component';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { FeedbackService } from '../../../services/FeedbackService/feedback.service';
 import { GetFeedbackResponseService } from '../../../services/FeedbackService/get-feedback-response.service';
 
-interface FeedbackResponse {
-  model: string;
-  questions: { [questionId: number]: { question: string; answer: string } }[];
-}
 
 @Component({
   selector: 'app-feedback-forms',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    NgClass,
-    ProgressComponent,
-    RouterLink,
-    FontAwesomeModule,
-  ],
+  imports: [ReactiveFormsModule, FormsModule, NgClass, ProgressComponent, RouterLink, FontAwesomeModule, HomeNavigationComponent],
   templateUrl: './feedback-forms.component.html',
   styleUrl: './feedback-forms.component.css',
 })
@@ -49,42 +29,43 @@ export class FeedbackFormsComponent {
   faArrowRightLong = faArrowRightLong;
   faArrowLeftLong = faArrowLeftLong;
   faPaperPlane = faPaperPlane;
-  isLoading: boolean= false;
+  isLoading: boolean = false;
 
-  model: string = '';
-  // for feedback response from feedback forms...
-  questions: {
-    questionId: number;
-     question: string;
-      answer: string
-    } [];
+  model: string = this.selectedFeedbackType;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private http: HttpClient,
     private feedbackService: FeedbackService,
-    private getFeedbackResponseService: GetFeedbackResponseService
+    private getFeedbackResponseService: GetFeedbackResponseService,
+    private cdRef: ChangeDetectorRef
     ) {
     this.feedbackForm = this.fb.group({});
-    this.questions = this.getResponseForSelectedModel();
   }
 
-  getResponseForSelectedModel(): {
-    questionId: number,
-    question: string,
-    answer: string
-  }[] {
-    switch (this.model) {
+  getResponseForSelectedModel(this: any): {
+    model: string;
+    feedback: {
+      questionId: number,
+      question: string,
+      answer: string
+    }[] } {
+      let feedbackResponse: {model: string; feedback:  { questionId: number; question: string; answer: string; }[]; };
+      switch (this.selectedFeedbackType) {
       case 'Instructor':
-        return this.getFeedbackResponseService.getInstructorFeedbackResponse(this.feedbackForm);
+        feedbackResponse = this.getFeedbackResponseService.getInstructorFeedbackResponse(this.feedbackForm);
+        break;
       case 'Assessment':
-        return this.getFeedbackResponseService.getAssessmentFeedbackResponse(this.feedbackForm);
+        feedbackResponse = this.getFeedbackResponseService.getAssessmentFeedbackResponse(this.feedbackForm);
+        break;
       case 'Course':
-        return this.getFeedbackResponseService.getCourseFeedbackResponse(this.feedbackForm);
+        feedbackResponse = this.getFeedbackResponseService.getCourseFeedbackResponse(this.feedbackForm);
+        break;
       default:
-        return [];
+        feedbackResponse = {model: '', feedback:[] };
     }
+    return feedbackResponse;
   }
 
   selectFeedbackType(event: Event) {
@@ -94,7 +75,9 @@ export class FeedbackFormsComponent {
   }
 
   onModelSelected(model: string) {
-    this.selectedFeedbackType = model;
+    this.model = model;
+    // const feedbackResponse = this.getResponseForSelectedModel();
+    this.cdRef.detectChanges();
   }
 
   get currentQuestion() {
@@ -118,7 +101,6 @@ export class FeedbackFormsComponent {
         this.fb.control('', Validators.required)
       );
     });
-
     this.feedbackForm = formGroup;
   }
 
@@ -140,30 +122,14 @@ export class FeedbackFormsComponent {
     return this.feedbackForm.controls[this.currentQuestion.name].valid;
   }
   
-   constructFeedbackData(this: any): FeedbackResponse {
-
-    const feedbackFunction = this['get' + this.model + 'FeedbackResponse'] as (form: FormGroup) => { questionId: number; question: string; answer: string; selectedOption?: { label: string; value: string } }[];
-    const feedback = feedbackFunction(this.feedbackForm);
-  
-    // Ensure type compatibility for 'reduce':
-    const feedBackResponseToQuestions: { [questionId: number]: { question: string; answer: string } } = feedback.reduce(
-        (acc: { [questionId: number]: { question: string; answer: string } } = {}, item) => {
-    acc[item.questionId] = { question: item.question, answer: item.answer };
-    return acc;
-    }, {});
-  
-    return { model: this.model, questions: [feedBackResponseToQuestions] }; 
-    
-  }
-  
-
-  feedbackData = this.constructFeedbackData();
-
   onSubmit() {
-    this.isLoading= true;
+    this.isLoading = true;
     setTimeout(() => {
+      this.isLoading = false;
+      this.router.navigate(['/feedback']);
       this.isLoading=false
       console.log('Form Submitted:', this.feedbackForm.value);
+      console.log('Form Submitted:', this.getResponseForSelectedModel());
       this.feedbackService.submitFeedback();
       this.router.navigate(['/feedback']);
     }, 5000);

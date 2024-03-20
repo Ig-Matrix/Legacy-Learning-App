@@ -32,20 +32,24 @@
         </svg>
       </button>
     </div>
-    <form #courseForm="ngForm">
+    <form [formGroup]="courseForm">
       <div class="mb-4">
         <label for="courseName" class="block text-sm font-medium text-gray-700"
           >Course Name</label
         >
         <input
           type="text"
-          class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          class="w-full placeholder:italic px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           id="courseName"
-          name="courseName"
-          [(ngModel)]="course.name"
+          name="name"
+          formControlName="name"
           placeholder="enter course name"
           required
         />
+        @if (courseForm.get('name')?.hasError('nameType') &&
+        courseForm.get('name')?.touched) {
+        <small class="text-red-500">name must contain only alphabets</small>
+        }
       </div>
       <div class="mb-4">
         <label for="courseCode" class="block text-sm font-medium text-gray-700"
@@ -53,13 +57,17 @@
         >
         <input
           type="text"
-          class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          class="w-full placeholder:italic px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           id="courseCode"
-          name="courseCode"
-          [(ngModel)]="course.code"
+          name="code"
+          formControlName="code"
           placeholder="e.g MTH110"
           required
         />
+        @if (courseForm.get('code')?.hasError('codeType') &&
+        courseForm.get('code')?.touched) {
+        <small class="text-red-500">course code can contain only numbers, alphabets, hyphen, or underscore</small>
+        }
       </div>
       <div class="mb-4">
         <label for="courseScore" class="block text-sm font-medium text-gray-700"
@@ -67,12 +75,19 @@
         >
         <input
           type="number"
-          class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          class="w-full px-3 placeholder:italic py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           id="courseScore"
-          name="courseScore"
-          [(ngModel)]="course.score"
+          name="score"
+          placeholder="e.g 65"
+          formControlName="score"
           required
         />
+        @if (courseForm.get('score')?.hasError('scoreRange')) {
+        <small class="text-red-500"> Score must be between 0 and 100</small>
+        }@else if (courseForm.get('score')?.hasError('valueType') &&
+        courseForm.get('score')?.touched) {
+        <small class="text-red-500"> must be a number</small>
+        }
       </div>
       <div class="mb-4">
         <label for="courseUnit" class="block text-sm font-medium text-gray-700"
@@ -80,31 +95,37 @@
         >
         <input
           type="number"
-          class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          class="w-full placeholder:italic px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           id="courseUnit"
-          name="courseUnit"
-          [(ngModel)]="course.unit"
+          name="unit"
+          formControlName="unit"
+          placeholder="e.g 3"
           required
         />
+        @if (courseForm.get('unit')?.hasError('valueType') &&
+        courseForm.get('unit')?.touched) {
+        <small class="text-red-500"> must be a number</small>
+        }
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button
+          type="button"
+          class="text-gray-500 px-2 sm:px-4 py-1 sm:py-2 rounded-md border border-gray-300 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          (click)="closeModal($event)"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="bg-indigo-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          (click)="submitCourse($event)"
+          [ngClass]="{ 'opacity-55': !courseForm.valid }"
+          [disabled]="!courseForm.valid"
+        >
+          Add Course
+        </button>
       </div>
     </form>
-    <div class="flex justify-end space-x-2">
-      <button
-        type="button"
-        class="text-gray-500 px-2 sm:px-4 py-1 sm:py-2 rounded-md border border-gray-300 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        (click)="closeModal($event)"
-      >
-        Close
-      </button>
-      <button
-        type="button"
-        class="bg-indigo-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        (click)="submitCourse($event)"
-        [disabled]="!courseForm.valid"
-      >
-        Add Course
-      </button>
-    </div>
   </div>
 </div>
 }

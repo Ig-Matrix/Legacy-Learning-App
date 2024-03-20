@@ -1,13 +1,6 @@
 <main class="">
-  <nav class="bg-orange-200 p-3 text-white flex justify-around">
-    <span class="text-white font-bold text-lg">
-      <a [routerLink]="['/portfolio']" routerLinkActive="router-link-active">
-        <fa-icon [icon]="faBackward" />
-      </a>
-    </span>
-    <div class="text-2xl font-mono font-bold">GPA Calculator</div>
-    <div class=""></div>
-  </nav>
+  <app-home-navigation />
+
   <section class="container mx-auto">
     @if (!courses.length) {
     <div
@@ -23,51 +16,44 @@
     </div>
 
     }@else {
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto p-4 border rounded-md mt-[4rem]">
       <table class="table w-full divide-y divide-gray-200">
-        <thead>
-          <tr>
-            <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Course Name
-            </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Course Code
-            </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Course Score
-            </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Course Unit
-            </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Course Grade
-            </th>
-            <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Action
-            </th>
+        <thead
+          class="border-b border-neutral-200 bg-[#3b2e2e] font-medium text-white font-mono text-left"
+        >
+          <tr class="uppercase">
+            <th class="px-2 py-3 tracking-wider">#</th>
+            <th class="px-6 py-3 tracking-wider">Course Name</th>
+            <th class="px-6 py-3 tracking-wider">Course Code</th>
+            <th class="px-6 py-3 tracking-wider">Course Unit</th>
+            <th class="px-6 py-3 tracking-wider">Course Score</th>
+            <th class="px-6 py-3 tracking-wider">Course Grade</th>
+            <th class="px-6 py-3 tracking-wider">Actions</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          @for (course of courses; track trackingIndex; let i = $index) {
-          <tr>
+          @for (course of courses; track i; let i = $index) {
+          <tr class="transition duration-300 ease-in-out hover:bg-neutral-100">
             @if (editingCourseIndex !== i) {
+            <td class="px-2 py-4 whitespace-nowrap">{{ i + 1 }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ course.name }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ course.code }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ course.score }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ course.unit }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{ course.grade }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="px-3 inline-flex leading-5 font-semibold text-xl rounded-full"
+                [ngClass]="{
+                            'text-indigo-600 bg-green-100': course.grade==='A', 
+                            'text-blue-500 bg-blue-100': course.grade==='B', 
+                            'text-green-600 bg-purple-100': course.grade==='C',
+                            'text-yellow-600 bg-yellow-100': course.grade==='D',
+                            'text-orange-600 bg-orange-100': course.grade==='E',
+                            'text-red-600 bg-red-100': course.grade==='F',
+                            }"
+                >{{ course.grade }}
+              </span>
+            </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <button
                 class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
@@ -142,53 +128,48 @@
         Add Course
       </button>
     </div>
-    } @if (courses.length) {
     <div
-      class="border border-double flex items-center justify-between p-6 my-3"
+      class="border border-double flex items-center flex-wrap parent gap-y-2 sm:gap-y-0 justify-between p-6 my-3"
     >
       <button
-        class="bg-slate-200 hover:bg-slate-50 text-blue-500 shadow-md p-3 rounded-md tex-"
+        class="bg-slate-200 hover:bg-slate-50 text-blue-500 shadow-md p-3 rounded-md mxauto"
         (click)="calculateCGPA()"
       >
         Calculate CGPA
       </button>
-      <div
-        class="border-2 border-dotted w-24 h-24 rounded-full flex items-center justify-center"
-        [ngClass]="{
-          'border-red-600 ': cgpa !== null && cgpa < 1.0,
-          'border-orange-600 ': cgpa !== null && cgpa >= 1.0 && cgpa < 2.0,
-          'border-yellow-600 ': cgpa !== null && cgpa >= 2.0 && cgpa < 3.0,
-          'border-green-600 ': cgpa !== null && cgpa >= 3.0 && cgpa < 4.0,
-          'border-blue-600 ': cgpa !== null && cgpa >= 4.0 && cgpa < 4.5,
-          'border-purple-600 ': cgpa !== null && cgpa >= 4.5
-        }"
-      >
-        @if (cgpa !== null) {
-        <p
-          class="text-[1.2rem]"
-          [ngClass]="{
-            'text-red-600': cgpa !== null && cgpa < 1.0,
-            'text-orange-600': cgpa !== null && cgpa >= 1.0 && cgpa < 2.0,
-            'text-yellow-600': cgpa !== null && cgpa >= 2.0 && cgpa < 3.0,
-            'text-green-600': cgpa !== null && cgpa >= 3.0 && cgpa < 4.0,
-            'text-blue-600': cgpa !== null && cgpa >= 4.0 && cgpa < 4.5,
-            'text-purple-600': cgpa !== null && cgpa >= 4.5
-          }"
-        >
-          {{ cgpa.toFixed(2) }}<span class="text-sm">/5.00</span>
-        </p>
-        }@else {
-        <p class="text-gray-400">N/A</p>
-        }
+      <div class="flex items-center justify-center relative mxauto">
+        <div class="inline-block absolute">
+          @if (isGpaCalculated) {
+          <p
+            class="text-[1.4rem] inline-block"
+            [ngClass]="{
+              'text-red-500': cgpa < 1.0,
+              'text-yellow-500': cgpa >= 1.0 && cgpa < 2.0,
+              'text-orange-500': cgpa >= 2.0 && cgpa < 3.0,
+              'text-green-500': cgpa >= 3.0 && cgpa < 4.0,
+              'text-blue-500': cgpa >= 4.0 && cgpa < 4.5,
+              'text-indigo-500': cgpa >= 4.5
+            }"
+          >
+            {{ cgpa.toFixed(2) }}<span class="text-sm">/5.00</span>
+          </p>
+          }@else {
+          <p class="text-[#6b6464] inline-block font-mono font-semibold">
+            CGPA
+          </p>
+          }
+        </div>
+        <app-gpa-progress [cgpa]="cgpa" />
       </div>
     </div>
-
-    } @if (showModal) {
-    <app-add-course-modal
-      [showModal]="showModal"
-      (courseAdded)="addCourse($event)"
-      (closeModalEvent)="closeCourseModal()"
-    />
     }
   </section>
+
+  @if (showModal) {
+  <app-add-course-modal
+    [showModal]="showModal"
+    (courseAdded)="addCourse($event)"
+    (closeModalEvent)="closeCourseModal()"
+  />
+  }
 </main>

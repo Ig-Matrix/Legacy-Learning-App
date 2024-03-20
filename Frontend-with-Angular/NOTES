@@ -1,55 +1,56 @@
-1. Layout and Components:
+Passing Feedback Data and Calculating Averages
+Here's how you can handle passing feedback data and calculating averages:
 
-Divide the page into sections:
-Announcement List: This section displays a list of existing announcements with details like title, date, and maybe a snippet of the content.
-Announcement Details (Optional): When an announcement is selected from the list, this section displays its full details in a read-only format.
-Create/Edit Announcement Form: A collapsible or modal form allows admins to create new announcements or edit existing ones.
+1. Passing Feedback Data to Backend:
 
+a. Data Structure:
 
-2. List of Announcements:
+Create a data structure in your frontend that represents a single feedback submission. This might be a JavaScript object or a class depending on your framework.
+Include properties for the chosen feedback model (assessment, course, instructor), the selected response for each question (e.g., "Very Likely", "Excellent"), and any other relevant information like timestamps or user IDs.
+b. Sending Data:
 
-Use a table or a list component to display existing announcements.
-Each row/item in the list should represent an announcement and include:
-Title of the announcement.
-Date and time of creation (or last edit).
-Optional: Shortened content snippet.
-Action buttons for editing and deleting the announcement (implemented as separate components or directives).
+When the user submits the feedback form, utilize an HTTP client library in your frontend framework (like Angular's HttpClient or Axios) to send a POST request to a backend API endpoint.
+The request body should be the constructed feedback data object containing all the user's selections.
+c. Backend API:
 
+Define a corresponding API endpoint on your backend to receive the POST request.
+Parse the request body to access the feedback data.
+Store the received feedback data in your database (e.g., MySQL, MongoDB) using appropriate models or tables.
+2. Calculating and Displaying Averages:
 
-3. Announcement Details (Optional):
+a. Frontend Calculation (for quick updates):
 
-This section displays the full details of a selected announcement in a read-only format.
-It can include:
-Title.
-Full announcement content.
-Date and time of creation and last edit (if applicable).
-Author information (optional).
+Upon receiving multiple feedback responses, you can calculate the average ratings for each question within your frontend application.
+Maintain a local data structure (e.g., an object or array) to store the current average for each question.
+Whenever a new feedback response arrives, update the corresponding averages in your local data structure.
+Use this local data to display the average ratings to the user.
+b. Backend Calculation (for guaranteed accuracy):
 
+For a more robust and reliable approach, you can implement average calculation logic on the backend.
+When a new feedback is submitted, the backend can update the relevant database entries and recalculate the overall averages for each question.
+The frontend can then fetch the updated average values from the backend using a separate API endpoint (e.g., a GET request). This ensures the displayed averages always reflect the latest data in the database.
+Here's an example breakdown assuming an Angular application with a backend API:
 
-4. Create/Edit Announcement Form:
+Frontend:
 
-This form allows admins to enter details for new announcements or edit existing ones.
-Include fields for:
-Title (required).
-Announcement content (rich text editor or a text area).
-Optional fields like visibility settings (e.g., publish date, target groups/classes).
-A submit button to save the announcement (create new or update existing).
+User submits feedback form.
+Angular application constructs a feedback data object with user selections.
+The application sends a POST request to the backend API endpoint with the feedback data object in the request body.
+Upon successful response, the application updates its local data structure with the newly submitted feedback (optional for immediate frontend display).
+The application can also trigger a separate GET request to a different backend endpoint to fetch the latest average values from the database (recommended for accuracy).
+Backend:
 
+API endpoint receives the POST request with feedback data.
+The backend parses the request body and extracts the feedback information.
+It stores the feedback data in the database.
+The backend updates the average ratings for each question in the database (can involve querying existing data and recalculating averages).
+(Optional) The API endpoint can return a response containing the updated average values.
+Frontend:
 
-5. Additional Considerations:
+The application receives the response from the GET request containing the updated average values (if implemented in the backend).
+It displays the average ratings to the user, either from the locally maintained data (if updated) or from the fetched backend data (recommended).
+Additional Considerations:
 
-Implement clear visual cues to differentiate between announcement states (e.g., draft, published, expired).
-Use validation for user input in the form (e.g., required fields, content length).
-Consider implementing search and filtering functionalities for the announcement list.
-Provide user-friendly confirmation dialogues for deletion actions.
-Implement appropriate error handling for API calls and form submissions.
-
-
-6. Technology Choices:
-
-Use Angular Material components (or similar UI libraries) for pre-built components like tables, forms, and buttons.
-Consider using a rich text editor library for editing announcement content.
-Remember:
-
-This is a general guideline, adapt it to your specific requirements and design preferences.
-Ensure a user-friendly and intuitive interface for admins to manage announcements efficiently.
+Implement error handling mechanisms for both frontend and backend communication.
+Consider security measures like user authentication and authorization to control access to feedback submission and viewing.
+Choose an approach (frontend vs. backend) for calculating averages based on your specific requirements for performance and data consistency.
