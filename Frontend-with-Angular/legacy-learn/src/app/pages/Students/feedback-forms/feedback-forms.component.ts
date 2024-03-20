@@ -11,12 +11,14 @@ import { FeedbackType } from '../../../../models/Interfaces/Feedback';
 import { NgClass } from '@angular/common';
 import { ProgressComponent } from '../../../components/progress/progress.component';
 import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faArrowRightLong,
   faArrowLeftLong,
   faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
+import { HomeNavigationComponent } from '../../../components/home-navigation/home-navigation.component';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { FeedbackService } from '../../../services/FeedbackService/feedback.service';
 import { GetFeedbackResponseService } from '../../../services/FeedbackService/get-feedback-response.service';
@@ -36,6 +38,7 @@ interface FeedbackResponse {
     ProgressComponent,
     RouterLink,
     FontAwesomeModule,
+    HomeNavigationComponent
   ],
   templateUrl: './feedback-forms.component.html',
   styleUrl: './feedback-forms.component.css',
@@ -49,8 +52,9 @@ export class FeedbackFormsComponent {
   faArrowRightLong = faArrowRightLong;
   faArrowLeftLong = faArrowLeftLong;
   faPaperPlane = faPaperPlane;
-  isLoading: boolean= false;
+  isLoading: boolean = false;
 
+  constructor(private fb: FormBuilder, private router: Router) {
   model: string = '';
   // for feedback response from feedback forms...
   questions: {
@@ -160,8 +164,11 @@ export class FeedbackFormsComponent {
   feedbackData = this.constructFeedbackData();
 
   onSubmit() {
-    this.isLoading= true;
+    this.isLoading = true;
     setTimeout(() => {
+      this.isLoading = false;
+      console.log('Form Submiited:', this.feedbackForm.value);
+      this.router.navigate(['/feedback']);
       this.isLoading=false
       console.log('Form Submitted:', this.feedbackForm.value);
       this.feedbackService.submitFeedback();

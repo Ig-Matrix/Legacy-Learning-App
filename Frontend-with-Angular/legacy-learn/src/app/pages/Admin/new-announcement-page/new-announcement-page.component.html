@@ -2,16 +2,13 @@
     <app-home-navigation></app-home-navigation>
 </nav>
 
-<main>
-    <!-- <div class="announcement-list">
-        <app-announcement-list [announcements]="announcements" (announcementSelected)="onAnnouncementSelected(announcement)"></app-announcement-list>
+<main class="mt-16">
+    <div class="container mx-auto bg-slate-50 p-5">
+        <h1 class="text-bold font-mono text-xl sm:text-2xl ">Welcome 👋</h1>
+        <p>Click on the button below to get started</p>
+        <button (click)="openModal()" class="bg-sky-700 p-3 text-indigo-100 hover:text-indigo-300 rounded-md">Create Announcement</button>
     </div>
-
-    <div class="announcement-details" *ngIf="selectedAnnouncement">
-        <app-announcement-details [announcement]="selectedAnnouncement"></app-announcement-details>
-    </div> -->
-
-    <div class="announcement-form">
-        <app-announcement-form (announcementSubmitted)="handleAnnouncementSubmit($event)"></app-announcement-form>
-    </div>
+    @if (isShowModal) {
+        <app-announcement-modal [showModal]="isShowModal" (closeModalEvent)="closeModal()" />
+    }
 </main>

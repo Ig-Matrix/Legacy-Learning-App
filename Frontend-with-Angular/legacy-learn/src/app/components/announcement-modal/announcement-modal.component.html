@@ -1,0 +1,123 @@
+@if (showModal) {
+<div
+  class="fixed top-0 left-0 w-full h-full bg-gray-900 opacity-75 z-50 flex justify-center items-center"
+  (click)="onCloseModal($event)"
+>
+  <div
+    class="bg-white rounded-lg shadow-md p-8 w-[86%] sm:w-3/5 md:w-2/4"
+    (click)="stopPropagation($event)"
+  >
+    <div
+      class="flex justify-between items-center pb-4 border-b border-gray-200"
+    >
+      <h5 class="text-xl font-bold text-gray-800">Add Announcement</h5>
+      <button
+        type="button"
+        class="text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        (click)="onCloseModal($event)"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+    <form [formGroup]="announcementForm">
+      <div class="mb-4">
+        <label for="title" class="block text-sm font-medium text-gray-700"
+          >Title</label
+        >
+        <input
+          type="text"
+          class="w-full placeholder:italic px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          id="title"
+          name="title"
+          formControlName="title"
+          placeholder="enter announcement title"
+          required
+        />
+        @if (announcementForm.get('title')?.hasError('nameType') &&
+        announcementForm.get('title')?.touched) {
+        <small class="text-red-500">name must contain only alphabets</small>
+        }
+      </div>
+      <div class="mb-4">
+        <label for="date" class="block text-sm font-medium text-gray-700"
+          >Created At</label
+        >
+        <input
+          type="date"
+          class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          id="date"
+          name="createdAt"
+          formControlName="createdAt"
+          required
+        />
+        @if (announcementForm.get('createdAt')?.hasError('createdAtType') &&
+        announcementForm.get('createdAt')?.touched) {
+        <small class="text-red-500"
+          >course code can contain only numbers, alphabets, hyphen, or
+          underscore</small
+        >
+        }
+      </div>
+      <div class="mb-4">
+        <label
+          for="announcementContent"
+          class="block text-sm font-medium text-gray-700"
+          >Content</label
+        >
+        <textarea
+          class="w-full px-3 placeholder:italic py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          name="announcementContent"
+          formControlName="announcementContent"
+          id="announcementContent"
+          cols="30"
+          rows="10"
+          required
+        ></textarea>
+
+        @if (announcementForm.get('score')?.hasError('scoreRange')) {
+        <small class="text-red-500"> Score must be between 0 and 100</small>
+        }@else if (announcementForm.get('score')?.hasError('valueType') &&
+        announcementForm.get('score')?.touched) {
+        <small class="text-red-500"> must be a number</small>
+        }
+      </div>
+
+      <div class="flex justify-end space-x-2">
+        <button
+          type="button"
+          class="text-gray-500 px-2 sm:px-4 py-1 sm:py-2 rounded-md border border-gray-300 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          (click)="onCloseModal($event)"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="bg-indigo-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          (click)="submitCourse($event)"
+          [ngClass]="{ 'opacity-55': !announcementForm.valid }"
+          [disabled]="!announcementForm.valid"
+        >
+          Publish @if (isLoading) {
+          <p
+            className="animate-spin w-14 h-14 border-2 rounded-full border-x-transparent"
+          ></p>
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+}
