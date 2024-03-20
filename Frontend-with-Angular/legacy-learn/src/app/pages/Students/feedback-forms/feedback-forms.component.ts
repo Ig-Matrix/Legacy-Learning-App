@@ -11,7 +11,6 @@ import { FeedbackType } from '../../../../models/Interfaces/Feedback';
 import { NgClass } from '@angular/common';
 import { ProgressComponent } from '../../../components/progress/progress.component';
 import { Router, RouterLink } from '@angular/router';
-import { Router, RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faArrowRightLong,
@@ -53,15 +52,14 @@ export class FeedbackFormsComponent {
   faArrowLeftLong = faArrowLeftLong;
   faPaperPlane = faPaperPlane;
   isLoading: boolean = false;
-
-  constructor(private fb: FormBuilder, private router: Router) {
+  
   model: string = '';
-  // for feedback response from feedback forms...
-  questions: {
-    questionId: number;
-     question: string;
-      answer: string
-    } [];
+      // for feedback response from feedback forms...
+      questions: {
+        questionId: number;
+        question: string;
+          answer: string
+        } [];
 
   constructor(
     private fb: FormBuilder,
