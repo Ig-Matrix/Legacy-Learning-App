@@ -10,13 +10,14 @@ import {
 import { FeedbackType } from '../../../../models/Interfaces/Feedback';
 import { NgClass } from '@angular/common';
 import { ProgressComponent } from '../../../components/progress/progress.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faArrowRightLong,
   faArrowLeftLong,
   faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
+import { HomeNavigationComponent } from '../../../components/home-navigation/home-navigation.component';
 
 @Component({
   selector: 'app-feedback-forms',
@@ -28,6 +29,7 @@ import {
     ProgressComponent,
     RouterLink,
     FontAwesomeModule,
+    HomeNavigationComponent
   ],
   templateUrl: './feedback-forms.component.html',
   styleUrl: './feedback-forms.component.css',
@@ -40,9 +42,9 @@ export class FeedbackFormsComponent {
   faArrowRightLong = faArrowRightLong;
   faArrowLeftLong = faArrowLeftLong;
   faPaperPlane = faPaperPlane;
-  isLoading: boolean= false;
+  isLoading: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.feedbackForm = this.fb.group({});
   }
 
@@ -96,10 +98,11 @@ export class FeedbackFormsComponent {
   }
 
   onSubmit() {
-    this.isLoading= true;
+    this.isLoading = true;
     setTimeout(() => {
-      this.isLoading=false
+      this.isLoading = false;
       console.log('Form Submiited:', this.feedbackForm.value);
+      this.router.navigate(['/feedback']);
     }, 5000);
   }
 }

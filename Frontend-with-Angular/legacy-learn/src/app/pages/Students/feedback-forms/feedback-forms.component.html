@@ -1,18 +1,14 @@
-<div class="flex items-center justify-end p-2">
-  <button
-    class="bg-red-400 hover:bg-red-500 h-8 w-8 font-bold transition-all duration-75 rounded-full"
-  >
-    <a class="text-white" [routerLink]="['/feedback']">X</a>
-  </button>
-</div>
+<app-home-navigation />
 
-<section class="p-4 flex flex-col sm:flex-row-reverse">
-  <div class="form flex-1 bg-slate-100 h-full p-2">
-    <h1 class="font-mono font-bold text-center text-lg">Welcome Jabronis</h1>
-    <br>
+<section class="p-4 flex flex-col sm:flex-row-reverse mt-[2.8rem]">
+  <div class="form flex-1 bg-[#edeff7] h-full p-2">
+    <h1 class="font-mono font-bold text-center text-lg ">Welcome!</h1>
+    <br />
     @if (feedbackTypes.length > 0) {
-    <h2 class="font-medium italic text-[1rem] ">Select the type of feedback from the drop down below:</h2>
-    <br><br>
+    <h2 class="font-medium italic text-[1rem]">
+      Select the type of feedback from the drop down below:
+    </h2>
+    <br /><br />
     <select
       name="type"
       id="type"
@@ -25,7 +21,7 @@
       </option>
       }
     </select>
-    <div class="bg-slate-50 py-6">
+    <div class="bg-white py-6 px-3">
       @if (selectedFeedbackType) {
       <div class="relative flex items-center justify-center my-6">
         <p class="font-medium font-mono absolute text-[#3f51b5]">
@@ -97,8 +93,11 @@
             [disabled]="!isCurrentQuestionAnswered()"
             (click)="onSubmit()"
           >
-            @if (isLoading) { 
-              Submitting <fa-icon [icon]="faPaperPlane" class="animate-pulse text-xl transition-all duration-100" />
+            @if (isLoading) { Submitting
+            <fa-icon
+              [icon]="faPaperPlane"
+              class="animate-pulse text-xl transition-all duration-100"
+            />
             }@else { Submit
             <fa-icon [icon]="faPaperPlane" />
             }
@@ -111,7 +110,7 @@
 
     }
   </div>
-  <div class="img flex-1 bg-blue-500">
+  <div class="img flex-1">
     <img
       src="../../../../assets/images/Survey 2.png"
       alt="feedback img"

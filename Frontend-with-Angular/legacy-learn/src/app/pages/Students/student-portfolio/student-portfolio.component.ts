@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { GpaProgressComponent } from '../../../components/gpa-progress/gpa-progress.component';
+import { HomeNavigationComponent } from '../../../components/home-navigation/home-navigation.component';
 
 @Component({
   selector: 'app-student-portfolio',
@@ -21,7 +22,8 @@ import { GpaProgressComponent } from '../../../components/gpa-progress/gpa-progr
     FormsModule,
     FontAwesomeModule,
     NgClass,
-    GpaProgressComponent
+    GpaProgressComponent,
+    HomeNavigationComponent
   ],
   templateUrl: './student-portfolio.component.html',
   styleUrl: './student-portfolio.component.css',
@@ -32,7 +34,6 @@ export class StudentPortfolioComponent {
   cgpa!: number; // CGPA property to store calculated value
   editingCourseIndex: number | null = null; // Track the index of the course being edited
   trackingIndex: number = 1;
-  faBackward = faLessThan;
   check = faCheck;
   cancel = faXmark;
   isGpaCalculated: boolean = false;

@@ -1,13 +1,6 @@
 <main class="">
-  <nav class="bg-orange-200 p-3 text-white flex justify-around">
-    <span class="text-white font-bold text-lg">
-      <a [routerLink]="['/portfolio']" routerLinkActive="router-link-active">
-        <fa-icon [icon]="faBackward" />
-      </a>
-    </span>
-    <div class="text-2xl font-mono font-bold">GPA Calculator</div>
-    <div class=""></div>
-  </nav>
+  <app-home-navigation />
+
   <section class="container mx-auto">
     @if (!courses.length) {
     <div
@@ -23,26 +16,26 @@
     </div>
 
     }@else {
-    <div class="overflow-x-auto  p-4 border rounded-md my-3">
+    <div class="overflow-x-auto p-4 border rounded-md mt-[4rem]">
       <table class="table w-full divide-y divide-gray-200">
         <thead
-        class="border-b border-neutral-200 bg-[#332D2D] font-medium text-white font-mono text-left"
-      >
-        <tr class="uppercase">
-          <th class="px-2 py-3 tracking-wider">#</th>
-          <th class="px-6 py-3 tracking-wider">Course Name</th>
-          <th class="px-6 py-3 tracking-wider">Course Code</th>
-          <th class="px-6 py-3 tracking-wider">Course Unit</th>
-          <th class="px-6 py-3 tracking-wider">Course Score</th>
-          <th class="px-6 py-3 tracking-wider">Course Grade</th>
-          <th class="px-6 py-3 tracking-wider">Actions</th>
-        </tr>
-      </thead>
+          class="border-b border-neutral-200 bg-[#3b2e2e] font-medium text-white font-mono text-left"
+        >
+          <tr class="uppercase">
+            <th class="px-2 py-3 tracking-wider">#</th>
+            <th class="px-6 py-3 tracking-wider">Course Name</th>
+            <th class="px-6 py-3 tracking-wider">Course Code</th>
+            <th class="px-6 py-3 tracking-wider">Course Unit</th>
+            <th class="px-6 py-3 tracking-wider">Course Score</th>
+            <th class="px-6 py-3 tracking-wider">Course Grade</th>
+            <th class="px-6 py-3 tracking-wider">Actions</th>
+          </tr>
+        </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           @for (course of courses; track i; let i = $index) {
           <tr class="transition duration-300 ease-in-out hover:bg-neutral-100">
             @if (editingCourseIndex !== i) {
-            <td class="px-2 py-4 whitespace-nowrap">{{ i+ 1 }}</td>
+            <td class="px-2 py-4 whitespace-nowrap">{{ i + 1 }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ course.name }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ course.code }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ course.score }}</td>
