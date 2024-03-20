@@ -4,7 +4,7 @@ import { Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { AnnouncementListComponent } from "../../../components/announcement-list/announcement-list.component";
 import { AnnouncementDetailsComponent } from "../../../components/announcement-details/announcement-details.component";
 import { AnnouncementFormComponent } from "../../../components/announcement-form/announcement-form.component";
-import { Announcement } from '../../../model/announcement.model';
+import { Announcement } from '../../../../models/announcement.model';
 import { AnnouncementService } from '../../../services/AnnouncementService/announcement.service';
 import { CommonModule } from '@angular/common';
 import { AdminAnnouncementService } from '../../../services/AnnouncementService/admin-announcement-service';

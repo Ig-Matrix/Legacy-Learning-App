@@ -1,4 +1,5 @@
 import { Question } from '../Interfaces/Feedback';
+import { FormGroup, FormControl } from '@angular/forms';
 
 export const CourseFeedback: Question[] = [
   {

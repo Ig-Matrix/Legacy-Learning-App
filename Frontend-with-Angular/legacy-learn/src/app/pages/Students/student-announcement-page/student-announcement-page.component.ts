@@ -3,7 +3,7 @@ import { SideBarComponent } from "../../../components/side-bar/side-bar.componen
 import { HomeNavigationComponent } from "../../../components/home-navigation/home-navigation.component";
 import { AnnouncementService } from '../../../services/AnnouncementService/announcement.service';
 import { CommonModule } from '@angular/common';
-import { Announcement } from '../../../model/announcement.model';
+import { Announcement } from '../../../../models/announcement.model';
 
 @Component({
     selector: 'app-student-announcement-page',
