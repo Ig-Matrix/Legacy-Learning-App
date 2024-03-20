@@ -2,11 +2,13 @@ package com.example.demo.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Announcement {
     @Id
