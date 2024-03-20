@@ -53,6 +53,8 @@ export class AnnouncementModalComponent {
 
   submitCourse(event: Event) {
     this.isLoading = true;
+    console.log('form data', this.announcementForm.value);
+    
     if (this.announcementForm.valid) {
       this.announcementService
         .createAnnouncements(this.announcementForm.value)

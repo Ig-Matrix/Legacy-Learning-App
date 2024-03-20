@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Announcement } from '../../model/announcement.model';
@@ -18,15 +18,18 @@ export class AdminAnnouncementService {
   ) { }
 
   createAnnouncements(announcement: Announcement): Observable<Announcement> {
-    return this.http.post<Announcement>(`${this.baseUrl}/createAnnouncement/{announcementId}`, announcement)
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post<Announcement>(`${this.baseUrl}/createAnnouncement`, announcement, {headers})
   }
 
   editAnnouncements(announcementId: number, announcement: Announcement): Observable<Announcement> {
-    return this.http.put<Announcement>(`${this.baseUrl}/editAnnouncement/{announcementId}`, announcement);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.put<Announcement>(`${this.baseUrl}/editAnnouncement/{announcementId}`, announcement, {headers});
   }
 
   deleteAnnouncements(announcementId: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/deleteAnnouncement/{announcementId}`);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.delete<void>(`${this.baseUrl}/deleteAnnouncement/{announcementId}`, {headers});
   }
 
 }
