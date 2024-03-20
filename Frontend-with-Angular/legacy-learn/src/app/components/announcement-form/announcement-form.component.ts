@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Announcement } from '../../model/announcement.model';
+import { Announcement } from '../../../models/announcement.model';
 
 @Component({
   selector: 'app-announcement-form',

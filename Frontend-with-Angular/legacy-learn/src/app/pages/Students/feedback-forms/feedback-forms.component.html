@@ -1,24 +1,23 @@
 <div class="flex items-center justify-end p-2">
   <button
-    class="bg-red-400 hover:bg-red-500 h-8 w-8 font-bold transition-all duration-75 rounded-full"
-  >
+    class="bg-red-400 hover:bg-red-500 h-8 w-8 font-bold transition-all duration-75 rounded-full">
     <a class="text-white" [routerLink]="['/feedback']">X</a>
   </button>
 </div>
 
 <section class="p-4 flex flex-col sm:flex-row-reverse">
   <div class="form flex-1 bg-slate-100 h-full p-2">
-    <h1 class="font-mono font-bold text-center text-lg">Welcome Jabronis</h1>
+    <h1 class="font-mono font-bold text-center text-lg">Welcome!</h1>
     <br>
     @if (feedbackTypes.length > 0) {
-    <h2 class="font-medium italic text-[1rem] ">Select the type of feedback from the drop down below:</h2>
+    <h2 class="font-medium italic text-[1rem]">Select the type of feedback from the drop down below:</h2>
     <br><br>
     <select
       name="type"
       id="type"
+      (click)="onModelSelected"
       (change)="selectFeedbackType($event)"
-      [(ngModel)]="selectedFeedbackType"
-    >
+      [(ngModel)]="selectedFeedbackType">
       @for (type of feedbackTypes; track $index) {
       <option [value]="type.value">
         {{ type.label }}
@@ -108,14 +107,14 @@
       </form>
       }
     </div>
-
-    }
+  }
   </div>
+
   <div class="img flex-1 bg-blue-500">
     <img
       src="../../../../assets/images/Survey 2.png"
       alt="feedback img"
-      class=""
-    />
+      class=""/>
   </div>
+
 </section>

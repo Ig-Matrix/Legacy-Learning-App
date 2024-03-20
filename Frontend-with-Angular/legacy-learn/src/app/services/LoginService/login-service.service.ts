@@ -18,7 +18,8 @@ export class LoginService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private http: HttpClient) { }
 
   login(loginForm: FormGroup): Observable<JwtAuthResponse> {
