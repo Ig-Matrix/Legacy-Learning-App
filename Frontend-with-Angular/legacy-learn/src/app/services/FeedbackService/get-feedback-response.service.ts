@@ -12,30 +12,42 @@ export class GetFeedbackResponseService {
   constructor() { }
 
   getAssessmentFeedbackResponse(assessmentFeedbackForm: FormGroup): {
-    questionId: number;
-    question: string;
-    answer: string;
-    selectedOption?: {label: string; value: string}
-  } [] {
-    return AssessmentFeedback.map((question) => {
+    model: string;
+    feedback: {
+      questionId: number;
+      question: string;
+      answer: string;
+      selectedOption?: {label: string; value: string}
+    } []
+    } {
+    const model = 'Assessment';
+    const feedback = AssessmentFeedback.map((question) => {
       const assessmentQuestionControl = assessmentFeedbackForm.get(question.name) as FormControl;
       const selectedOption = assessmentQuestionControl.value;
-  
+
       return {
         questionId: question.id,
         question: question.text,
         answer: selectedOption
       };
     });
+    return {
+      model: model,
+      feedback: feedback
+    };
   }
 
   getInstructorFeedbackResponse(instructorFeedbackForm: FormGroup): {
-    questionId: number;
-    question: string;
-    answer: string;
-    selectedOption?: {label: string; value: string}
-  } [] {
-    return InstructorFeedback.map((question) => {
+    model: string;
+    feedback: {
+      questionId: number;
+      question: string;
+      answer: string;
+      selectedOption?: {label: string; value: string}
+    } []
+    } {
+      const model = 'Instructor';
+      const feedback = InstructorFeedback.map((question) => {
       const instructorQuestionControl = instructorFeedbackForm.get(question.name) as FormControl;
       const selectedOption = instructorQuestionControl.value;
   
@@ -45,15 +57,23 @@ export class GetFeedbackResponseService {
         answer: selectedOption
       };
     });
+    return {
+      model: model,
+      feedback: feedback
+    };
   }
 
   getCourseFeedbackResponse(courseFeedbackForm: FormGroup): {
-    questionId: number;
-    question: string;
-    answer: string;
-    selectedOption?: {label: string; value: string}
-  } [] {
-    return CourseFeedback.map((question) => {
+    model: string;
+    feedback: {
+      questionId: number;
+      question: string;
+      answer: string;
+      selectedOption?: {label: string; value: string}
+    } []
+    } {
+      const model = 'Course';
+      const feedback = CourseFeedback.map((question) => {
       const courseQuestionControl = courseFeedbackForm.get(question.name) as FormControl;
       const selectedOption = courseQuestionControl.value;
   
@@ -63,6 +83,10 @@ export class GetFeedbackResponseService {
         answer: selectedOption
       };
     });
+    return {
+      model: model,
+      feedback: feedback
+    };
   }
     
 }

@@ -1,3 +1,4 @@
+import { FeedbackFormsComponent } from './../feedback-forms/feedback-forms.component';
 import { Component } from '@angular/core';
 import { SideBarComponent } from "../../../components/side-bar/side-bar.component";
 import { HomeNavigationComponent } from "../../../components/home-navigation/home-navigation.component";
@@ -8,8 +9,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     standalone: true,
     templateUrl: './student-feedback-page.component.html',
     styleUrl: './student-feedback-page.component.css',
-    imports: [SideBarComponent, HomeNavigationComponent, RouterLink, RouterLinkActive]
+    imports: [SideBarComponent, HomeNavigationComponent, FeedbackFormsComponent, RouterLink, RouterLinkActive]
 })
 export class StudentFeedbackPageComponent {
-
 }
