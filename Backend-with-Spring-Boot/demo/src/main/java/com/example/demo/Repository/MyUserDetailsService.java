@@ -1,8 +1,7 @@
-package com.example.demo.Services;
+package com.example.demo.Repository;
 
 import com.example.demo.Entity.User;
 import com.example.demo.Entity.UserPrincipal;
-import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,17 +15,13 @@ import java.util.Collections;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
+
     private final UserRepository userRepository;
+
     @Autowired
     public MyUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-//    @Autowired
-//    public MyUserDetailsService(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-//            return new User(user.getUsername(), user.getPassword());
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
