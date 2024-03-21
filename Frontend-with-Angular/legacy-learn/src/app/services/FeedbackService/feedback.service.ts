@@ -27,34 +27,3 @@ export class FeedbackService {
     });
   }
 }
-
-
-// getResponseForSelectedModel(this: any): {
-//   model: string;
-//   feedback: {
-//     questionId: number,
-//     question: string,
-//     answer: string
-//   }[] } {
-//     let feedbackResponse: {model: string; feedback:  { questionId: number; question: string; answer: string; }[]; };
-//     switch (this.selectedFeedbackType) {
-//     case 'Instructor':
-//       feedbackResponse = this.getFeedbackResponseService.getInstructorFeedbackResponse(this.feedbackForm);
-//       break;
-//     case 'Assessment':
-//       feedbackResponse = this.getFeedbackResponseService.getAssessmentFeedbackResponse(this.feedbackForm);
-//       break;
-//     case 'Course':
-//       feedbackResponse = this.getFeedbackResponseService.getCourseFeedbackResponse(this.feedbackForm);
-//       break;
-//     default:
-//       feedbackResponse = {model: '', feedback:[] };
-//   }
-//   return feedbackResponse;
-// }
-
-// onModelSelected(model: string) {
-  //   this.model = model;
-  //   // const feedbackResponse = this.getResponseForSelectedModel();
-  //   this.cdRef.detectChanges();
-  // }
