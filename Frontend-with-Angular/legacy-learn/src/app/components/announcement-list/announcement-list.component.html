@@ -1,10 +1,12 @@
 <div
-  class="overflow-x-auto p-4 border rounded-md my-3 flex items-center justify-center container  mx-auto"
+  class="overflow-x-auto p-4 border rounded-md my-3 flex items-center justify-center container mx-auto"
 >
   @if (isLoading) {
-    <p class="inline-block my-10 animate-spin w-16 h-16 border-2 rounded-full border-x-slate-400"></p>
+  <p
+    class="inline-block my-10 animate-spin w-16 h-16 border-2 rounded-full border-x-slate-400"
+  ></p>
   }@else {
-  <table class=" divide-y divide-gray-200 shadow-md rounded-md">
+  <table class="divide-y divide-gray-200 shadow-md rounded-md">
     <thead
       class="border-b border-neutral-200 bg-[#313068] font-medium text-white font-mono text-left"
     >
@@ -22,7 +24,16 @@
         <td class="px-6 py-4 whitespace-nowrap">{{ ann.announcementId }}</td>
         <td class="px-6 py-4 whitespace-nowrap">{{ ann.title }}</td>
         <td class="px-6 py-4 whitespace-normal">
-          {{ ann.announcementContent }}
+          @if (ann.showFullContent) {
+          <span>
+            {{ ann.announcementContent }}<button (click)="toggleContent(ann)" class="text-blue-300 inline-block text-sm hover:text-blue-500 hover:underline">Show less</button>
+          </span>
+          }@else {
+          <span>
+            {{ getTruncatedContent(ann.announcementContent) }}...
+            <button (click)="toggleContent(ann)" class="text-blue-300 inline-block text-sm hover:text-blue-500 hover:underline">Show more</button>
+          </span>
+          }
         </td>
         <td class="px-6 py-4 whitespace-nowrap">{{ ann.createdAt }}</td>
         <td class="px-6 py-4 whitespace-nowrap">

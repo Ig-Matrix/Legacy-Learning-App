@@ -12,8 +12,16 @@ import { AnnouncementService } from '../../services/AnnouncementService/announce
 export class AnnouncementListComponent implements OnInit {
   announcement!: Announcement[];
   isLoading: boolean = false;
-
+  
   constructor(private annService: AnnouncementService) {}
+
+  toggleContent(announcement: Announcement){
+    announcement.showFullContent=!announcement.showFullContent
+  }
+
+  getTruncatedContent(content: string){
+    return content.substring(0, 50)
+  }
 
   editAnnouncement(announcement: Announcement, index: number) {}
   deleteAnnouncement(announcement: Announcement) {}
@@ -23,9 +31,7 @@ export class AnnouncementListComponent implements OnInit {
     this.annService.getAnnouncements().subscribe(
       (res) => {
         this.isLoading = false;
-        this.announcement = res;
-        console.log(res);
-        
+        this.announcement = res;        
       },
       (error) => {
         this.isLoading = false;
