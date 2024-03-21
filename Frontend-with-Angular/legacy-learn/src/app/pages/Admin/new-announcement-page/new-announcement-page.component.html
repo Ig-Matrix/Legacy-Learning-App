@@ -1,14 +1,20 @@
 <nav>
     <app-home-navigation></app-home-navigation>
 </nav>
-
 <main class="mt-16">
     <div class="container mx-auto bg-slate-50 p-5">
         <h1 class="text-bold font-mono text-xl sm:text-2xl ">Welcome 👋</h1>
         <p>Click on the button below to get started</p>
         <button (click)="openModal()" class="bg-sky-700 p-3 text-indigo-100 hover:text-indigo-300 rounded-md">Create Announcement</button>
     </div>
-    @if (isShowModal) {
-        <app-announcement-modal [showModal]="isShowModal" (closeModalEvent)="closeModal()" />
-    }
+    <div class="">
+        @if (onAnnouncement) {
+            <app-announcement-list />
+        }@else {
+            <app-announcement-list />
+        }
+    </div>
 </main>
+@if (isShowModal) {
+    <app-announcement-modal [showModal]="isShowModal" (closeModalEvent)="closeModal()" />
+}

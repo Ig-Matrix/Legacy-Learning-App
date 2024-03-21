@@ -96,7 +96,7 @@ export class FeedbackFormsComponent {
       this.isLoading = false;
       this.router.navigate(['/feedback']);
       this.isLoading=false
-      console.log('Form Submitted:', this.feedbackForm.value);
+      console.log('Form Submitted:', this.feedbackForm.value, this.selectedFeedbackType);
       this.feedbackService.submitFeedback();
       this.router.navigate(['/feedback']);
     }, 5000);

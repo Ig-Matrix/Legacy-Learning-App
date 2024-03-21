@@ -1,8 +1,9 @@
 export class Announcement {
   constructor(
-    public id: number,
+    public announcementId: number,
     public title: string,
     public announcementContent: string,
-    public createdAt: Date
+    public createdAt: Date,
+    public showFullContent: Boolean
   ) {}
 }
