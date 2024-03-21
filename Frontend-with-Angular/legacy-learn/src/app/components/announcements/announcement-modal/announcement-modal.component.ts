@@ -13,7 +13,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { AdminAnnouncementService } from '../../services/AnnouncementService/admin-announcement-service';
+import { AdminAnnouncementService } from '../../../services/AnnouncementService/admin-announcement-service';
 
 @Component({
   selector: 'app-announcement-modal',
@@ -52,23 +52,23 @@ export class AnnouncementModalComponent {
     }
   }
 
-  submitCourse(event: Event) {
+  publishAnnouncement(event: Event) {
     this.isLoading = true;
     console.log('form data', this.announcementForm.value);
-    
+
     if (this.announcementForm.valid) {
       this.announcementService
         .createAnnouncements(this.announcementForm.value)
         .subscribe(
           (response) => {
-            this.onCloseModal(event)
+            this.onCloseModal(event);
             console.log('submmitted', response);
             this.isLoading = false;
           },
           (error) => {
             console.log('error', error);
             this.isLoading = false;
-            this.onCloseModal(event)
+            this.onCloseModal(event);
           }
         );
     }

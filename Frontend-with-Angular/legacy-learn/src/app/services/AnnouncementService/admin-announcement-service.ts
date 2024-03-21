@@ -24,12 +24,12 @@ export class AdminAnnouncementService {
 
   editAnnouncements(announcementId: number, announcement: Announcement): Observable<Announcement> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.put<Announcement>(`${this.baseUrl}/editAnnouncement/{announcementId}`, announcement, {headers});
+    return this.http.put<Announcement>(`${this.baseUrl}/editAnnouncement/${announcementId}`, announcement, {headers});
   }
 
   deleteAnnouncements(announcementId: number): Observable<void> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.delete<void>(`${this.baseUrl}/deleteAnnouncement/{announcementId}`, {headers});
+    return this.http.delete<void>(`${this.baseUrl}/deleteAnnouncement/${announcementId}`, {headers});
   }
 
 }
