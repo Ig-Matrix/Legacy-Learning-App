@@ -61,6 +61,7 @@ a:hover, a:focus {
 #italics {
     font-style: italic;
     text-decoration: underline;
+    color: #2f57e5;
 }
 
 @media screen and (max-width: 1020px) {

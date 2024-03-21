@@ -54,3 +54,41 @@ Additional Considerations:
 Implement error handling mechanisms for both frontend and backend communication.
 Consider security measures like user authentication and authorization to control access to feedback submission and viewing.
 Choose an approach (frontend vs. backend) for calculating averages based on your specific requirements for performance and data consistency.
+
+
+
+
+
+
+
+{CourseClarity: 'Very Clear', CourseMaterialsSupport: 'Strongly Agree', CourseMaterialsOrganization: 'Excellent', AssignmentsRelevance: 'Strongly Agree', CourseExpectations: 'Here!', …}
+AssessmentsFairness
+: 
+"Agree"
+AssignmentsRelevance
+: 
+"Strongly Agree"
+CourseClarity
+: 
+"Very Clear"
+CourseExpectations
+: 
+"Here!"
+CourseImprovements
+: 
+"Well!"
+CourseLearningGoalsAchievement
+: 
+"Yes"
+CourseMaterialsOrganization
+: 
+"Excellent"
+CourseMaterialsSupport
+: 
+"Strongly Agree"
+CoursePace
+: 
+"Too Fast"
+InstructorCommunication
+: 
+"Good"
