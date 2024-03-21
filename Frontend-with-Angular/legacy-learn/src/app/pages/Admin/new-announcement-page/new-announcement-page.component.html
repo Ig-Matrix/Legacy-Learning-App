@@ -8,7 +8,11 @@
         <button (click)="openModal()" class="bg-sky-700 p-3 text-indigo-100 hover:text-indigo-300 rounded-md">Create Announcement</button>
     </div>
     <div class="">
-        <app-announcement-list />
+        @if (onAnnouncement) {
+            <app-announcement-list />
+        }@else {
+            <app-announcement-list />
+        }
     </div>
 </main>
 @if (isShowModal) {
