@@ -11,7 +11,7 @@
     <div class="">
         <app-announcement-list />
     </div>
-    @if (isShowModal) {
-        <app-announcement-modal [showModal]="isShowModal" (closeModalEvent)="closeModal()" />
-    }
 </main>
+@if (isShowModal) {
+    <app-announcement-modal [showModal]="isShowModal" (closeModalEvent)="closeModal()" />
+}
