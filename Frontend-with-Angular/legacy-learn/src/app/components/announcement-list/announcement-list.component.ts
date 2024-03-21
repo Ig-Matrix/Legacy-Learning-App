@@ -1,25 +1,36 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Announcement } from '../../../models/announcement.model';
-import { CommonModule } from '@angular/common';
+import { AnnouncementService } from '../../services/AnnouncementService/announcement.service';
+
 @Component({
   selector: 'app-announcement-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './announcement-list.component.html',
-  styleUrl: './announcement-list.component.css'
+  styleUrl: './announcement-list.component.css',
 })
-export class AnnouncementListComponent {
-  announcement: Announcement | null = null;
-  @Input() announcements: Announcement[] = [];
-  @Output() selectedAnnouncement = new EventEmitter<Announcement>();
-  @Output() deleteAnnouncementRequested = new EventEmitter<number>();
+export class AnnouncementListComponent implements OnInit {
+  announcement!: Announcement[];
+  isLoading: boolean = false;
 
-  onAnnouncementSelected(announcement: Announcement | null ) {
-    if (announcement) {
-      this.selectedAnnouncement.emit(announcement);
-    }
-  }
-  onDeleteRequested(announcementId: number) {
-    this.deleteAnnouncementRequested.emit(announcementId);
+  constructor(private annService: AnnouncementService) {}
+
+  editAnnouncement(announcement: Announcement, index: number) {}
+  deleteAnnouncement(announcement: Announcement) {}
+
+  ngOnInit(): void {
+    this.isLoading = true;
+    this.annService.getAnnouncements().subscribe(
+      (res) => {
+        this.isLoading = false;
+        this.announcement = res;
+        console.log(res);
+        
+      },
+      (error) => {
+        this.isLoading = false;
+        console.log(error);
+      }
+    );
   }
 }
