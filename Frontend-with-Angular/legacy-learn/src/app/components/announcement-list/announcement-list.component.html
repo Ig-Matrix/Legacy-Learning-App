@@ -25,13 +25,24 @@
         <td class="px-6 py-4 whitespace-nowrap">{{ ann.title }}</td>
         <td class="px-6 py-4 whitespace-normal">
           @if (ann.showFullContent) {
-          <span>
-            {{ ann.announcementContent }}<button (click)="toggleContent(ann)" class="text-blue-300 inline-block text-sm hover:text-blue-500 hover:underline">Show less</button>
+          <span class="whitespace-normal">
+            {{ ann.announcementContent }}
+            <button
+              (click)="toggleContent(ann)"
+              class="text-blue-300 inline-block text-sm hover:text-blue-500 hover:underline whitespace-normal"
+            >
+              Show less
+            </button>
           </span>
           }@else {
-          <span>
+          <span class="whitespace-normal">
             {{ getTruncatedContent(ann.announcementContent) }}...
-            <button (click)="toggleContent(ann)" class="text-blue-300 inline-block text-sm hover:text-blue-500 hover:underline">Show more</button>
+            <button
+              (click)="toggleContent(ann)"
+              class="text-blue-300 inline-block text-sm hover:text-blue-500 hover:underline whitespace-normal"
+            >
+              Show more
+            </button>
           </span>
           }
         </td>
@@ -45,10 +56,16 @@
           </button>
           <button
             class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
-            (click)="deleteAnnouncement(ann)"
+            (click)="deleteAnnouncement(ann.announcementId)"
           >
             Delete
           </button>
+          @if (isConfirmDelete) {
+          <app-delete-confirmation
+            (cancel)="onCancelConfirmed()"
+            (confirm)="onDeleteConfirmed()"
+          />
+          }
         </td>
       </tr>
       }
