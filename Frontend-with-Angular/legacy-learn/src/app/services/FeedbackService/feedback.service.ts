@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { FeedbackResponse } from '../../../models/FeedbackResponse/feedback-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +16,10 @@ export class FeedbackService {
   ) { }
 
  
-  submitFeedback() {
+  submitFeedback(feedbackResponse: FeedbackResponse) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post<any>(`${this.baseUrl}/sendFeedback`, {headers})
-    .subscribe(response => {
+    return this.http.post<any>(`${this.baseUrl}/sendFeedback`, feedbackResponse, {headers})
+    .subscribe(() => {
       console.log("Feedback submitted successfully!");
     },
     error => {

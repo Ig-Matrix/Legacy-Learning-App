@@ -1,6 +1,6 @@
 export interface FeedbackResponse {
-    model: string;
-    questions: {
+    modelChosen: string;
+    responseChosen: {
         name: string;
         value: string;
     } [];

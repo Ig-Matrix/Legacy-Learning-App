@@ -10,7 +10,7 @@ import {faArrowRightLong, faArrowLeftLong, faPaperPlane} from '@fortawesome/free
 import { HomeNavigationComponent } from '../../../components/home-navigation/home-navigation.component';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { FeedbackService } from '../../../services/FeedbackService/feedback.service';
-import { GetFeedbackResponseService } from '../../../services/FeedbackService/get-feedback-response.service';
+import { FeedbackResponse } from '../../../../models/FeedbackResponse/feedback-response.model';
 
 
 @Component({
@@ -31,6 +31,7 @@ export class FeedbackFormsComponent {
   faPaperPlane = faPaperPlane;
   isLoading: boolean = false;
 
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -46,7 +47,6 @@ export class FeedbackFormsComponent {
     this.buildForm();
   }
 
-  
   get currentQuestion() {
     const questions = this.getSelectedFeedbackType().questions;
     return questions[this.currentQuestionIndex] || null;
@@ -89,17 +89,20 @@ export class FeedbackFormsComponent {
     return this.feedbackForm.controls[this.currentQuestion.name].valid;
   }
 
+  getFeedbackResponse(): FeedbackResponse {
+    const modelChosen = this.selectedFeedbackType;
+    const responseChosen = this.feedbackForm.value;
+    return {modelChosen, responseChosen};
+  }
+
 
   onSubmit() {
     this.isLoading = true;
-    setTimeout(() => {
-      this.isLoading = false;
-      this.router.navigate(['/feedback']);
-      this.isLoading=false
-      console.log('Form Submitted:', this.feedbackForm.value, this.selectedFeedbackType);
-      this.feedbackService.submitFeedback();
-      this.router.navigate(['/feedback']);
-    }, 5000);
-  }
-  
+    const feedbackResponse = this.getFeedbackResponse();
+
+    this.feedbackService.submitFeedback(feedbackResponse);
+    console.log("Feedback submitted successfully: ", feedbackResponse);
+    this.isLoading = false;
+    this.router.navigate(['/feedback']);
+    }
 }
