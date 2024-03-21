@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Announcement } from '../../../models/announcement.model';
-import { AnnouncementService } from '../../services/AnnouncementService/announcement.service';
-import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
-import { AdminAnnouncementService } from '../../services/AnnouncementService/admin-announcement-service';
+import { Announcement } from '../../../../models/announcement.model';
+import { AnnouncementService } from '../../../services/AnnouncementService/announcement.service';
+import { DeleteConfirmationComponent } from '../../delete-confirmation/delete-confirmation.component';
+import { AdminAnnouncementService } from '../../../services/AnnouncementService/admin-announcement-service';
 
 @Component({
   selector: 'app-announcement-list',
@@ -44,7 +44,7 @@ export class AnnouncementListComponent implements OnInit {
           // this.announcement = this.announcement.filter(
           //   (ann) => ann !== this.announcement[this.annIdToDelete]
           // );
-          this.fetchAnnouncements()
+          this.fetchAnnouncements();
         },
         (err) => {
           console.log('error', err);
@@ -58,7 +58,7 @@ export class AnnouncementListComponent implements OnInit {
     this.isConfirmDelete = false;
   }
 
-  fetchAnnouncements(){
+  fetchAnnouncements() {
     this.isLoading = true;
     this.annService.getAnnouncements().subscribe(
       (res) => {
@@ -70,9 +70,8 @@ export class AnnouncementListComponent implements OnInit {
         console.log(error);
       }
     );
-
   }
   ngOnInit(): void {
-    this.fetchAnnouncements()
+    this.fetchAnnouncements();
   }
 }
