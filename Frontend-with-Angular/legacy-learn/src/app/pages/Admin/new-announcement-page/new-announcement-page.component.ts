@@ -15,7 +15,7 @@ import { AnnouncementModalComponent } from '../../../components/announcement-mod
   standalone: true,
   templateUrl: './new-announcement-page.component.html',
   styleUrl: './new-announcement-page.component.css',
-  imports: [RouterLink, RouterLinkActive, HomeNavigationComponent, AnnouncementModalComponent],
+  imports: [RouterLink, RouterLinkActive, HomeNavigationComponent, AnnouncementModalComponent, AnnouncementListComponent],
 })
 export class NewAnnouncementPageComponent {
   isShowModal: boolean = false;
