@@ -31,41 +31,13 @@ export class FeedbackFormsComponent {
   faPaperPlane = faPaperPlane;
   isLoading: boolean = false;
 
-  model: string = this.selectedFeedbackType;
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private http: HttpClient,
     private feedbackService: FeedbackService,
-    private getFeedbackResponseService: GetFeedbackResponseService,
-    private cdRef: ChangeDetectorRef
     ) {
     this.feedbackForm = this.fb.group({});
-  }
-
-  getResponseForSelectedModel(this: any): {
-    model: string;
-    feedback: {
-      questionId: number,
-      question: string,
-      answer: string
-    }[] } {
-      let feedbackResponse: {model: string; feedback:  { questionId: number; question: string; answer: string; }[]; };
-      switch (this.selectedFeedbackType) {
-      case 'Instructor':
-        feedbackResponse = this.getFeedbackResponseService.getInstructorFeedbackResponse(this.feedbackForm);
-        break;
-      case 'Assessment':
-        feedbackResponse = this.getFeedbackResponseService.getAssessmentFeedbackResponse(this.feedbackForm);
-        break;
-      case 'Course':
-        feedbackResponse = this.getFeedbackResponseService.getCourseFeedbackResponse(this.feedbackForm);
-        break;
-      default:
-        feedbackResponse = {model: '', feedback:[] };
-    }
-    return feedbackResponse;
   }
 
   selectFeedbackType(event: Event) {
@@ -74,12 +46,7 @@ export class FeedbackFormsComponent {
     this.buildForm();
   }
 
-  onModelSelected(model: string) {
-    this.model = model;
-    // const feedbackResponse = this.getResponseForSelectedModel();
-    this.cdRef.detectChanges();
-  }
-
+  
   get currentQuestion() {
     const questions = this.getSelectedFeedbackType().questions;
     return questions[this.currentQuestionIndex] || null;
@@ -121,7 +88,8 @@ export class FeedbackFormsComponent {
   isCurrentQuestionAnswered(): boolean {
     return this.feedbackForm.controls[this.currentQuestion.name].valid;
   }
-  
+
+
   onSubmit() {
     this.isLoading = true;
     setTimeout(() => {
@@ -129,7 +97,6 @@ export class FeedbackFormsComponent {
       this.router.navigate(['/feedback']);
       this.isLoading=false
       console.log('Form Submitted:', this.feedbackForm.value);
-      console.log('Form Submitted:', this.getResponseForSelectedModel());
       this.feedbackService.submitFeedback();
       this.router.navigate(['/feedback']);
     }, 5000);

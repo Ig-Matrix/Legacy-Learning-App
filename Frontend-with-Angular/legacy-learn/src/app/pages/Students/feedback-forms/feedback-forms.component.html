@@ -12,7 +12,6 @@
     <select
       name="type"
       id="type"
-      (click)="onModelSelected"
       (change)="selectFeedbackType($event)"
       [(ngModel)]="selectedFeedbackType">
       @for (type of feedbackTypes; track $index) {

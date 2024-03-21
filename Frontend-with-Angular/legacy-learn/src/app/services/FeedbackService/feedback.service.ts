@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FeedbackResponse } from '../../../models/FeedbackResponse/feedback.model';
-import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -17,23 +15,7 @@ export class FeedbackService {
     private http: HttpClient
   ) { }
 
-  //  constructFeedbackData(this: any): FeedbackResponse {
-  //   const feedbackFunction = this['get' + this.model + 'FeedbackResponse'] as (form: FormGroup) => { questionId: number; question: string; answer: string; selectedOption?: { label: string; value: string } }[];
-  //   const feedback = feedbackFunction(this.feedbackForm);
-  
-  //   // Ensure type compatibility for 'reduce':
-  //   const feedBackResponseToQuestions: { [questionId: number]: { question: string; answer: string } } = feedback.reduce(
-  //       (acc: { [questionId: number]: { question: string; answer: string } } = {}, item) => {
-  //   acc[item.questionId] = { question: item.question, answer: item.answer };
-  //   return acc;
-  //   }, {});
-  
-  //   return { model: this.model, questions: [feedBackResponseToQuestions] }; 
-    
-  // }
-
-  // feedbackData = ;
-
+ 
   submitFeedback() {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post<any>(`${this.baseUrl}/sendFeedback`, {headers})
@@ -46,3 +28,33 @@ export class FeedbackService {
   }
 }
 
+
+// getResponseForSelectedModel(this: any): {
+//   model: string;
+//   feedback: {
+//     questionId: number,
+//     question: string,
+//     answer: string
+//   }[] } {
+//     let feedbackResponse: {model: string; feedback:  { questionId: number; question: string; answer: string; }[]; };
+//     switch (this.selectedFeedbackType) {
+//     case 'Instructor':
+//       feedbackResponse = this.getFeedbackResponseService.getInstructorFeedbackResponse(this.feedbackForm);
+//       break;
+//     case 'Assessment':
+//       feedbackResponse = this.getFeedbackResponseService.getAssessmentFeedbackResponse(this.feedbackForm);
+//       break;
+//     case 'Course':
+//       feedbackResponse = this.getFeedbackResponseService.getCourseFeedbackResponse(this.feedbackForm);
+//       break;
+//     default:
+//       feedbackResponse = {model: '', feedback:[] };
+//   }
+//   return feedbackResponse;
+// }
+
+// onModelSelected(model: string) {
+  //   this.model = model;
+  //   // const feedbackResponse = this.getResponseForSelectedModel();
+  //   this.cdRef.detectChanges();
+  // }
