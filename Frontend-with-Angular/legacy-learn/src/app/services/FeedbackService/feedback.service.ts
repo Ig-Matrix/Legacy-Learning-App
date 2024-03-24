@@ -10,20 +10,14 @@ import { FeedbackResponse } from '../../../models/FeedbackResponse/feedback-resp
 
 export class FeedbackService {
   baseUrl = 'http://localhost:8080/api';
+  
   constructor(
-    private router: Router,
     private http: HttpClient
   ) { }
 
  
   submitFeedback(feedbackResponse: FeedbackResponse) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post<any>(`${this.baseUrl}/sendFeedback`, feedbackResponse, {headers})
-    .subscribe(() => {
-      console.log("Feedback submitted successfully!");
-    },
-    error => {
-      console.log("Error submitting feedback: " + error);
-    });
+    return this.http.post<any>(`${this.baseUrl}/student/sendFeedback`, feedbackResponse, {headers});
   }
 }

@@ -4,7 +4,7 @@ import {FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule} fr
 import { FeedbackType } from '../../../../models/Interfaces/Feedback';
 import { NgClass } from '@angular/common';
 import { ProgressComponent } from '../../../components/progress/progress.component';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {faArrowRightLong, faArrowLeftLong, faPaperPlane} from '@fortawesome/free-solid-svg-icons';
 import { HomeNavigationComponent } from '../../../components/home-navigation/home-navigation.component';
@@ -16,7 +16,7 @@ import { FeedbackResponse } from '../../../../models/FeedbackResponse/feedback-r
 @Component({
   selector: 'app-feedback-forms',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, NgClass, ProgressComponent, RouterLink, FontAwesomeModule, HomeNavigationComponent],
+  imports: [ReactiveFormsModule, FormsModule, NgClass, ProgressComponent, RouterLink, RouterLinkActive, FontAwesomeModule, HomeNavigationComponent],
   templateUrl: './feedback-forms.component.html',
   styleUrl: './feedback-forms.component.css',
 })
@@ -35,10 +35,11 @@ export class FeedbackFormsComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private http: HttpClient,
     private feedbackService: FeedbackService,
     ) {
-    this.feedbackForm = this.fb.group({});
+    this.feedbackForm = this.fb.group({
+      name: ['', Validators.required],
+    });
   }
 
   selectFeedbackType(event: Event) {
@@ -89,20 +90,25 @@ export class FeedbackFormsComponent {
     return this.feedbackForm.controls[this.currentQuestion.name].valid;
   }
 
-  getFeedbackResponse(): FeedbackResponse {
-    const modelChosen = this.selectedFeedbackType;
-    const responseChosen = this.feedbackForm.value;
-    return {modelChosen, responseChosen};
-  }
-
 
   onSubmit() {
     this.isLoading = true;
-    const feedbackResponse = this.getFeedbackResponse();
+    const modelChosen = this.selectedFeedbackType;
+    const responseChosen = this.feedbackForm.value;
 
-    this.feedbackService.submitFeedback(feedbackResponse);
-    console.log("Feedback submitted successfully: ", feedbackResponse);
-    this.isLoading = false;
-    this.router.navigate(['/feedback']);
-    }
+    const feedbackResponse = {modelChosen, responseChosen};
+    console.log("Feedback to be submitted: ", feedbackResponse);
+
+    this.feedbackService.submitFeedback(feedbackResponse).
+    subscribe({
+      next: (response) => {
+        console.log("Feedback submitted successfully: ", response);
+        this.isLoading = false;
+        this.router.navigate(['/feedback']);
+      }, error: (error) => {
+        console.log("Feedback error: ", error);
+        this.isLoading = false;
+      }
+    });
+  }
 }
