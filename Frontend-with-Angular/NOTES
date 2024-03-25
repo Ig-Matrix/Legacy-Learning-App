@@ -59,36 +59,16 @@ Choose an approach (frontend vs. backend) for calculating averages based on your
 
 
 
-
-
-{CourseClarity: 'Very Clear', CourseMaterialsSupport: 'Strongly Agree', CourseMaterialsOrganization: 'Excellent', AssignmentsRelevance: 'Strongly Agree', CourseExpectations: 'Here!', …}
-AssessmentsFairness
-: 
-"Agree"
-AssignmentsRelevance
-: 
-"Strongly Agree"
-CourseClarity
-: 
-"Very Clear"
-CourseExpectations
-: 
-"Here!"
-CourseImprovements
-: 
-"Well!"
-CourseLearningGoalsAchievement
-: 
-"Yes"
-CourseMaterialsOrganization
-: 
-"Excellent"
-CourseMaterialsSupport
-: 
-"Strongly Agree"
-CoursePace
-: 
-"Too Fast"
-InstructorCommunication
-: 
-"Good"
+modelChosen: "assessment",
+responseChosen: 
+{
+    AssessmentAccuracy: "Strongly Agree", 
+    AssessmentAlignmentWithObjectives: "Strongly Agree", AssessmentDifficultyLevel: "Just Right", 
+    AssessmentFeedbackOnPerformance: "Agree",
+    AssessmentFormatSuitability: "Good",
+    AssessmentImprovementSuggestions: "Welldone!",
+    AssessmentInstructionsClarity: "Yes",
+    AssessmentPromotionOfSkills: "Agree",
+    AssessmentTechnicalIssues: "Yes",
+    AssessmentTimeProvided: "Yes"
+}

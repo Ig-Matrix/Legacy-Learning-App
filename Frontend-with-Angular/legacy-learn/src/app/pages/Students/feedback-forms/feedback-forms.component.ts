@@ -96,19 +96,17 @@ export class FeedbackFormsComponent {
     const modelChosen = this.selectedFeedbackType;
     const responseChosen = this.feedbackForm.value;
 
-    const feedbackResponse = {modelChosen, responseChosen};
-    console.log("Feedback to be submitted: ", feedbackResponse);
+    const constructedFeedback  = {modelChosen, responseChosen};
+    console.log("Feedback to be submitted: ", constructedFeedback);
 
-    this.feedbackService.submitFeedback(feedbackResponse).
-    subscribe({
-      next: (response) => {
-        console.log("Feedback submitted successfully: ", response);
-        this.isLoading = false;
+    this.feedbackService.submitFeedback(constructedFeedback)
+    .subscribe(response => {
+      this.isLoading = false;
+        console.log("Feedback submitted successfully: ", constructedFeedback);
         this.router.navigate(['/feedback']);
-      }, error: (error) => {
-        console.log("Feedback error: ", error);
+      }, error => {
         this.isLoading = false;
-      }
-    });
+        console.log("Feedback error: ", error);
+      });
   }
 }

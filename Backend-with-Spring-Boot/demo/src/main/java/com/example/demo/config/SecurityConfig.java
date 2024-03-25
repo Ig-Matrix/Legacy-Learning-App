@@ -6,6 +6,7 @@ import com.example.demo.utilty.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -50,6 +51,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/registerStudent").permitAll()
                         .requestMatchers("/api/registerAdmin").permitAll()
                         .requestMatchers("/api/admin/**").permitAll()
+                        .requestMatchers("/api/student/**").permitAll()
                         .requestMatchers("/api/getAnnouncement").permitAll()
                         .anyRequest().authenticated()
                 )
