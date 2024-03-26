@@ -32,6 +32,7 @@ a:hover, a:focus {
 }
 .bolden {
     font-weight: 600;
+    font-size: 2.1vh;
 }
 ul {
     list-style-type: disc;
@@ -66,6 +67,9 @@ ul {
         font-size: 2.5vh;
     }
     h3 {
-        font-size: 2vh;
+        font-size: 2.2vh;
+    }
+    .bolden {
+        font-size: 1.8vh;
     }
 }

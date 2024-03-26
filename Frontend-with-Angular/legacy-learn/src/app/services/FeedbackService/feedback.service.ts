@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 interface FeedbackData {
   modelChosen: string;
-  responseChosen: any;
+  responseChosen: {[key: string]: any};
 }
 
 @Injectable({

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Course } from '../../../../models/Interfaces/Course';
 import { AddCourseModalComponent } from '../add-course-modal/add-course-modal.component';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { GpaProgressComponent } from '../../../components/gpa-progress/gpa-progress.component';
 import { HomeNavigationComponent } from '../../../components/home-navigation/home-navigation.component';
+
 
 @Component({
   selector: 'app-student-portfolio',
@@ -28,7 +29,7 @@ import { HomeNavigationComponent } from '../../../components/home-navigation/hom
   templateUrl: './student-portfolio.component.html',
   styleUrl: './student-portfolio.component.css',
 })
-export class StudentPortfolioComponent {
+export class StudentPortfolioComponent implements OnInit {
   courses: Course[] = []; // Array to store course data
   showModal: boolean = false; // Flag to control modal visibility
   cgpa!: number; // CGPA property to store calculated value
@@ -37,6 +38,19 @@ export class StudentPortfolioComponent {
   check = faCheck;
   cancel = faXmark;
   isGpaCalculated: boolean = false;
+
+  constructor() {}
+
+  ngOnInit() {
+    const storedCourses = localStorage.getItem('courses');
+    if (storedCourses) {
+      this.courses = JSON.parse(storedCourses);
+    }
+  }
+
+  saveCoursesToLocalStorage() {
+    localStorage.setItem('courses', JSON.stringify(this.courses));
+  }
 
   openAddCourseModal() {
     this.showModal = true; // Open the modal on button click
@@ -53,6 +67,7 @@ export class StudentPortfolioComponent {
     this.cgpa = 0;
     this.showModal = false; // Close the modal after adding
     this.isGpaCalculated = false;
+    this.saveCoursesToLocalStorage();
   }
 
   calculateGrade(score: number): string {
@@ -131,6 +146,8 @@ export class StudentPortfolioComponent {
       this.editingCourseIndex = null;
       this.isGpaCalculated=false;
       this.cgpa = 0; // Invalidate CGPA after course edit
+      this.saveCoursesToLocalStorage();
     }
   }
+  
 }

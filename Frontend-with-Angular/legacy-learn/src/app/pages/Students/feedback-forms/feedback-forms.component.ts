@@ -10,6 +10,10 @@ import {faArrowRightLong, faArrowLeftLong, faPaperPlane} from '@fortawesome/free
 import { HomeNavigationComponent } from '../../../components/home-navigation/home-navigation.component';
 import { FeedbackService } from '../../../services/FeedbackService/feedback.service';
 
+interface FeedbackData {
+  modelChosen: string;
+  responseChosen: any;
+}
 
 @Component({
   selector: 'app-feedback-forms',
@@ -94,7 +98,7 @@ export class FeedbackFormsComponent {
     const modelChosen = this.selectedFeedbackType;
     const responseChosen = this.feedbackForm.value;
 
-    const constructedFeedback  = {modelChosen, responseChosen};
+    const constructedFeedback: FeedbackData  = {modelChosen, responseChosen};
 
     console.log("Feedback to be submitted: ", constructedFeedback);
     this.feedbackService.submitFeedback(constructedFeedback)
@@ -105,6 +109,7 @@ export class FeedbackFormsComponent {
       }, error => {
         this.isLoading = false;
         console.log("Feedback error: ", error);
+        this.router.navigate(['/feedback']);
       });
   }
 }
