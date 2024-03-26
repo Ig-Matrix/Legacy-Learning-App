@@ -1,12 +1,11 @@
 package com.example.demo.Entity;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Map;
+import java.util.List;
+
 
 
 @Getter
@@ -18,16 +17,15 @@ public class FeedbackResponse {
     private Long feedbackId;
     private String model;
 
-    @ElementCollection
-    @CollectionTable(name = "feedback_response_items", joinColumns = @JoinColumn(name = "feedback_id"))
-    private Map<String, String> response;
+    @OneToMany(mappedBy = "feedbackResponse", cascade = CascadeType.ALL)
+    private List<ResponseItem> responseItems;
 
     public FeedbackResponse() {
     }
 
-    public FeedbackResponse(String model, Map<String, String> response) {
+    public FeedbackResponse(String model, List<ResponseItem> responseItems) {
         this.model = model;
-        this.response = response;
+        this.responseItems = responseItems;
     }
 
 }
