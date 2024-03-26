@@ -8,9 +8,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {faArrowRightLong, faArrowLeftLong, faPaperPlane} from '@fortawesome/free-solid-svg-icons';
 import { HomeNavigationComponent } from '../../../components/home-navigation/home-navigation.component';
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { FeedbackService } from '../../../services/FeedbackService/feedback.service';
-import { FeedbackResponse } from '../../../../models/FeedbackResponse/feedback-response.model';
 
 
 @Component({
@@ -97,12 +95,12 @@ export class FeedbackFormsComponent {
     const responseChosen = this.feedbackForm.value;
 
     const constructedFeedback  = {modelChosen, responseChosen};
-    console.log("Feedback to be submitted: ", constructedFeedback);
 
+    console.log("Feedback to be submitted: ", constructedFeedback);
     this.feedbackService.submitFeedback(constructedFeedback)
     .subscribe(response => {
       this.isLoading = false;
-        console.log("Feedback submitted successfully: ", constructedFeedback);
+        console.log("Feedback submitted successfully: ", response);
         this.router.navigate(['/feedback']);
       }, error => {
         this.isLoading = false;

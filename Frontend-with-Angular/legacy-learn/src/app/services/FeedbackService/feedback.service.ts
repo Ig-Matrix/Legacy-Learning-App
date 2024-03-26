@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FeedbackResponse } from '../../../models/FeedbackResponse/feedback-response.model';
+import { Observable } from 'rxjs';
+
+
+interface FeedbackData {
+  modelChosen: string;
+  responseChosen: any;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +19,11 @@ export class FeedbackService {
   
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
  
-  submitFeedback(feedbackResponse: FeedbackResponse) {
+  submitFeedback(feedbackData: FeedbackData): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post<any>(`${this.baseUrl}/student/sendFeedback`, feedbackResponse, {headers});
+    return this.http.post<any>(`${this.baseUrl}/student/sendFeedback`, feedbackData, { headers });
   }
 }
