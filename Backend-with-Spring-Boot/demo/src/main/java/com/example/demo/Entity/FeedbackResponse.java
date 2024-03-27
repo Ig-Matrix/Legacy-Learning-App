@@ -4,8 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
+
+
 
 @Getter
 @Setter
@@ -17,5 +18,14 @@ public class FeedbackResponse {
     private String model;
 
     @OneToMany(mappedBy = "feedbackResponse", cascade = CascadeType.ALL)
-    private List<QuestionAnswer> questions = new ArrayList<>();
+    private List<ResponseItem> responseItems;
+
+    public FeedbackResponse() {
+    }
+
+    public FeedbackResponse(String model, List<ResponseItem> responseItems) {
+        this.model = model;
+        this.responseItems = responseItems;
+    }
+
 }

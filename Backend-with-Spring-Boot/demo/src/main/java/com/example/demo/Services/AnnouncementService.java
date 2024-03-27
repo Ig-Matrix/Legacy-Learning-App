@@ -2,7 +2,7 @@ package com.example.demo.Services;
 
 import com.example.demo.Entity.Announcement;
 import com.example.demo.Entity.User;
-import com.example.demo.utilty.ResourceNotFoundException;
+import com.example.demo.Exceptions.ResourceNotFoundException;
 
 import java.util.List;
 

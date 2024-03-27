@@ -1,10 +1,6 @@
-<div
-  class="overflow-x-auto p-4 border rounded-md my-3 flex items-center justify-center container mx-auto"
->
+<div class="overflow-x-auto p-4 border rounded-md my-3 flex items-center justify-center container mx-auto">
   @if (isLoading) {
-  <p
-    class="inline-block my-10 animate-spin w-16 h-16 border-2 rounded-full border-x-slate-400"
-  ></p>
+  <p class="inline-block my-10 animate-spin w-16 h-16 border-2 rounded-full border-x-slate-400"></p>
   }@else {
   <table class="divide-y divide-gray-200 shadow-md rounded-md">
     <thead
@@ -48,12 +44,12 @@
         </td>
         <td class="px-6 py-4 whitespace-nowrap">{{ ann.createdAt }}</td>
         <td class="px-6 py-4 whitespace-nowrap">
-          <button
+          <!-- <button
             class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
             (click)="editAnnouncement(ann, ann.announcementId)"
           >
             Edit
-          </button>
+          </button> -->
           <button
             class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
             (click)="deleteAnnouncement(ann.announcementId)"

@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @EnableJpaRepositories(basePackages = "com.example.demo")
 @CrossOrigin(origins = "*")
 public class DemoApplication {
-
 	public static void main(String[] args) {
-
 		SpringApplication.run(DemoApplication.class, args);
 	}
 

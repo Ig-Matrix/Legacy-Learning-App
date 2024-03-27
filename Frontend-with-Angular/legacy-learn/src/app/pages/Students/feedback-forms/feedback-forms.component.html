@@ -33,7 +33,7 @@
           [totalQuestions]="getSelectedFeedbackType().questions.length"
         />
       </div>
-      <form [formGroup]="feedbackForm">
+      <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
         @if (currentQuestion) {
         <h3>{{ currentQuestion.text }}</h3>
         @for (option of currentQuestion.options; track option.label) { @if

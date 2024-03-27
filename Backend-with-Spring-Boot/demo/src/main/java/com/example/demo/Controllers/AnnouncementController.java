@@ -3,7 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.Entity.Announcement;
 import com.example.demo.Entity.User;
 import com.example.demo.Services.AnnouncementService;
-import com.example.demo.utilty.ResourceNotFoundException;
+import com.example.demo.Exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

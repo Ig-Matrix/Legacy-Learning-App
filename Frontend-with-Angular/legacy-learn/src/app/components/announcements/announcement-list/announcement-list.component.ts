@@ -71,6 +71,7 @@ export class AnnouncementListComponent implements OnInit {
       }
     );
   }
+  
   ngOnInit(): void {
     this.fetchAnnouncements();
   }

@@ -1,7 +1,6 @@
 package com.example.demo.Repository;
 
 import com.example.demo.Entity.User;
-import com.example.demo.Entity.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
